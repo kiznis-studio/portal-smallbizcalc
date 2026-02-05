@@ -77,7 +77,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
 
           <button
             id="calculate-btn"
-            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+            class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
           >
             Calculate Margins
           </button>
@@ -97,7 +97,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
             <!-- Gross Margin -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Gross Margin</div>
-              <div id="gross-margin" class="text-2xl font-bold text-blue-500">0%</div>
+              <div id="gross-margin" class="text-2xl font-bold text-emerald-500">0%</div>
             </div>
 
             <!-- Net Profit -->
@@ -109,7 +109,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
             <!-- Net Margin -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Net Margin</div>
-              <div id="net-margin" class="text-2xl font-bold text-blue-500">0%</div>
+              <div id="net-margin" class="text-2xl font-bold text-emerald-500">0%</div>
             </div>
           </div>
 
@@ -160,8 +160,8 @@ const description = "Calculate your gross and net profit margins instantly. Ente
 
           <h3 class="text-lg font-medium mt-6 mb-3">Gross vs Net Margin</h3>
           <div class="space-y-4">
-            <div class="card p-4 bg-blue-500/5 border-blue-500/20">
-              <div class="font-medium text-blue-500 mb-1">Gross Margin</div>
+            <div class="card p-4 bg-emerald-500/5 border-emerald-500/20">
+              <div class="font-medium text-emerald-500 mb-1">Gross Margin</div>
               <p class="text-sm text-[var(--color-muted)]">
                 Revenue minus direct costs (COGS). Shows production efficiency before overhead. Formula: (Revenue - COGS) / Revenue × 100
               </p>
@@ -222,23 +222,23 @@ const description = "Calculate your gross and net profit margins instantly. Ente
           <h3 class="text-lg font-medium mt-6 mb-3">How to Improve Your Margins</h3>
           <ul class="space-y-2 text-[var(--color-muted)]">
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Raise prices</strong> – Test 5-10% increases; value-based pricing often works</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Reduce COGS</strong> – Negotiate with suppliers, buy in bulk, optimize production</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Cut overhead</strong> – Review subscriptions, renegotiate rent, automate tasks</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Improve efficiency</strong> – Reduce waste, train staff, streamline processes</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Focus on high-margin products</strong> – Analyze per-product margins, promote winners</span>
             </li>
           </ul>
@@ -280,7 +280,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
       advice = 'Your net margin is exceptional. You\'re outperforming most businesses. Focus on scaling while maintaining these margins.';
     } else if (netMargin >= 10) {
       rating = 'Good';
-      color = 'text-blue-500';
+      color = 'text-emerald-500';
       advice = 'Your net margin is healthy. You have room to invest in growth while maintaining profitability.';
     } else if (netMargin >= 5) {
       rating = 'Average';

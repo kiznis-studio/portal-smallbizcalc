@@ -76,14 +76,14 @@ const icons = {
       {liveCalcs.map(calc => (
         <a
           href={calc.href}
-          class="card p-6 hover:border-blue-500/50 transition-colors group"
+          class="card p-6 hover:border-emerald-500/50 transition-colors group"
         >
-          <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
-            <svg class="w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors">
+            <svg class="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <Fragment set:html={icons[calc.icon]} />
             </svg>
           </div>
-          <h2 class="text-lg font-semibold mb-2 group-hover:text-blue-500 transition-colors">
+          <h2 class="text-lg font-semibold mb-2 group-hover:text-emerald-500 transition-colors">
             {calc.title}
           </h2>
           <p class="text-sm text-[var(--color-muted)]">
@@ -119,14 +119,14 @@ const icons = {
 
     <!-- CTA -->
     <div class="mt-16 text-center">
-      <div class="card p-8 max-w-2xl mx-auto bg-blue-500/5 border-blue-500/20">
+      <div class="card p-8 max-w-2xl mx-auto bg-emerald-500/5 border-emerald-500/20">
         <h2 class="text-xl font-semibold mb-3">Need a different calculator?</h2>
         <p class="text-[var(--color-muted)] mb-4">
           We're always adding new tools. Let us know what calculators would help your business.
         </p>
         <a
           href="mailto:hello@smallbizcalc.com"
-          class="inline-flex items-center gap-2 text-blue-500 hover:underline"
+          class="inline-flex items-center gap-2 text-emerald-500 hover:underline"
         >
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

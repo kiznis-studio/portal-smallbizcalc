@@ -31,7 +31,7 @@ const description = "Calculate the right markup and selling price for your produ
             <div class="grid grid-cols-2 gap-2">
               <button
                 id="mode-price"
-                class="py-2 px-4 rounded-lg border-2 border-blue-500 bg-blue-500/10 text-blue-500 font-medium transition-colors"
+                class="py-2 px-4 rounded-lg border-2 border-emerald-500 bg-emerald-500/10 text-emerald-500 font-medium transition-colors"
               >
                 Selling Price
               </button>
@@ -94,7 +94,7 @@ const description = "Calculate the right markup and selling price for your produ
 
           <button
             id="calculate-btn"
-            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+            class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
           >
             Calculate
           </button>
@@ -108,7 +108,7 @@ const description = "Calculate the right markup and selling price for your produ
             <!-- Selling Price -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Selling Price</div>
-              <div id="result-price" class="text-2xl font-bold text-blue-500">$0</div>
+              <div id="result-price" class="text-2xl font-bold text-emerald-500">$0</div>
             </div>
 
             <!-- Markup -->
@@ -126,7 +126,7 @@ const description = "Calculate the right markup and selling price for your produ
             <!-- Gross Margin -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Gross Margin</div>
-              <div id="result-margin" class="text-2xl font-bold text-blue-500">0%</div>
+              <div id="result-margin" class="text-2xl font-bold text-emerald-500">0%</div>
             </div>
           </div>
 
@@ -216,27 +216,27 @@ const description = "Calculate the right markup and selling price for your produ
           <h3 class="text-lg font-medium mt-6 mb-3">Typical Markups by Industry</h3>
           <ul class="space-y-2 text-[var(--color-muted)]">
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Grocery:</strong> 5-15% markup</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Clothing:</strong> 50-100% markup (keystone pricing)</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Jewelry:</strong> 100-300% markup</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Restaurants:</strong> 200-400% on food, 400-600% on drinks</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Electronics:</strong> 10-30% markup</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span><strong>Furniture:</strong> 80-150% markup</span>
             </li>
           </ul>
@@ -256,19 +256,19 @@ const description = "Calculate the right markup and selling price for your produ
           <h3 class="text-lg font-medium mt-6 mb-3">Pricing Strategy Tips</h3>
           <ul class="space-y-2 text-[var(--color-muted)]">
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span>Don't compete on price alone—differentiate on value</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span>Test prices—small increases often don't affect demand</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span>Account for ALL costs: shipping, returns, payment fees</span>
             </li>
             <li class="flex gap-2">
-              <span class="text-blue-500">•</span>
+              <span class="text-emerald-500">•</span>
               <span>Use psychological pricing ($9.99 vs $10.00)</span>
             </li>
           </ul>
@@ -308,12 +308,12 @@ const description = "Calculate the right markup and selling price for your produ
     currentMode = mode;
 
     if (mode === 'price') {
-      modePrice.className = 'py-2 px-4 rounded-lg border-2 border-blue-500 bg-blue-500/10 text-blue-500 font-medium transition-colors';
+      modePrice.className = 'py-2 px-4 rounded-lg border-2 border-emerald-500 bg-emerald-500/10 text-emerald-500 font-medium transition-colors';
       modeMarkup.className = 'py-2 px-4 rounded-lg border-2 border-[var(--color-border)] text-[var(--color-muted)] font-medium transition-colors hover:border-[var(--color-foreground)]';
       markupInputGroup.classList.remove('hidden');
       priceInputGroup.classList.add('hidden');
     } else {
-      modeMarkup.className = 'py-2 px-4 rounded-lg border-2 border-blue-500 bg-blue-500/10 text-blue-500 font-medium transition-colors';
+      modeMarkup.className = 'py-2 px-4 rounded-lg border-2 border-emerald-500 bg-emerald-500/10 text-emerald-500 font-medium transition-colors';
       modePrice.className = 'py-2 px-4 rounded-lg border-2 border-[var(--color-border)] text-[var(--color-muted)] font-medium transition-colors hover:border-[var(--color-foreground)]';
       markupInputGroup.classList.add('hidden');
       priceInputGroup.classList.remove('hidden');
