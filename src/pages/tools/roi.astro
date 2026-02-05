@@ -1,0 +1,569 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "ROI Calculator";
+const description = "Calculate return on investment for business decisions, marketing campaigns, and equipment purchases. Compare multiple options and see payback period.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          Calculate the return on investment for any business decision. Enter your costs and expected returns to see ROI percentage, net profit, and payback period.
+        </p>
+
+        <div class="card p-6 space-y-6">
+          <!-- Investment Name (optional) -->
+          <div>
+            <label for="investment-name" class="block text-sm font-medium mb-2">
+              Investment Name <span class="text-[var(--color-muted)]">(optional)</span>
+            </label>
+            <input
+              type="text"
+              id="investment-name"
+              class="input w-full"
+              placeholder="e.g., New Marketing Campaign"
+            />
+          </div>
+
+          <!-- Initial Investment -->
+          <div>
+            <label for="initial-investment" class="block text-sm font-medium mb-2">Initial Investment</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="initial-investment"
+                class="input pl-7 w-full"
+                placeholder="10,000"
+                min="0"
+                step="100"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Total upfront cost of the investment</p>
+          </div>
+
+          <!-- Expected Return -->
+          <div>
+            <label for="expected-return" class="block text-sm font-medium mb-2">Expected Total Return</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="expected-return"
+                class="input pl-7 w-full"
+                placeholder="15,000"
+                min="0"
+                step="100"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Total value or revenue generated from the investment</p>
+          </div>
+
+          <!-- Time Period -->
+          <div>
+            <label for="time-period" class="block text-sm font-medium mb-2">Time Period</label>
+            <div class="flex gap-3">
+              <input
+                type="number"
+                id="time-period"
+                class="input flex-1"
+                placeholder="12"
+                min="1"
+                max="120"
+                step="1"
+              />
+              <select id="time-unit" class="input w-28">
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">How long until you receive the full return</p>
+          </div>
+
+          <!-- Ongoing Costs (optional) -->
+          <div>
+            <label for="ongoing-costs" class="block text-sm font-medium mb-2">
+              Ongoing Costs <span class="text-[var(--color-muted)]">(optional)</span>
+            </label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="ongoing-costs"
+                class="input pl-7 w-full"
+                placeholder="500"
+                min="0"
+                step="50"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Monthly maintenance, subscription, or operating costs</p>
+          </div>
+
+          <button
+            id="calculate-btn"
+            class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Calculate ROI
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <h2 class="text-xl font-semibold mb-4">Investment Analysis</h2>
+
+          <div class="grid sm:grid-cols-2 gap-4 mb-6">
+            <!-- ROI Percentage -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Return on Investment</div>
+              <div id="roi-percentage" class="text-3xl font-bold text-emerald-500">0%</div>
+            </div>
+
+            <!-- Net Profit -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Net Profit</div>
+              <div id="net-profit" class="text-3xl font-bold">$0</div>
+            </div>
+
+            <!-- Payback Period -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Payback Period</div>
+              <div id="payback-period" class="text-2xl font-bold">0 months</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">Time to recover investment</div>
+            </div>
+
+            <!-- Annualized ROI -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Annualized ROI</div>
+              <div id="annualized-roi" class="text-2xl font-bold">0%</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">ROI per year</div>
+            </div>
+          </div>
+
+          <!-- Verdict -->
+          <div id="verdict-card" class="card p-5 mb-6">
+            <div class="flex items-start gap-3">
+              <div id="verdict-icon" class="flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <div id="verdict-title" class="font-semibold">Good Investment</div>
+                <div id="verdict-message" class="text-sm text-[var(--color-muted)]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="card p-5">
+            <div class="text-sm font-medium mb-4">Investment Breakdown</div>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">Initial Investment</span>
+                <span id="breakdown-initial" class="font-medium">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">Total Ongoing Costs</span>
+                <span id="breakdown-ongoing" class="font-medium">$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-3">
+                <span class="text-[var(--color-muted)]">Total Investment</span>
+                <span id="breakdown-total-investment" class="font-medium">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">Expected Return</span>
+                <span id="breakdown-return" class="font-medium text-emerald-500">$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-3">
+                <span class="font-medium">Net Profit / (Loss)</span>
+                <span id="breakdown-profit" class="font-bold">$0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compare Section -->
+        <div class="mt-8">
+          <button
+            id="add-comparison-btn"
+            class="text-sm text-emerald-500 hover:underline"
+          >
+            + Compare another investment
+          </button>
+          <div id="comparison-results" class="hidden mt-6">
+            <h3 class="font-semibold mb-4">Comparison</h3>
+            <div id="comparison-table" class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-2 px-3">Investment</th>
+                    <th class="text-right py-2 px-3">ROI</th>
+                    <th class="text-right py-2 px-3">Net Profit</th>
+                    <th class="text-right py-2 px-3">Payback</th>
+                    <th class="text-center py-2 px-3"></th>
+                  </tr>
+                </thead>
+                <tbody id="comparison-body">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Panel -->
+      <div class="lg:pt-20">
+        <div class="card p-6 mb-6">
+          <h3 class="font-semibold mb-3">Understanding ROI</h3>
+          <div class="space-y-3 text-sm text-[var(--color-muted)]">
+            <p>
+              <strong class="text-[var(--color-foreground)]">ROI (Return on Investment)</strong> measures
+              how much profit you make relative to what you invested. An ROI of 50% means you earned
+              $0.50 for every $1 invested.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Payback Period</strong> is how long it
+              takes to recover your initial investment. Shorter is generally better—you want your
+              money back as quickly as possible.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Annualized ROI</strong> lets you compare
+              investments of different durations. A 50% ROI over 2 years is different from 50% over
+              6 months.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-6 mb-6">
+          <h3 class="font-semibold mb-3">ROI Benchmarks</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Stock market average</span>
+              <span>7-10% / year</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Real estate</span>
+              <span>8-12% / year</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Small business</span>
+              <span>15-30% / year</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Marketing campaigns</span>
+              <span>5:1 ratio (400%)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-6 bg-emerald-500/5 border-emerald-500/20">
+          <h3 class="font-semibold mb-2">💡 Decision Framework</h3>
+          <ul class="text-sm text-[var(--color-muted)] space-y-2">
+            <li><strong>ROI > 0%:</strong> You're making money</li>
+            <li><strong>ROI > 15%:</strong> Beats typical business returns</li>
+            <li><strong>ROI > 100%:</strong> You've doubled your money</li>
+            <li><strong>Payback < 12 months:</strong> Generally low risk</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Tools -->
+    <div class="mt-16 pt-8 border-t border-[var(--color-border)]">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Break-Even Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Find how many sales cover your costs</p>
+        </a>
+        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Profit Margin Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Calculate margins from revenue and costs</p>
+        </a>
+        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Business Loan Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Calculate loan payments and total cost</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const investmentNameInput = document.getElementById('investment-name') as HTMLInputElement;
+  const initialInvestmentInput = document.getElementById('initial-investment') as HTMLInputElement;
+  const expectedReturnInput = document.getElementById('expected-return') as HTMLInputElement;
+  const timePeriodInput = document.getElementById('time-period') as HTMLInputElement;
+  const timeUnitSelect = document.getElementById('time-unit') as HTMLSelectElement;
+  const ongoingCostsInput = document.getElementById('ongoing-costs') as HTMLInputElement;
+  const calculateBtn = document.getElementById('calculate-btn');
+  const results = document.getElementById('results');
+  const addComparisonBtn = document.getElementById('add-comparison-btn');
+  const comparisonResults = document.getElementById('comparison-results');
+  const comparisonBody = document.getElementById('comparison-body');
+
+  // Result elements
+  const roiPercentageEl = document.getElementById('roi-percentage');
+  const netProfitEl = document.getElementById('net-profit');
+  const paybackPeriodEl = document.getElementById('payback-period');
+  const annualizedRoiEl = document.getElementById('annualized-roi');
+  const verdictCard = document.getElementById('verdict-card');
+  const verdictIcon = document.getElementById('verdict-icon');
+  const verdictTitle = document.getElementById('verdict-title');
+  const verdictMessage = document.getElementById('verdict-message');
+  const breakdownInitial = document.getElementById('breakdown-initial');
+  const breakdownOngoing = document.getElementById('breakdown-ongoing');
+  const breakdownTotalInvestment = document.getElementById('breakdown-total-investment');
+  const breakdownReturn = document.getElementById('breakdown-return');
+  const breakdownProfit = document.getElementById('breakdown-profit');
+
+  interface ComparisonItem {
+    name: string;
+    roi: number;
+    netProfit: number;
+    paybackMonths: number;
+  }
+
+  let comparisons: ComparisonItem[] = [];
+
+  function formatCurrency(amount: number): string {
+    const isNegative = amount < 0;
+    const formatted = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(Math.abs(amount));
+    return isNegative ? '-' + formatted : formatted;
+  }
+
+  function formatPercent(value: number): string {
+    return value.toFixed(1) + '%';
+  }
+
+  function calculateROI() {
+    const name = investmentNameInput.value || 'Investment ' + (comparisons.length + 1);
+    const initialInvestment = parseFloat(initialInvestmentInput.value) || 0;
+    const expectedReturn = parseFloat(expectedReturnInput.value) || 0;
+    let timePeriodMonths = parseFloat(timePeriodInput.value) || 12;
+    const ongoingCostsMonthly = parseFloat(ongoingCostsInput.value) || 0;
+
+    if (initialInvestment <= 0) {
+      return;
+    }
+
+    // Convert years to months if needed
+    if (timeUnitSelect.value === 'years') {
+      timePeriodMonths = timePeriodMonths * 12;
+    }
+
+    // Calculate total ongoing costs
+    const totalOngoingCosts = ongoingCostsMonthly * timePeriodMonths;
+    const totalInvestment = initialInvestment + totalOngoingCosts;
+
+    // Calculate net profit and ROI
+    const netProfit = expectedReturn - totalInvestment;
+    const roi = (netProfit / totalInvestment) * 100;
+
+    // Calculate annualized ROI
+    const years = timePeriodMonths / 12;
+    const annualizedRoi = years > 0 ? roi / years : roi;
+
+    // Calculate payback period (months)
+    let paybackMonths: number;
+    if (expectedReturn <= 0) {
+      paybackMonths = Infinity;
+    } else {
+      const monthlyReturn = expectedReturn / timePeriodMonths;
+      const monthlyNet = monthlyReturn - ongoingCostsMonthly;
+      if (monthlyNet <= 0) {
+        paybackMonths = Infinity;
+      } else {
+        paybackMonths = initialInvestment / monthlyNet;
+      }
+    }
+
+    // Update results
+    if (roiPercentageEl) {
+      roiPercentageEl.textContent = formatPercent(roi);
+      roiPercentageEl.className = roi >= 0 ? 'text-3xl font-bold text-emerald-500' : 'text-3xl font-bold text-red-500';
+    }
+    if (netProfitEl) {
+      netProfitEl.textContent = formatCurrency(netProfit);
+      netProfitEl.className = netProfit >= 0 ? 'text-3xl font-bold text-emerald-500' : 'text-3xl font-bold text-red-500';
+    }
+    if (paybackPeriodEl) {
+      if (paybackMonths === Infinity || paybackMonths > 1000) {
+        paybackPeriodEl.textContent = 'Never';
+      } else if (paybackMonths < 1) {
+        paybackPeriodEl.textContent = 'Immediate';
+      } else if (paybackMonths >= 12) {
+        const years = Math.floor(paybackMonths / 12);
+        const months = Math.round(paybackMonths % 12);
+        paybackPeriodEl.textContent = years + ' year' + (years > 1 ? 's' : '') + (months > 0 ? ' ' + months + ' mo' : '');
+      } else {
+        paybackPeriodEl.textContent = Math.round(paybackMonths) + ' months';
+      }
+    }
+    if (annualizedRoiEl) {
+      annualizedRoiEl.textContent = formatPercent(annualizedRoi);
+    }
+
+    // Update verdict
+    if (verdictCard && verdictIcon && verdictTitle && verdictMessage) {
+      const iconSvg = verdictIcon.querySelector('svg');
+      const iconPath = iconSvg?.querySelector('path');
+
+      if (roi >= 100) {
+        verdictCard.className = 'card p-5 mb-6 bg-emerald-500/10 border-emerald-500/30';
+        if (iconSvg) iconSvg.setAttribute('class', 'w-5 h-5 text-emerald-500');
+        if (iconPath) iconPath.setAttribute('d', 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z');
+        verdictTitle.textContent = 'Excellent Investment';
+        verdictMessage.textContent = 'This investment more than doubles your money. With an annualized ROI of ' + formatPercent(annualizedRoi) + ', it significantly outperforms typical returns.';
+      } else if (roi >= 15) {
+        verdictCard.className = 'card p-5 mb-6 bg-emerald-500/10 border-emerald-500/30';
+        if (iconSvg) iconSvg.setAttribute('class', 'w-5 h-5 text-emerald-500');
+        if (iconPath) iconPath.setAttribute('d', 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z');
+        verdictTitle.textContent = 'Good Investment';
+        verdictMessage.textContent = 'This investment beats typical business returns of 15%. Payback in ' + (paybackMonths < 12 ? Math.round(paybackMonths) + ' months' : Math.round(paybackMonths/12) + ' year(s)') + ' is reasonable.';
+      } else if (roi >= 0) {
+        verdictCard.className = 'card p-5 mb-6 bg-amber-500/10 border-amber-500/30';
+        if (iconSvg) iconSvg.setAttribute('class', 'w-5 h-5 text-amber-500');
+        if (iconPath) iconPath.setAttribute('d', 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z');
+        verdictTitle.textContent = 'Marginal Investment';
+        verdictMessage.textContent = 'You\'ll make money, but the return is below typical business investment benchmarks. Consider if there are better uses for this capital.';
+      } else {
+        verdictCard.className = 'card p-5 mb-6 bg-red-500/10 border-red-500/30';
+        if (iconSvg) iconSvg.setAttribute('class', 'w-5 h-5 text-red-500');
+        if (iconPath) iconPath.setAttribute('d', 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z');
+        verdictTitle.textContent = 'Losing Investment';
+        verdictMessage.textContent = 'This investment loses money. You\'d lose ' + formatCurrency(Math.abs(netProfit)) + ' over the time period. Reconsider or find ways to increase returns.';
+      }
+    }
+
+    // Update breakdown
+    if (breakdownInitial) breakdownInitial.textContent = formatCurrency(initialInvestment);
+    if (breakdownOngoing) breakdownOngoing.textContent = formatCurrency(totalOngoingCosts);
+    if (breakdownTotalInvestment) breakdownTotalInvestment.textContent = formatCurrency(totalInvestment);
+    if (breakdownReturn) breakdownReturn.textContent = formatCurrency(expectedReturn);
+    if (breakdownProfit) {
+      breakdownProfit.textContent = formatCurrency(netProfit);
+      breakdownProfit.className = netProfit >= 0 ? 'font-bold text-emerald-500' : 'font-bold text-red-500';
+    }
+
+    // Show results
+    if (results) results.classList.remove('hidden');
+
+    // Return data for comparison
+    return { name, roi, netProfit, paybackMonths };
+  }
+
+  function addToComparison() {
+    const result = calculateROI();
+    if (!result) return;
+
+    comparisons.push(result);
+    renderComparison();
+
+    // Clear form for next entry
+    investmentNameInput.value = '';
+    initialInvestmentInput.value = '';
+    expectedReturnInput.value = '';
+    ongoingCostsInput.value = '';
+    if (results) results.classList.add('hidden');
+  }
+
+  function renderComparison() {
+    if (!comparisonBody || !comparisonResults) return;
+    if (comparisons.length === 0) {
+      comparisonResults.classList.add('hidden');
+      return;
+    }
+
+    comparisonResults.classList.remove('hidden');
+
+    // Clear existing rows
+    while (comparisonBody.firstChild) {
+      comparisonBody.removeChild(comparisonBody.firstChild);
+    }
+
+    // Find best ROI for highlighting
+    const bestRoi = Math.max(...comparisons.map(c => c.roi));
+
+    comparisons.forEach((item, index) => {
+      const tr = document.createElement('tr');
+      tr.className = 'border-b border-[var(--color-border)]';
+      if (item.roi === bestRoi && comparisons.length > 1) {
+        tr.className += ' bg-emerald-500/5';
+      }
+
+      const nameTd = document.createElement('td');
+      nameTd.className = 'py-2 px-3 font-medium';
+      nameTd.textContent = item.name;
+      if (item.roi === bestRoi && comparisons.length > 1) {
+        const badge = document.createElement('span');
+        badge.className = 'ml-2 text-xs px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-500';
+        badge.textContent = 'Best';
+        nameTd.appendChild(badge);
+      }
+
+      const roiTd = document.createElement('td');
+      roiTd.className = item.roi >= 0 ? 'py-2 px-3 text-right text-emerald-500' : 'py-2 px-3 text-right text-red-500';
+      roiTd.textContent = formatPercent(item.roi);
+
+      const profitTd = document.createElement('td');
+      profitTd.className = item.netProfit >= 0 ? 'py-2 px-3 text-right' : 'py-2 px-3 text-right text-red-500';
+      profitTd.textContent = formatCurrency(item.netProfit);
+
+      const paybackTd = document.createElement('td');
+      paybackTd.className = 'py-2 px-3 text-right text-[var(--color-muted)]';
+      if (item.paybackMonths === Infinity || item.paybackMonths > 1000) {
+        paybackTd.textContent = 'Never';
+      } else {
+        paybackTd.textContent = Math.round(item.paybackMonths) + ' mo';
+      }
+
+      const actionTd = document.createElement('td');
+      actionTd.className = 'py-2 px-3 text-center';
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'text-[var(--color-muted)] hover:text-red-500 transition-colors';
+      removeBtn.textContent = '×';
+      removeBtn.addEventListener('click', () => {
+        comparisons.splice(index, 1);
+        renderComparison();
+      });
+      actionTd.appendChild(removeBtn);
+
+      tr.appendChild(nameTd);
+      tr.appendChild(roiTd);
+      tr.appendChild(profitTd);
+      tr.appendChild(paybackTd);
+      tr.appendChild(actionTd);
+
+      comparisonBody.appendChild(tr);
+    });
+  }
+
+  calculateBtn?.addEventListener('click', calculateROI);
+  addComparisonBtn?.addEventListener('click', addToComparison);
+
+  // Calculate on Enter key
+  [initialInvestmentInput, expectedReturnInput, timePeriodInput, ongoingCostsInput].forEach(input => {
+    input?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculateROI();
+    });
+  });
+</script>
