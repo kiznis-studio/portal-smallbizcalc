@@ -1,0 +1,496 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Break-Even Calculator";
+const description = "Calculate your break-even point in units and revenue. Find out exactly how much you need to sell to cover your costs.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          Enter your fixed costs, price per unit, and variable cost per unit to find your break-even point—the minimum sales needed to cover all costs.
+        </p>
+
+        <div class="card p-6 space-y-6">
+          <!-- Fixed Costs -->
+          <div>
+            <label for="fixed-costs" class="block text-sm font-medium mb-2">Fixed Costs (per month)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="fixed-costs"
+                class="input pl-7 w-full"
+                placeholder="5,000"
+                min="0"
+                step="1"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Rent, salaries, insurance, subscriptions—costs that don't change with sales</p>
+          </div>
+
+          <!-- Price per Unit -->
+          <div>
+            <label for="price-per-unit" class="block text-sm font-medium mb-2">Selling Price per Unit</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="price-per-unit"
+                class="input pl-7 w-full"
+                placeholder="50.00"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+
+          <!-- Variable Cost per Unit -->
+          <div>
+            <label for="variable-cost" class="block text-sm font-medium mb-2">Variable Cost per Unit</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="variable-cost"
+                class="input pl-7 w-full"
+                placeholder="20.00"
+                min="0"
+                step="0.01"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Materials, packaging, shipping, payment fees—costs per item sold</p>
+          </div>
+
+          <button
+            id="calculate-btn"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Calculate Break-Even
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <h2 class="text-xl font-semibold mb-4">Your Break-Even Point</h2>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <!-- Break-Even Units -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Units to Break Even</div>
+              <div id="break-even-units" class="text-2xl font-bold text-blue-500">0</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">per month</div>
+            </div>
+
+            <!-- Break-Even Revenue -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Revenue to Break Even</div>
+              <div id="break-even-revenue" class="text-2xl font-bold text-blue-500">$0</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">per month</div>
+            </div>
+
+            <!-- Contribution Margin -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Contribution Margin</div>
+              <div id="contribution-margin" class="text-2xl font-bold text-green-500">$0</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">per unit</div>
+            </div>
+
+            <!-- Contribution Margin % -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Contribution Margin %</div>
+              <div id="contribution-margin-pct" class="text-2xl font-bold text-green-500">0%</div>
+            </div>
+          </div>
+
+          <!-- Profit Projections -->
+          <div class="card p-5 mt-4">
+            <h3 class="font-medium mb-3">Profit at Different Sales Levels</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-2 font-medium">Units Sold</th>
+                    <th class="text-right py-2 font-medium">Revenue</th>
+                    <th class="text-right py-2 font-medium">Total Costs</th>
+                    <th class="text-right py-2 font-medium">Profit/Loss</th>
+                  </tr>
+                </thead>
+                <tbody id="projections-table" class="text-[var(--color-muted)]">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Visual Chart -->
+          <div class="card p-5 mt-4">
+            <h3 class="font-medium mb-4">Break-Even Visualization</h3>
+            <div id="chart-container" class="h-64 relative">
+              <canvas id="break-even-chart"></canvas>
+            </div>
+            <div class="flex justify-center gap-6 mt-4 text-sm">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-blue-500 rounded"></div>
+                <span class="text-[var(--color-muted)]">Revenue</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-red-500 rounded"></div>
+                <span class="text-[var(--color-muted)]">Total Costs</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-green-500 rounded"></div>
+                <span class="text-[var(--color-muted)]">Break-Even</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Content -->
+      <div class="lg:border-l lg:border-[var(--color-border)] lg:pl-12">
+        <h2 class="text-xl font-semibold mb-4">Understanding Break-Even Analysis</h2>
+
+        <div class="prose prose-sm">
+          <h3 class="text-lg font-medium mt-6 mb-3">What is Break-Even Point?</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            The break-even point is where total revenue equals total costs—you're not making profit, but you're not losing money either. Every sale after this point is pure profit (minus variable costs).
+          </p>
+
+          <div class="card p-4 bg-[var(--color-card)] mb-4">
+            <code class="text-sm">Break-Even Units = Fixed Costs / (Price - Variable Cost)</code>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Fixed vs Variable Costs</h3>
+          <div class="space-y-4">
+            <div class="card p-4 bg-blue-500/5 border-blue-500/20">
+              <div class="font-medium text-blue-500 mb-2">Fixed Costs</div>
+              <p class="text-sm text-[var(--color-muted)] mb-2">
+                Stay the same regardless of sales volume:
+              </p>
+              <ul class="text-sm text-[var(--color-muted)] space-y-1">
+                <li>• Rent / mortgage</li>
+                <li>• Salaries (fixed staff)</li>
+                <li>• Insurance premiums</li>
+                <li>• Software subscriptions</li>
+                <li>• Loan payments</li>
+                <li>• Utilities (base amount)</li>
+              </ul>
+            </div>
+            <div class="card p-4 bg-green-500/5 border-green-500/20">
+              <div class="font-medium text-green-500 mb-2">Variable Costs</div>
+              <p class="text-sm text-[var(--color-muted)] mb-2">
+                Change with each unit sold:
+              </p>
+              <ul class="text-sm text-[var(--color-muted)] space-y-1">
+                <li>• Raw materials / inventory</li>
+                <li>• Packaging</li>
+                <li>• Shipping per order</li>
+                <li>• Payment processing fees</li>
+                <li>• Sales commissions</li>
+                <li>• Per-unit labor</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Contribution Margin</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            The contribution margin is how much each sale "contributes" toward covering fixed costs and then profit. It's the selling price minus variable costs.
+          </p>
+          <div class="card p-4 bg-[var(--color-card)] mb-4">
+            <code class="text-sm">Contribution Margin = Price - Variable Cost per Unit</code>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Using Break-Even Analysis</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Set sales targets</strong> – Know the minimum you need to survive</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Evaluate pricing</strong> – See how price changes affect break-even</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Assess new costs</strong> – Understand impact of hiring or new expenses</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Launch decisions</strong> – Determine if a new product is viable</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Investor pitches</strong> – Show you understand your economics</span>
+            </li>
+          </ul>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Lowering Your Break-Even Point</h3>
+          <div class="space-y-3 text-[var(--color-muted)]">
+            <p><strong>1. Reduce fixed costs</strong> – Negotiate rent, cut unused subscriptions, go remote</p>
+            <p><strong>2. Raise prices</strong> – Increases contribution margin per sale</p>
+            <p><strong>3. Lower variable costs</strong> – Better supplier deals, optimize shipping</p>
+            <p><strong>4. Increase average order value</strong> – Bundles, upsells, minimum orders</p>
+          </div>
+
+          <div class="card p-4 bg-yellow-500/5 border-yellow-500/20 mt-6">
+            <div class="font-medium text-yellow-600 dark:text-yellow-400 mb-1">Pro Tip</div>
+            <p class="text-sm text-[var(--color-muted)]">
+              Calculate break-even for each product line separately. A product with low margins might be dragging down your overall profitability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script type="module">
+  const fixedCostsInput = document.getElementById('fixed-costs');
+  const priceInput = document.getElementById('price-per-unit');
+  const variableCostInput = document.getElementById('variable-cost');
+  const calculateBtn = document.getElementById('calculate-btn');
+  const resultsSection = document.getElementById('results');
+
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  function formatNumber(value) {
+    return new Intl.NumberFormat('en-US').format(Math.ceil(value));
+  }
+
+  function formatPercent(value) {
+    return value.toFixed(1) + '%';
+  }
+
+  function updateProjections(fixedCosts, price, variableCost, breakEvenUnits) {
+    const tbody = document.getElementById('projections-table');
+    tbody.textContent = '';
+
+    // Show units at various percentages of break-even and beyond
+    const levels = [
+      Math.round(breakEvenUnits * 0.5),
+      Math.round(breakEvenUnits * 0.75),
+      Math.ceil(breakEvenUnits),
+      Math.round(breakEvenUnits * 1.25),
+      Math.round(breakEvenUnits * 1.5),
+      Math.round(breakEvenUnits * 2)
+    ];
+
+    levels.forEach(units => {
+      const revenue = units * price;
+      const totalCosts = fixedCosts + (units * variableCost);
+      const profit = revenue - totalCosts;
+      const isBreakEven = units === Math.ceil(breakEvenUnits);
+
+      const row = document.createElement('tr');
+      row.className = 'border-b border-[var(--color-border)]';
+
+      const unitsCell = document.createElement('td');
+      unitsCell.className = 'py-2';
+      if (isBreakEven) {
+        const span = document.createElement('span');
+        span.className = 'font-medium text-green-500';
+        span.textContent = formatNumber(units) + ' ★';
+        unitsCell.appendChild(span);
+      } else {
+        unitsCell.textContent = formatNumber(units);
+      }
+
+      const revenueCell = document.createElement('td');
+      revenueCell.className = 'text-right';
+      revenueCell.textContent = formatCurrency(revenue);
+
+      const costsCell = document.createElement('td');
+      costsCell.className = 'text-right';
+      costsCell.textContent = formatCurrency(totalCosts);
+
+      const profitCell = document.createElement('td');
+      profitCell.className = `text-right font-medium ${profit >= 0 ? 'text-green-500' : 'text-red-500'}`;
+      profitCell.textContent = (profit >= 0 ? '+' : '') + formatCurrency(profit);
+
+      row.appendChild(unitsCell);
+      row.appendChild(revenueCell);
+      row.appendChild(costsCell);
+      row.appendChild(profitCell);
+      tbody.appendChild(row);
+    });
+  }
+
+  function drawChart(fixedCosts, price, variableCost, breakEvenUnits) {
+    const canvas = document.getElementById('break-even-chart');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('chart-container');
+
+    // Set canvas size
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 40;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Calculate range (show up to 2x break-even)
+    const maxUnits = Math.ceil(breakEvenUnits * 2);
+    const maxRevenue = maxUnits * price;
+    const maxCost = fixedCosts + (maxUnits * variableCost);
+    const maxY = Math.max(maxRevenue, maxCost);
+
+    // Scale functions
+    const scaleX = (units) => padding + (units / maxUnits) * (width - padding * 2);
+    const scaleY = (value) => height - padding - (value / maxY) * (height - padding * 2);
+
+    // Get computed colors
+    const isDark = document.documentElement.classList.contains('dark');
+    const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+    const textColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)';
+
+    // Draw grid lines
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+
+    // Horizontal grid
+    for (let i = 0; i <= 4; i++) {
+      const y = padding + (i / 4) * (height - padding * 2);
+      ctx.beginPath();
+      ctx.moveTo(padding, y);
+      ctx.lineTo(width - padding, y);
+      ctx.stroke();
+    }
+
+    // Draw axes labels
+    ctx.fillStyle = textColor;
+    ctx.font = '11px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('Units', width / 2, height - 10);
+
+    ctx.save();
+    ctx.translate(12, height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('$', 0, 0);
+    ctx.restore();
+
+    // Draw revenue line (blue)
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(scaleX(0), scaleY(0));
+    ctx.lineTo(scaleX(maxUnits), scaleY(maxRevenue));
+    ctx.stroke();
+
+    // Draw cost line (red)
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(scaleX(0), scaleY(fixedCosts));
+    ctx.lineTo(scaleX(maxUnits), scaleY(maxCost));
+    ctx.stroke();
+
+    // Draw break-even point (green dot)
+    const beX = scaleX(breakEvenUnits);
+    const beY = scaleY(breakEvenUnits * price);
+
+    ctx.fillStyle = '#22c55e';
+    ctx.beginPath();
+    ctx.arc(beX, beY, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Draw break-even vertical line
+    ctx.strokeStyle = '#22c55e';
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(beX, beY);
+    ctx.lineTo(beX, height - padding);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Label break-even point
+    ctx.fillStyle = textColor;
+    ctx.font = '10px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText(formatNumber(breakEvenUnits) + ' units', beX, height - padding + 15);
+  }
+
+  function calculate() {
+    const fixedCosts = parseFloat(fixedCostsInput.value) || 0;
+    const price = parseFloat(priceInput.value) || 0;
+    const variableCost = parseFloat(variableCostInput.value) || 0;
+
+    if (fixedCosts <= 0) {
+      alert('Please enter fixed costs greater than zero.');
+      return;
+    }
+
+    if (price <= 0) {
+      alert('Please enter a selling price greater than zero.');
+      return;
+    }
+
+    if (price <= variableCost) {
+      alert('Selling price must be greater than variable cost per unit.');
+      return;
+    }
+
+    const contributionMargin = price - variableCost;
+    const contributionMarginPct = (contributionMargin / price) * 100;
+    const breakEvenUnits = fixedCosts / contributionMargin;
+    const breakEvenRevenue = breakEvenUnits * price;
+
+    // Update results
+    document.getElementById('break-even-units').textContent = formatNumber(breakEvenUnits);
+    document.getElementById('break-even-revenue').textContent = formatCurrency(breakEvenRevenue);
+    document.getElementById('contribution-margin').textContent = formatCurrency(contributionMargin);
+    document.getElementById('contribution-margin-pct').textContent = formatPercent(contributionMarginPct);
+
+    // Update projections table
+    updateProjections(fixedCosts, price, variableCost, breakEvenUnits);
+
+    // Draw chart
+    drawChart(fixedCosts, price, variableCost, breakEvenUnits);
+
+    // Show results
+    resultsSection.classList.remove('hidden');
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  calculateBtn.addEventListener('click', calculate);
+
+  // Allow Enter key to calculate
+  [fixedCostsInput, priceInput, variableCostInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculate();
+    });
+  });
+
+  // Redraw chart on resize
+  window.addEventListener('resize', () => {
+    if (!resultsSection.classList.contains('hidden')) {
+      const fixedCosts = parseFloat(fixedCostsInput.value) || 0;
+      const price = parseFloat(priceInput.value) || 0;
+      const variableCost = parseFloat(variableCostInput.value) || 0;
+      const breakEvenUnits = fixedCosts / (price - variableCost);
+      drawChart(fixedCosts, price, variableCost, breakEvenUnits);
+    }
+  });
+</script>

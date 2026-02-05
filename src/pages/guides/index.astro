@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Business Guides";
+const description = "Free guides for small business owners covering profit margins, pricing strategy, financial planning, and more.";
+
+const guides = [
+  {
+    href: '/guides/profit-margins',
+    title: 'Understanding Profit Margins',
+    description: 'Learn the difference between gross and net margin, industry benchmarks, and how to improve your margins.',
+    status: 'coming'
+  },
+  {
+    href: '/guides/pricing-strategy',
+    title: 'Pricing Strategy for Small Business',
+    description: 'How to price your products and services for profitability without losing customers.',
+    status: 'coming'
+  },
+  {
+    href: '/guides/break-even-analysis',
+    title: 'Break-Even Analysis Explained',
+    description: 'Use break-even analysis to make smarter decisions about pricing, costs, and growth.',
+    status: 'coming'
+  },
+  {
+    href: '/guides/cash-flow-basics',
+    title: 'Cash Flow Basics',
+    description: 'Why profitable businesses fail and how to manage cash flow to avoid running out of money.',
+    status: 'coming'
+  }
+];
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <div class="max-w-3xl mx-auto text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">{title}</h1>
+      <p class="text-lg text-[var(--color-muted)]">
+        Practical guides to help you understand the numbers behind your business.
+      </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto">
+      <div class="card p-8 text-center bg-blue-500/5 border-blue-500/20">
+        <svg class="w-12 h-12 text-blue-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <h2 class="text-xl font-semibold mb-2">Guides Coming Soon</h2>
+        <p class="text-[var(--color-muted)] mb-6">
+          We're working on practical guides to help you make sense of your business finances. Check back soon or use our calculators in the meantime.
+        </p>
+        <a
+          href="/tools"
+          class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        >
+          Try Our Calculators
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Planned Guides -->
+      <div class="mt-12">
+        <h2 class="text-lg font-semibold mb-4 text-[var(--color-muted)]">Planned Guides</h2>
+        <div class="space-y-4">
+          {guides.map(guide => (
+            <div class="card p-4 opacity-60">
+              <h3 class="font-medium mb-1">{guide.title}</h3>
+              <p class="text-sm text-[var(--color-muted)]">{guide.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

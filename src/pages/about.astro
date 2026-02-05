@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = "About SmallBizCalc";
+const description = "SmallBizCalc provides free business calculators to help small business owners make smarter financial decisions.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold mb-6">{title}</h1>
+
+      <div class="prose prose-lg">
+        <p class="text-[var(--color-muted)] mb-6">
+          SmallBizCalc is a free resource for small business owners who need quick, accurate financial calculations without the complexity of spreadsheets or expensive software.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-8 mb-4">Our Mission</h2>
+        <p class="text-[var(--color-muted)] mb-6">
+          Running a small business is hard enough. You shouldn't need a finance degree to understand your profit margins or figure out how to price your products. We build simple, straightforward calculators that give you answers in seconds.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-8 mb-4">What We Offer</h2>
+        <ul class="space-y-3 text-[var(--color-muted)] mb-6">
+          <li class="flex gap-2">
+            <span class="text-blue-500">•</span>
+            <span><strong>Free calculators</strong> – No signup, no credit card, no catch</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-blue-500">•</span>
+            <span><strong>Educational content</strong> – We explain the concepts, not just the numbers</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-blue-500">•</span>
+            <span><strong>Privacy-focused</strong> – Your data stays on your device</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-blue-500">•</span>
+            <span><strong>Works everywhere</strong> – Desktop, tablet, or phone</span>
+          </li>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-8 mb-4">Disclaimer</h2>
+        <p class="text-[var(--color-muted)] mb-6">
+          The calculators and information provided on SmallBizCalc are for educational and informational purposes only. They should not be considered financial, legal, or tax advice. Always consult with a qualified professional for advice specific to your situation.
+        </p>
+
+        <h2 class="text-xl font-semibold mt-8 mb-4">Contact</h2>
+        <p class="text-[var(--color-muted)]">
+          Questions, suggestions, or feedback? We'd love to hear from you.
+        </p>
+        <p class="mt-2">
+          <a href="mailto:hello@smallbizcalc.com" class="text-blue-500 hover:underline">
+            hello@smallbizcalc.com
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>

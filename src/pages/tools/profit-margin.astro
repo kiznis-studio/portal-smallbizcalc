@@ -1,0 +1,361 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Profit Margin Calculator";
+const description = "Calculate your gross and net profit margins instantly. Enter your revenue and costs to see your exact profitability percentages.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          Enter your revenue and costs to calculate your profit margins. See both gross margin (before overhead) and net margin (after all expenses).
+        </p>
+
+        <div class="card p-6 space-y-6">
+          <!-- Revenue -->
+          <div>
+            <label for="revenue" class="block text-sm font-medium mb-2">Revenue (Sales)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="revenue"
+                class="input pl-7 w-full"
+                placeholder="10,000"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+
+          <!-- Cost of Goods Sold -->
+          <div>
+            <label for="cogs" class="block text-sm font-medium mb-2">Cost of Goods Sold (COGS)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="cogs"
+                class="input pl-7 w-full"
+                placeholder="6,000"
+                min="0"
+                step="0.01"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Direct costs: materials, labor, manufacturing</p>
+          </div>
+
+          <!-- Operating Expenses -->
+          <div>
+            <label for="expenses" class="block text-sm font-medium mb-2">Operating Expenses (Optional)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="expenses"
+                class="input pl-7 w-full"
+                placeholder="2,000"
+                min="0"
+                step="0.01"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Overhead: rent, utilities, salaries, marketing</p>
+          </div>
+
+          <button
+            id="calculate-btn"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Calculate Margins
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <h2 class="text-xl font-semibold mb-4">Your Profit Margins</h2>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <!-- Gross Profit -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Gross Profit</div>
+              <div id="gross-profit" class="text-2xl font-bold text-green-500">$0</div>
+            </div>
+
+            <!-- Gross Margin -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Gross Margin</div>
+              <div id="gross-margin" class="text-2xl font-bold text-blue-500">0%</div>
+            </div>
+
+            <!-- Net Profit -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Net Profit</div>
+              <div id="net-profit" class="text-2xl font-bold text-green-500">$0</div>
+            </div>
+
+            <!-- Net Margin -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Net Margin</div>
+              <div id="net-margin" class="text-2xl font-bold text-blue-500">0%</div>
+            </div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="card p-5 mt-4">
+            <h3 class="font-medium mb-3">Breakdown</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">Revenue</span>
+                <span id="breakdown-revenue">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">− Cost of Goods Sold</span>
+                <span id="breakdown-cogs" class="text-red-500">−$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
+                <span class="font-medium">= Gross Profit</span>
+                <span id="breakdown-gross" class="font-medium">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">− Operating Expenses</span>
+                <span id="breakdown-expenses" class="text-red-500">−$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
+                <span class="font-medium">= Net Profit</span>
+                <span id="breakdown-net" class="font-medium">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Industry Comparison -->
+          <div id="industry-comparison" class="card p-5 mt-4">
+            <h3 class="font-medium mb-3">How You Compare</h3>
+            <div id="comparison-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Content -->
+      <div class="lg:border-l lg:border-[var(--color-border)] lg:pl-12">
+        <h2 class="text-xl font-semibold mb-4">Understanding Profit Margins</h2>
+
+        <div class="prose prose-sm">
+          <h3 class="text-lg font-medium mt-6 mb-3">What is Profit Margin?</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            Profit margin measures how much of every dollar in sales a company keeps as profit. It's expressed as a percentage and is one of the most important metrics for measuring business health.
+          </p>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Gross vs Net Margin</h3>
+          <div class="space-y-4">
+            <div class="card p-4 bg-blue-500/5 border-blue-500/20">
+              <div class="font-medium text-blue-500 mb-1">Gross Margin</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Revenue minus direct costs (COGS). Shows production efficiency before overhead. Formula: (Revenue - COGS) / Revenue × 100
+              </p>
+            </div>
+            <div class="card p-4 bg-green-500/5 border-green-500/20">
+              <div class="font-medium text-green-500 mb-1">Net Margin</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Revenue minus ALL costs. Shows true profitability. Formula: (Revenue - COGS - Expenses) / Revenue × 100
+              </p>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Typical Margins by Industry</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 font-medium">Industry</th>
+                  <th class="text-right py-2 font-medium">Gross</th>
+                  <th class="text-right py-2 font-medium">Net</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Software/SaaS</td>
+                  <td class="text-right">70-85%</td>
+                  <td class="text-right">15-25%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Retail</td>
+                  <td class="text-right">25-50%</td>
+                  <td class="text-right">2-5%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Restaurants</td>
+                  <td class="text-right">60-70%</td>
+                  <td class="text-right">3-9%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Manufacturing</td>
+                  <td class="text-right">25-35%</td>
+                  <td class="text-right">5-10%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Consulting</td>
+                  <td class="text-right">80-90%</td>
+                  <td class="text-right">15-25%</td>
+                </tr>
+                <tr>
+                  <td class="py-2">E-commerce</td>
+                  <td class="text-right">40-60%</td>
+                  <td class="text-right">5-10%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">How to Improve Your Margins</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Raise prices</strong> – Test 5-10% increases; value-based pricing often works</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Reduce COGS</strong> – Negotiate with suppliers, buy in bulk, optimize production</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Cut overhead</strong> – Review subscriptions, renegotiate rent, automate tasks</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Improve efficiency</strong> – Reduce waste, train staff, streamline processes</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Focus on high-margin products</strong> – Analyze per-product margins, promote winners</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script type="module">
+  const revenueInput = document.getElementById('revenue');
+  const cogsInput = document.getElementById('cogs');
+  const expensesInput = document.getElementById('expenses');
+  const calculateBtn = document.getElementById('calculate-btn');
+  const resultsSection = document.getElementById('results');
+
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  function formatPercent(value) {
+    return value.toFixed(1) + '%';
+  }
+
+  function getComparisonText(netMargin) {
+    const container = document.getElementById('comparison-content');
+    container.textContent = '';
+
+    let rating, color, advice;
+
+    if (netMargin >= 20) {
+      rating = 'Excellent';
+      color = 'text-green-500';
+      advice = 'Your net margin is exceptional. You\'re outperforming most businesses. Focus on scaling while maintaining these margins.';
+    } else if (netMargin >= 10) {
+      rating = 'Good';
+      color = 'text-blue-500';
+      advice = 'Your net margin is healthy. You have room to invest in growth while maintaining profitability.';
+    } else if (netMargin >= 5) {
+      rating = 'Average';
+      color = 'text-yellow-500';
+      advice = 'Your net margin is typical for many industries. Look for ways to reduce costs or increase prices to improve profitability.';
+    } else if (netMargin > 0) {
+      rating = 'Low';
+      color = 'text-orange-500';
+      advice = 'Your net margin is thin. Small changes in costs or revenue could significantly impact profitability. Consider ways to improve efficiency.';
+    } else {
+      rating = 'Negative';
+      color = 'text-red-500';
+      advice = 'You\'re operating at a loss. Urgent action needed: review pricing, cut unnecessary expenses, or increase sales volume.';
+    }
+
+    const ratingDiv = document.createElement('div');
+    ratingDiv.className = `text-lg font-medium mb-2 ${color}`;
+    ratingDiv.textContent = rating;
+
+    const adviceP = document.createElement('p');
+    adviceP.className = 'text-sm text-[var(--color-muted)]';
+    adviceP.textContent = advice;
+
+    container.appendChild(ratingDiv);
+    container.appendChild(adviceP);
+  }
+
+  function calculate() {
+    const revenue = parseFloat(revenueInput.value) || 0;
+    const cogs = parseFloat(cogsInput.value) || 0;
+    const expenses = parseFloat(expensesInput.value) || 0;
+
+    if (revenue <= 0) {
+      alert('Please enter a revenue amount greater than zero.');
+      return;
+    }
+
+    const grossProfit = revenue - cogs;
+    const netProfit = grossProfit - expenses;
+    const grossMargin = (grossProfit / revenue) * 100;
+    const netMargin = (netProfit / revenue) * 100;
+
+    // Update results
+    document.getElementById('gross-profit').textContent = formatCurrency(grossProfit);
+    document.getElementById('gross-margin').textContent = formatPercent(grossMargin);
+    document.getElementById('net-profit').textContent = formatCurrency(netProfit);
+    document.getElementById('net-margin').textContent = formatPercent(netMargin);
+
+    // Update breakdown
+    document.getElementById('breakdown-revenue').textContent = formatCurrency(revenue);
+    document.getElementById('breakdown-cogs').textContent = '−' + formatCurrency(cogs);
+    document.getElementById('breakdown-gross').textContent = formatCurrency(grossProfit);
+    document.getElementById('breakdown-expenses').textContent = '−' + formatCurrency(expenses);
+    document.getElementById('breakdown-net').textContent = formatCurrency(netProfit);
+
+    // Color code profits
+    document.getElementById('gross-profit').className = `text-2xl font-bold ${grossProfit >= 0 ? 'text-green-500' : 'text-red-500'}`;
+    document.getElementById('net-profit').className = `text-2xl font-bold ${netProfit >= 0 ? 'text-green-500' : 'text-red-500'}`;
+    document.getElementById('breakdown-gross').className = `font-medium ${grossProfit >= 0 ? '' : 'text-red-500'}`;
+    document.getElementById('breakdown-net').className = `font-medium ${netProfit >= 0 ? '' : 'text-red-500'}`;
+
+    // Get comparison
+    getComparisonText(netMargin);
+
+    // Show results
+    resultsSection.classList.remove('hidden');
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  calculateBtn.addEventListener('click', calculate);
+
+  // Allow Enter key to calculate
+  [revenueInput, cogsInput, expensesInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculate();
+    });
+  });
+</script>

@@ -1,0 +1,407 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Markup Calculator";
+const description = "Calculate the right markup and selling price for your products. Convert between markup percentage and profit margin instantly.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          Enter your cost and desired markup to calculate the selling price, or enter the selling price to see your markup percentage.
+        </p>
+
+        <div class="card p-6 space-y-6">
+          <!-- Calculator Mode -->
+          <div>
+            <label class="block text-sm font-medium mb-3">Calculate</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button
+                id="mode-price"
+                class="py-2 px-4 rounded-lg border-2 border-blue-500 bg-blue-500/10 text-blue-500 font-medium transition-colors"
+              >
+                Selling Price
+              </button>
+              <button
+                id="mode-markup"
+                class="py-2 px-4 rounded-lg border-2 border-[var(--color-border)] text-[var(--color-muted)] font-medium transition-colors hover:border-[var(--color-foreground)]"
+              >
+                Markup %
+              </button>
+            </div>
+          </div>
+
+          <!-- Cost -->
+          <div>
+            <label for="cost" class="block text-sm font-medium mb-2">Cost (What you pay)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="cost"
+                class="input pl-7 w-full"
+                placeholder="50.00"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+
+          <!-- Markup (for price mode) -->
+          <div id="markup-input-group">
+            <label for="markup" class="block text-sm font-medium mb-2">Markup Percentage</label>
+            <div class="relative">
+              <input
+                type="number"
+                id="markup"
+                class="input pr-8 w-full"
+                placeholder="50"
+                min="0"
+                step="0.1"
+              />
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">%</span>
+            </div>
+          </div>
+
+          <!-- Selling Price (for markup mode) -->
+          <div id="price-input-group" class="hidden">
+            <label for="price" class="block text-sm font-medium mb-2">Selling Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="price"
+                class="input pl-7 w-full"
+                placeholder="75.00"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+
+          <button
+            id="calculate-btn"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Calculate
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <h2 class="text-xl font-semibold mb-4">Your Pricing</h2>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <!-- Selling Price -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Selling Price</div>
+              <div id="result-price" class="text-2xl font-bold text-blue-500">$0</div>
+            </div>
+
+            <!-- Markup -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Markup</div>
+              <div id="result-markup" class="text-2xl font-bold text-green-500">0%</div>
+            </div>
+
+            <!-- Profit per Unit -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Profit per Unit</div>
+              <div id="result-profit" class="text-2xl font-bold text-green-500">$0</div>
+            </div>
+
+            <!-- Gross Margin -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Gross Margin</div>
+              <div id="result-margin" class="text-2xl font-bold text-blue-500">0%</div>
+            </div>
+          </div>
+
+          <!-- Quick Reference -->
+          <div class="card p-5 mt-4">
+            <h3 class="font-medium mb-3">Sales Volume Projections</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-2 font-medium">Units Sold</th>
+                    <th class="text-right py-2 font-medium">Revenue</th>
+                    <th class="text-right py-2 font-medium">Total Cost</th>
+                    <th class="text-right py-2 font-medium">Gross Profit</th>
+                  </tr>
+                </thead>
+                <tbody id="projections-table" class="text-[var(--color-muted)]">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Content -->
+      <div class="lg:border-l lg:border-[var(--color-border)] lg:pl-12">
+        <h2 class="text-xl font-semibold mb-4">Understanding Markup vs Margin</h2>
+
+        <div class="prose prose-sm">
+          <div class="card p-4 bg-yellow-500/5 border-yellow-500/20 mb-6">
+            <div class="font-medium text-yellow-600 dark:text-yellow-400 mb-1">⚠️ Common Confusion</div>
+            <p class="text-sm text-[var(--color-muted)]">
+              Markup and margin are NOT the same! A 50% markup does NOT give you 50% margin. This is a costly mistake many business owners make.
+            </p>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">What is Markup?</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            Markup is the percentage added to your cost to get the selling price. It's based on cost.
+          </p>
+          <div class="card p-4 bg-[var(--color-card)] mb-4">
+            <code class="text-sm">Markup % = (Price - Cost) / Cost × 100</code>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Markup vs Margin Comparison</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 font-medium">Markup</th>
+                  <th class="text-right py-2 font-medium">Margin</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">15%</td>
+                  <td class="text-right">13.0%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">20%</td>
+                  <td class="text-right">16.7%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">25%</td>
+                  <td class="text-right">20.0%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">33%</td>
+                  <td class="text-right">25.0%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">50%</td>
+                  <td class="text-right">33.3%</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">75%</td>
+                  <td class="text-right">42.9%</td>
+                </tr>
+                <tr>
+                  <td class="py-2">100%</td>
+                  <td class="text-right">50.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Typical Markups by Industry</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Grocery:</strong> 5-15% markup</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Clothing:</strong> 50-100% markup (keystone pricing)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Jewelry:</strong> 100-300% markup</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Restaurants:</strong> 200-400% on food, 400-600% on drinks</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Electronics:</strong> 10-30% markup</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span><strong>Furniture:</strong> 80-150% markup</span>
+            </li>
+          </ul>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Conversion Formulas</h3>
+          <div class="space-y-3">
+            <div class="card p-3 bg-[var(--color-card)]">
+              <div class="text-xs text-[var(--color-muted)] mb-1">Markup → Margin</div>
+              <code class="text-sm">Margin = Markup / (1 + Markup)</code>
+            </div>
+            <div class="card p-3 bg-[var(--color-card)]">
+              <div class="text-xs text-[var(--color-muted)] mb-1">Margin → Markup</div>
+              <code class="text-sm">Markup = Margin / (1 - Margin)</code>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Pricing Strategy Tips</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span>Don't compete on price alone—differentiate on value</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span>Test prices—small increases often don't affect demand</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span>Account for ALL costs: shipping, returns, payment fees</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-blue-500">•</span>
+              <span>Use psychological pricing ($9.99 vs $10.00)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script type="module">
+  const modePrice = document.getElementById('mode-price');
+  const modeMarkup = document.getElementById('mode-markup');
+  const markupInputGroup = document.getElementById('markup-input-group');
+  const priceInputGroup = document.getElementById('price-input-group');
+  const costInput = document.getElementById('cost');
+  const markupInput = document.getElementById('markup');
+  const priceInput = document.getElementById('price');
+  const calculateBtn = document.getElementById('calculate-btn');
+  const resultsSection = document.getElementById('results');
+
+  let currentMode = 'price'; // 'price' or 'markup'
+
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount);
+  }
+
+  function formatPercent(value) {
+    return value.toFixed(1) + '%';
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+
+    if (mode === 'price') {
+      modePrice.className = 'py-2 px-4 rounded-lg border-2 border-blue-500 bg-blue-500/10 text-blue-500 font-medium transition-colors';
+      modeMarkup.className = 'py-2 px-4 rounded-lg border-2 border-[var(--color-border)] text-[var(--color-muted)] font-medium transition-colors hover:border-[var(--color-foreground)]';
+      markupInputGroup.classList.remove('hidden');
+      priceInputGroup.classList.add('hidden');
+    } else {
+      modeMarkup.className = 'py-2 px-4 rounded-lg border-2 border-blue-500 bg-blue-500/10 text-blue-500 font-medium transition-colors';
+      modePrice.className = 'py-2 px-4 rounded-lg border-2 border-[var(--color-border)] text-[var(--color-muted)] font-medium transition-colors hover:border-[var(--color-foreground)]';
+      markupInputGroup.classList.add('hidden');
+      priceInputGroup.classList.remove('hidden');
+    }
+  }
+
+  function updateProjections(cost, price, profit) {
+    const tbody = document.getElementById('projections-table');
+    tbody.textContent = '';
+
+    const volumes = [10, 50, 100, 500, 1000];
+
+    volumes.forEach(units => {
+      const row = document.createElement('tr');
+      row.className = 'border-b border-[var(--color-border)]';
+
+      const unitsCell = document.createElement('td');
+      unitsCell.className = 'py-2';
+      unitsCell.textContent = units.toLocaleString();
+
+      const revenueCell = document.createElement('td');
+      revenueCell.className = 'text-right';
+      revenueCell.textContent = formatCurrency(price * units);
+
+      const costCell = document.createElement('td');
+      costCell.className = 'text-right';
+      costCell.textContent = formatCurrency(cost * units);
+
+      const profitCell = document.createElement('td');
+      profitCell.className = 'text-right text-green-500';
+      profitCell.textContent = formatCurrency(profit * units);
+
+      row.appendChild(unitsCell);
+      row.appendChild(revenueCell);
+      row.appendChild(costCell);
+      row.appendChild(profitCell);
+      tbody.appendChild(row);
+    });
+  }
+
+  function calculate() {
+    const cost = parseFloat(costInput.value) || 0;
+
+    if (cost <= 0) {
+      alert('Please enter a cost greater than zero.');
+      return;
+    }
+
+    let price, markup, profit, margin;
+
+    if (currentMode === 'price') {
+      markup = parseFloat(markupInput.value) || 0;
+      price = cost * (1 + markup / 100);
+      profit = price - cost;
+      margin = (profit / price) * 100;
+    } else {
+      price = parseFloat(priceInput.value) || 0;
+      if (price <= cost) {
+        alert('Selling price must be greater than cost.');
+        return;
+      }
+      profit = price - cost;
+      markup = (profit / cost) * 100;
+      margin = (profit / price) * 100;
+    }
+
+    // Update results
+    document.getElementById('result-price').textContent = formatCurrency(price);
+    document.getElementById('result-markup').textContent = formatPercent(markup);
+    document.getElementById('result-profit').textContent = formatCurrency(profit);
+    document.getElementById('result-margin').textContent = formatPercent(margin);
+
+    // Update projections
+    updateProjections(cost, price, profit);
+
+    // Show results
+    resultsSection.classList.remove('hidden');
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  modePrice.addEventListener('click', () => setMode('price'));
+  modeMarkup.addEventListener('click', () => setMode('markup'));
+  calculateBtn.addEventListener('click', calculate);
+
+  // Allow Enter key to calculate
+  [costInput, markupInput, priceInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculate();
+    });
+  });
+</script>

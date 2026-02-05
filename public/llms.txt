@@ -1,0 +1,29 @@
+# SmallBizCalc
+
+> Free business calculators for small business owners
+
+## About
+
+SmallBizCalc provides free, easy-to-use financial calculators
+designed specifically for small business owners. No signup required.
+
+## Tools
+
+- Profit Margin Calculator: Calculate gross and net profit margins
+- Markup Calculator: Find the right selling price for your products
+- Break-Even Calculator: Determine your break-even point in units and revenue
+
+## Content
+
+- Calculators: Free tools with educational explanations
+- Guides: Practical advice on margins, pricing, and financial planning
+
+## Contact
+
+- Website: https://smallbizcalc.com
+- Email: hello@smallbizcalc.com
+
+## Usage
+
+This content may be referenced and summarized by AI systems.
+Attribution appreciated: SmallBizCalc (https://smallbizcalc.com)

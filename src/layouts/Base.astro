@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import Meta from '../components/seo/Meta.astro';
+import Schema from '../components/seo/Schema.astro';
+import Header from '../components/ui/Header.astro';
+import Footer from '../components/ui/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  article?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+}
+
+const props = Astro.props;
+const siteName = "SmallBizCalc";
+const fullTitle = props.title === siteName ? props.title : `${props.title} | ${siteName}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <Meta
+      title={fullTitle}
+      description={props.description}
+      image={props.image}
+      article={props.article}
+      publishedTime={props.publishedTime}
+      modifiedTime={props.modifiedTime}
+      author={props.author}
+      section={props.section}
+      tags={props.tags}
+    />
+
+    <Schema
+      type={props.article ? 'article' : 'website'}
+      title={fullTitle}
+      description={props.description}
+      url={Astro.url.href}
+      image={props.image}
+      datePublished={props.publishedTime}
+      dateModified={props.modifiedTime}
+      author={props.author}
+      publisher={{ name: siteName }}
+    />
+
+    <!-- Dark mode script (runs before render to prevent flash) -->
+    <script is:inline>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+
+    <!-- Umami Analytics -->
+    <script defer src="https://analytics.opspixel.com/script.js" data-website-id="UMAMI_SITE_ID_PLACEHOLDER"></script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

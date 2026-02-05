@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = "Privacy Policy";
+const description = "SmallBizCalc privacy policy. Learn how we handle your data and protect your privacy.";
+const lastUpdated = "February 5, 2026";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+      <p class="text-sm text-[var(--color-muted)] mb-8">Last updated: {lastUpdated}</p>
+
+      <div class="prose prose-lg space-y-6">
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Overview</h2>
+          <p class="text-[var(--color-muted)]">
+            SmallBizCalc ("we", "our", or "us") respects your privacy. This policy explains what data we collect, why we collect it, and your rights regarding that data.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Data We Collect</h2>
+
+          <h3 class="text-lg font-medium mt-4 mb-2">Calculator Data</h3>
+          <p class="text-[var(--color-muted)]">
+            All calculations are performed locally in your browser. The numbers you enter into our calculators are never sent to our servers or stored anywhere. Your financial data stays on your device.
+          </p>
+
+          <h3 class="text-lg font-medium mt-4 mb-2">Analytics Data</h3>
+          <p class="text-[var(--color-muted)]">
+            We use privacy-focused analytics (Umami) to understand how visitors use our site. This includes:
+          </p>
+          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
+            <li>Pages visited</li>
+            <li>Referral source</li>
+            <li>Browser type and device category</li>
+            <li>Country (based on IP, not stored)</li>
+          </ul>
+          <p class="text-[var(--color-muted)] mt-2">
+            We do not use cookies for analytics. We do not track individual users across sessions.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Third-Party Services</h2>
+          <p class="text-[var(--color-muted)]">
+            We may use the following third-party services:
+          </p>
+          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
+            <li><strong>Cloudflare</strong> – For website hosting and security</li>
+            <li><strong>Umami</strong> – For privacy-focused analytics</li>
+          </ul>
+          <p class="text-[var(--color-muted)] mt-2">
+            These services have their own privacy policies governing their data practices.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Cookies</h2>
+          <p class="text-[var(--color-muted)]">
+            SmallBizCalc uses minimal cookies:
+          </p>
+          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
+            <li><strong>Theme preference</strong> – Stored locally to remember your light/dark mode choice</li>
+          </ul>
+          <p class="text-[var(--color-muted)] mt-2">
+            We do not use tracking cookies, advertising cookies, or third-party cookies.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Your Rights</h2>
+          <p class="text-[var(--color-muted)]">
+            Since we don't collect personal data, there's nothing to delete or export. Your calculator inputs never leave your device.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Children's Privacy</h2>
+          <p class="text-[var(--color-muted)]">
+            Our site is not directed at children under 13. We do not knowingly collect data from children.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Changes to This Policy</h2>
+          <p class="text-[var(--color-muted)]">
+            We may update this policy from time to time. Changes will be posted on this page with an updated revision date.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Contact</h2>
+          <p class="text-[var(--color-muted)]">
+            Questions about this privacy policy? Contact us at:
+          </p>
+          <p class="mt-2">
+            <a href="mailto:privacy@smallbizcalc.com" class="text-blue-500 hover:underline">
+              privacy@smallbizcalc.com
+            </a>
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>

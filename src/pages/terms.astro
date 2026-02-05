@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = "Terms of Use";
+const description = "Terms of use for SmallBizCalc calculators and website.";
+const lastUpdated = "February 5, 2026";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+      <p class="text-sm text-[var(--color-muted)] mb-8">Last updated: {lastUpdated}</p>
+
+      <div class="prose prose-lg space-y-6">
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Acceptance of Terms</h2>
+          <p class="text-[var(--color-muted)]">
+            By accessing and using SmallBizCalc ("the Site"), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the Site.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Use of Calculators</h2>
+          <p class="text-[var(--color-muted)]">
+            The calculators and tools provided on this Site are for general informational and educational purposes only. They are designed to help small business owners with common financial calculations.
+          </p>
+          <p class="text-[var(--color-muted)] mt-3">
+            You may use the calculators for personal and commercial purposes, including making business decisions. However, you acknowledge that:
+          </p>
+          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
+            <li>Results are estimates based on the information you provide</li>
+            <li>Calculators may not account for all factors relevant to your situation</li>
+            <li>You are responsible for verifying calculations important to your business</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Not Professional Advice</h2>
+          <p class="text-[var(--color-muted)]">
+            <strong>The content on this Site does not constitute financial, legal, tax, or other professional advice.</strong>
+          </p>
+          <p class="text-[var(--color-muted)] mt-3">
+            The information and calculations provided should not be relied upon as a substitute for consultation with qualified professionals. Always seek the advice of a licensed accountant, financial advisor, attorney, or other appropriate professional for matters specific to your business.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Accuracy of Information</h2>
+          <p class="text-[var(--color-muted)]">
+            We strive to provide accurate and up-to-date information. However, we make no warranties or representations about the accuracy, completeness, or reliability of any information on the Site. Tax rates, regulations, and financial practices vary by jurisdiction and change over time.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Limitation of Liability</h2>
+          <p class="text-[var(--color-muted)]">
+            To the fullest extent permitted by law, SmallBizCalc and its operators shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from:
+          </p>
+          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
+            <li>Your use of or inability to use the Site</li>
+            <li>Any errors or omissions in calculator results</li>
+            <li>Any decisions made based on information from the Site</li>
+            <li>Any loss of data, profits, or business opportunities</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Intellectual Property</h2>
+          <p class="text-[var(--color-muted)]">
+            The Site content, including but not limited to text, graphics, logos, and software, is the property of SmallBizCalc and is protected by copyright and other intellectual property laws. You may not reproduce, distribute, or create derivative works without our permission.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Links to Other Sites</h2>
+          <p class="text-[var(--color-muted)]">
+            The Site may contain links to third-party websites. We are not responsible for the content, privacy practices, or terms of use of linked sites. Access to linked sites is at your own risk.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Modifications</h2>
+          <p class="text-[var(--color-muted)]">
+            We reserve the right to modify these Terms of Use at any time. Changes will be effective immediately upon posting. Your continued use of the Site after changes constitutes acceptance of the modified terms.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Governing Law</h2>
+          <p class="text-[var(--color-muted)]">
+            These terms shall be governed by and construed in accordance with applicable laws, without regard to conflicts of law principles.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Contact</h2>
+          <p class="text-[var(--color-muted)]">
+            Questions about these terms? Contact us at:
+          </p>
+          <p class="mt-2">
+            <a href="mailto:legal@smallbizcalc.com" class="text-blue-500 hover:underline">
+              legal@smallbizcalc.com
+            </a>
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>
