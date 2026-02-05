@@ -1,0 +1,317 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Understanding Profit Margins: A Complete Guide for Small Business";
+const description = "Learn the difference between gross, operating, and net profit margins. Industry benchmarks, calculation methods, and strategies to improve your margins.";
+const publishedDate = "2026-02-05";
+const modifiedDate = "2026-02-05";
+
+const tableOfContents = [
+  { id: 'what-are-margins', label: 'What Are Profit Margins?' },
+  { id: 'types', label: 'Types of Profit Margins' },
+  { id: 'industry-benchmarks', label: 'Industry Benchmarks' },
+  { id: 'how-to-calculate', label: 'How to Calculate' },
+  { id: 'improving-margins', label: 'Improving Your Margins' },
+  { id: 'common-mistakes', label: 'Common Mistakes' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishedDate}
+  modifiedTime={modifiedDate}
+  author="SmallBizCalc"
+  section="Financial Guides"
+  tags={["profit margins", "gross margin", "net margin", "small business finance"]}
+>
+  <article class="py-8 md:py-12">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-[var(--color-foreground)]">Guides</a>
+            <span>/</span>
+            <span>Financial Guides</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{title}</h1>
+
+          <div class="flex items-center gap-4 text-sm text-[var(--color-muted)]">
+            <time datetime={publishedDate}>Updated Feb 2026</time>
+            <span>·</span>
+            <span>10 min read</span>
+          </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="mb-10 p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+          <div class="font-semibold mb-3">In This Guide</div>
+          <ul class="space-y-2 text-sm">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-[var(--color-muted)] hover:text-[var(--color-accent)]">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Content -->
+        <div class="prose prose-lg max-w-none">
+          <!-- Intro -->
+          <p class="lead text-xl text-[var(--color-muted)] mb-8">
+            Revenue is vanity. Profit is sanity. Your business might be bringing in impressive sales numbers, but if your margins are thin—or negative—you're just running an expensive hobby. Understanding profit margins is fundamental to building a sustainable business.
+          </p>
+
+          <!-- What Are Margins -->
+          <section id="what-are-margins" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">What Are Profit Margins?</h2>
+
+            <p class="mb-4">
+              A profit margin tells you what percentage of your revenue you actually keep after expenses. It's the answer to a simple question: for every dollar that comes in, how many cents do I get to keep?
+            </p>
+
+            <p class="mb-4">
+              If your profit margin is 20%, you keep $0.20 from every dollar of sales. The other $0.80 goes to costs—products, labor, rent, marketing, everything else it takes to run the business.
+            </p>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mb-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">Why Margins Matter More Than Revenue</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                A business doing $1M in revenue with 5% margins keeps $50,000. A business doing $200,000 with 40% margins keeps $80,000. The smaller business is actually more profitable. Always think in margins, not just revenue.
+              </p>
+            </div>
+          </section>
+
+          <!-- Types of Margins -->
+          <section id="types" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Types of Profit Margins</h2>
+
+            <p class="mb-4">
+              There are three main profit margins, each telling you something different about your business health:
+            </p>
+
+            <div class="space-y-6">
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Gross Profit Margin</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Revenue minus the direct cost of goods sold (COGS). This shows how efficiently you produce or acquire what you sell.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Gross Margin = (Revenue - COGS) ÷ Revenue × 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> You sell a product for $100. It cost you $40 to make. Gross margin = ($100 - $40) ÷ $100 = 60%
+                </p>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Operating Profit Margin</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Gross profit minus operating expenses (rent, salaries, marketing, utilities). Shows how well you manage day-to-day operations.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Operating Margin = Operating Income ÷ Revenue × 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Your gross profit is $60,000. Operating expenses are $35,000. Operating margin = $25,000 ÷ $100,000 = 25%
+                </p>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Net Profit Margin</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  The bottom line—what's left after ALL expenses including taxes and interest. This is your true profitability.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Net Margin = Net Income ÷ Revenue × 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Your operating profit is $25,000. After $5,000 in taxes and interest, net profit is $20,000. Net margin = 20%
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Industry Benchmarks -->
+          <section id="industry-benchmarks" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+
+            <p class="mb-4">
+              "Good" margins vary dramatically by industry. A grocery store with 3% net margin might be doing great; a software company with 3% is in trouble. Here are typical ranges:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-3 px-4">Industry</th>
+                    <th class="text-center py-3 px-4">Gross Margin</th>
+                    <th class="text-center py-3 px-4">Net Margin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Software/SaaS</td>
+                    <td class="text-center py-3 px-4">70-85%</td>
+                    <td class="text-center py-3 px-4">15-25%</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Professional Services</td>
+                    <td class="text-center py-3 px-4">50-70%</td>
+                    <td class="text-center py-3 px-4">10-20%</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">E-commerce (General)</td>
+                    <td class="text-center py-3 px-4">40-60%</td>
+                    <td class="text-center py-3 px-4">5-10%</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Restaurants</td>
+                    <td class="text-center py-3 px-4">60-70%</td>
+                    <td class="text-center py-3 px-4">3-9%</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Retail</td>
+                    <td class="text-center py-3 px-4">25-50%</td>
+                    <td class="text-center py-3 px-4">2-5%</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Grocery</td>
+                    <td class="text-center py-3 px-4">25-30%</td>
+                    <td class="text-center py-3 px-4">1-3%</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Construction</td>
+                    <td class="text-center py-3 px-4">15-25%</td>
+                    <td class="text-center py-3 px-4">2-6%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="text-[var(--color-muted)]">
+              These are averages. Top performers in any industry typically achieve 2-3x these margins through operational excellence and strategic positioning.
+            </p>
+          </section>
+
+          <!-- How to Calculate -->
+          <section id="how-to-calculate" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">How to Calculate Your Margins</h2>
+
+            <p class="mb-4">
+              You need three numbers from your financial statements (or your accounting software):
+            </p>
+
+            <ol class="list-decimal list-inside space-y-3 mb-6">
+              <li><strong>Total Revenue:</strong> All money coming in from sales</li>
+              <li><strong>Cost of Goods Sold (COGS):</strong> Direct costs to produce/acquire what you sold</li>
+              <li><strong>Total Expenses:</strong> All operating costs, taxes, and interest</li>
+            </ol>
+
+            <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)] mb-6">
+              <h3 class="font-semibold mb-3">Quick Example</h3>
+              <div class="space-y-2 text-sm font-mono">
+                <p>Revenue: $500,000</p>
+                <p>COGS: $200,000</p>
+                <p>Operating Expenses: $180,000</p>
+                <p>Taxes & Interest: $30,000</p>
+                <p class="border-t border-[var(--color-border)] pt-2 mt-2">
+                  Gross Profit: $300,000 (60% margin)
+                </p>
+                <p>Operating Profit: $120,000 (24% margin)</p>
+                <p>Net Profit: $90,000 (18% margin)</p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+              <p class="text-sm">
+                <strong>Use our calculator:</strong> Don't want to do the math? Try our <a href="/tools/profit-margin" class="text-emerald-600 dark:text-emerald-400 hover:underline">Profit Margin Calculator</a> to instantly calculate all three margins with industry comparisons.
+              </p>
+            </div>
+          </section>
+
+          <!-- Improving Margins -->
+          <section id="improving-margins" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Improving Your Margins</h2>
+
+            <p class="mb-4">
+              There are only two ways to improve margins: increase prices or decrease costs. Most businesses focus on costs because it feels safer, but pricing is often the bigger lever.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Price-Side Improvements</h3>
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Raise prices gradually:</strong> Many businesses underprice. Test a 5-10% increase on new customers.</li>
+              <li><strong>Bundle products/services:</strong> Bundles have higher perceived value and higher margins.</li>
+              <li><strong>Add premium tiers:</strong> Some customers will pay more for better service, faster delivery, or extra features.</li>
+              <li><strong>Reduce discounts:</strong> Track how much you give away in discounts. It often shocks people.</li>
+              <li><strong>Fire bad customers:</strong> Low-margin, high-maintenance customers drain resources. Let competitors have them.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Cost-Side Improvements</h3>
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Negotiate with suppliers:</strong> Especially if you've grown. Volume deserves discounts.</li>
+              <li><strong>Audit subscriptions:</strong> You're probably paying for software and services you don't use.</li>
+              <li><strong>Improve efficiency:</strong> Time is money. Streamline repetitive processes.</li>
+              <li><strong>Reduce waste:</strong> In physical products, track spoilage, returns, and errors.</li>
+              <li><strong>Renegotiate fixed costs:</strong> Rent, insurance, and contracts can often be renegotiated.</li>
+            </ul>
+          </section>
+
+          <!-- Common Mistakes -->
+          <section id="common-mistakes" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Common Mistakes</h2>
+
+            <div class="space-y-4">
+              <div class="p-4 bg-red-500/5 border border-red-500/20 rounded-lg">
+                <h3 class="font-semibold text-red-700 dark:text-red-400 mb-2">Confusing Markup and Margin</h3>
+                <p class="text-sm text-[var(--color-muted)]">
+                  A 50% markup is NOT a 50% margin. If you buy for $100 and mark up 50%, you sell for $150. But your margin is only 33% ($50 profit ÷ $150 revenue). Use our <a href="/tools/markup" class="text-emerald-600 dark:text-emerald-400 hover:underline">Markup Calculator</a> to convert between them.
+                </p>
+              </div>
+
+              <div class="p-4 bg-red-500/5 border border-red-500/20 rounded-lg">
+                <h3 class="font-semibold text-red-700 dark:text-red-400 mb-2">Ignoring Hidden Costs</h3>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Shipping, returns, payment processing fees, customer service time—these add up. True margins are usually lower than you think.
+                </p>
+              </div>
+
+              <div class="p-4 bg-red-500/5 border border-red-500/20 rounded-lg">
+                <h3 class="font-semibold text-red-700 dark:text-red-400 mb-2">Competing on Price Alone</h3>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Racing to the bottom on price destroys margins for everyone. Unless you have structural cost advantages (like Amazon's scale), compete on value, service, or specialization instead.
+                </p>
+              </div>
+
+              <div class="p-4 bg-red-500/5 border border-red-500/20 rounded-lg">
+                <h3 class="font-semibold text-red-700 dark:text-red-400 mb-2">Not Tracking by Product/Service</h3>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Overall margins can hide that some products are profitable while others lose money. Track margins at the product or service level to make informed decisions.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- CTA -->
+          <section class="mt-12 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center">
+            <h3 class="text-xl font-semibold mb-3">Calculate Your Margins</h3>
+            <p class="text-[var(--color-muted)] mb-4">
+              Use our free calculator to find your gross, operating, and net margins—with industry comparisons.
+            </p>
+            <a href="/tools/profit-margin" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+              Try Profit Margin Calculator
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

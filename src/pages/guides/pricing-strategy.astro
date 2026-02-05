@@ -1,0 +1,399 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Pricing Strategy for Small Business: A Practical Guide";
+const description = "Learn how to price your products and services for maximum profit without losing customers. Cost-plus, value-based, and competitive pricing explained.";
+const publishedDate = "2026-02-05";
+const modifiedDate = "2026-02-05";
+
+const tableOfContents = [
+  { id: 'why-pricing-matters', label: 'Why Pricing Matters' },
+  { id: 'pricing-methods', label: 'Common Pricing Methods' },
+  { id: 'cost-plus', label: 'Cost-Plus Pricing' },
+  { id: 'value-based', label: 'Value-Based Pricing' },
+  { id: 'competitive', label: 'Competitive Pricing' },
+  { id: 'psychology', label: 'Pricing Psychology' },
+  { id: 'testing', label: 'Testing Your Prices' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishedDate}
+  modifiedTime={modifiedDate}
+  author="SmallBizCalc"
+  section="Financial Guides"
+  tags={["pricing strategy", "small business pricing", "value pricing", "cost-plus pricing"]}
+>
+  <article class="py-8 md:py-12">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-[var(--color-foreground)]">Guides</a>
+            <span>/</span>
+            <span>Financial Guides</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{title}</h1>
+
+          <div class="flex items-center gap-4 text-sm text-[var(--color-muted)]">
+            <time datetime={publishedDate}>Updated Feb 2026</time>
+            <span>·</span>
+            <span>12 min read</span>
+          </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="mb-10 p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+          <h2 class="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wide mb-3">Contents</h2>
+          <ul class="space-y-2">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-sm hover:text-emerald-500 transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+
+          <!-- Intro -->
+          <p class="lead text-xl text-[var(--color-muted)]">
+            Most small business owners price by gut feel or simply copy competitors. Both approaches
+            leave money on the table. This guide shows you how to price strategically—maximizing
+            profit while keeping customers happy.
+          </p>
+
+          <!-- Why Pricing Matters -->
+          <section id="why-pricing-matters" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Why Pricing Matters More Than You Think</h2>
+
+            <p>
+              A 1% increase in price typically improves profit by 8-11%. Compare that to:
+            </p>
+
+            <ul class="space-y-2 my-6">
+              <li><strong>1% more volume:</strong> ~3% profit increase</li>
+              <li><strong>1% lower variable costs:</strong> ~6% profit increase</li>
+              <li><strong>1% lower fixed costs:</strong> ~2% profit increase</li>
+            </ul>
+
+            <p>
+              Pricing is the most powerful lever you have. Yet most small businesses spend more
+              time choosing office supplies than setting prices.
+            </p>
+
+            <div class="card bg-emerald-500/5 border-emerald-500/20 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-2">The Pricing Trap</h3>
+              <p class="text-[var(--color-muted)] mb-0">
+                Many businesses compete on price because it's easy. But unless you have structural
+                cost advantages (like Walmart or Amazon), competing on price is a race to the bottom.
+                Someone can always go lower.
+              </p>
+            </div>
+          </section>
+
+          <!-- Pricing Methods -->
+          <section id="pricing-methods" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Common Pricing Methods</h2>
+
+            <p>
+              There are three main approaches to pricing. Most successful businesses use a
+              combination, not just one.
+            </p>
+
+            <div class="overflow-x-auto my-8">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-3 px-4 font-semibold">Method</th>
+                    <th class="text-left py-3 px-4 font-semibold">Best For</th>
+                    <th class="text-left py-3 px-4 font-semibold">Risk</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium">Cost-Plus</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Commodities, simple products</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Ignores what market will pay</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium">Value-Based</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Services, differentiated products</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Requires deep customer understanding</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4 font-medium">Competitive</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Established markets, known competitors</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Follows market, doesn't lead</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Cost-Plus Pricing -->
+          <section id="cost-plus" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Cost-Plus Pricing</h2>
+
+            <p>
+              The simplest method: calculate your costs, add a markup percentage, and that's your price.
+            </p>
+
+            <div class="card p-6 my-8">
+              <h3 class="font-semibold mb-4">Cost-Plus Formula</h3>
+              <code class="block bg-[var(--color-background)] p-4 rounded text-sm">
+                Price = Cost × (1 + Markup %)
+              </code>
+              <p class="text-sm text-[var(--color-muted)] mt-4">
+                Example: $50 cost × (1 + 0.40) = $70 price (40% markup)
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">When Cost-Plus Works</h3>
+            <ul class="space-y-2">
+              <li>Products with clear, stable costs</li>
+              <li>Commodity markets where differentiation is hard</li>
+              <li>Government contracts or regulated industries</li>
+              <li>When you need pricing consistency across many SKUs</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">When Cost-Plus Fails</h3>
+            <ul class="space-y-2">
+              <li>You're leaving money on the table if customers would pay more</li>
+              <li>You might price yourself out if competitors have lower costs</li>
+              <li>Ignores the value you create (a consultant who saves $100K shouldn't price by the hour)</li>
+            </ul>
+
+            <div class="card bg-amber-500/10 border-amber-500/30 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-2">Common Markup Ranges</h3>
+              <ul class="text-sm text-[var(--color-muted)] space-y-1 mb-0">
+                <li><strong>Retail:</strong> 50-100% (keystone pricing = 100%)</li>
+                <li><strong>Wholesale:</strong> 15-25%</li>
+                <li><strong>Restaurants:</strong> 200-400% on food, 400-600% on beverages</li>
+                <li><strong>Services:</strong> 50-150% on labor costs</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Value-Based Pricing -->
+          <section id="value-based" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Value-Based Pricing</h2>
+
+            <p>
+              Price based on the value you create for customers, not what it costs you. This is
+              the most profitable approach—but requires understanding your customers deeply.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">The Value Conversation</h3>
+            <p>
+              To price on value, you need to quantify the problem you solve. Ask:
+            </p>
+
+            <ul class="space-y-2 my-6">
+              <li><strong>What does the status quo cost them?</strong> (time, money, frustration)</li>
+              <li><strong>What's their alternative?</strong> (competitor, DIY, doing nothing)</li>
+              <li><strong>What outcome do they really want?</strong> (not features—outcomes)</li>
+              <li><strong>What would they pay for that outcome?</strong></li>
+            </ul>
+
+            <div class="card p-6 my-8">
+              <h3 class="font-semibold mb-4">Value-Based Pricing Example</h3>
+              <p class="text-sm text-[var(--color-muted)]">
+                <strong>Service:</strong> Website redesign<br>
+                <strong>Cost-based price:</strong> 40 hours × $75/hr = $3,000<br>
+                <strong>Client's situation:</strong> Current site converts at 1%, new site should hit 3%<br>
+                <strong>Client's traffic:</strong> 10,000 visitors/month<br>
+                <strong>Average sale:</strong> $200<br>
+                <strong>Extra revenue:</strong> 200 more sales × $200 = $40,000/month<br>
+                <strong>Value-based price:</strong> $15,000-25,000 (fraction of first year value)
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Implementing Value Pricing</h3>
+            <ol class="space-y-3 my-6">
+              <li><strong>1. Segment your customers.</strong> Different customers have different willingness to pay.</li>
+              <li><strong>2. Quantify the value.</strong> Help customers see the ROI in concrete terms.</li>
+              <li><strong>3. Create pricing tiers.</strong> Good/Better/Best options capture different value perceptions.</li>
+              <li><strong>4. Anchor high.</strong> Show the premium option first to make others seem reasonable.</li>
+            </ol>
+          </section>
+
+          <!-- Competitive Pricing -->
+          <section id="competitive" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Competitive Pricing</h2>
+
+            <p>
+              Use competitor prices as your reference point. This makes sense when customers
+              actively compare options and prices are transparent.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Three Competitive Positions</h3>
+
+            <div class="grid gap-4 my-8">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Below Market (Penetration)</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Price 10-20% below competitors to gain market share. Works if you have cost
+                  advantages or are building a customer base. Dangerous long-term.
+                </p>
+              </div>
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">At Market (Parity)</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Match competitor prices and compete on other factors (service, convenience,
+                  quality). The safe choice, but you need differentiation to win.
+                </p>
+              </div>
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Above Market (Premium)</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Price 20-50%+ above competitors. Requires clear differentiation and strong
+                  branding. Higher margins but smaller market.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-emerald-500/5 border-emerald-500/20 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-2">Pro Tip: Price Monitoring</h3>
+              <p class="text-[var(--color-muted)] mb-0">
+                Check competitor prices quarterly. Use tools like Prisync, Competera, or just a
+                spreadsheet. Know where you stand before customers tell you.
+              </p>
+            </div>
+          </section>
+
+          <!-- Pricing Psychology -->
+          <section id="psychology" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Pricing Psychology That Works</h2>
+
+            <p>
+              How you present prices matters as much as the prices themselves. These
+              psychological principles are backed by research.
+            </p>
+
+            <div class="space-y-6 my-8">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Charm Pricing ($9.99 vs $10)</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  The left digit effect is real—$9.99 feels significantly cheaper than $10.
+                  Works best for impulse purchases. Skip it for luxury goods (use round numbers).
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Price Anchoring</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Show a higher price first (original price, premium option, competitor price).
+                  It makes your price look better by comparison.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Decoy Pricing</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Add a third option that makes your target option look better. If you want people
+                  to buy the $50 plan, add a $45 plan with fewer features to make $50 the obvious choice.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Bundle Pricing</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Combine products/services into packages. Customers perceive bundles as better
+                  value even when the discount is small. Also hides individual item margins.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Remove the Dollar Sign</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Studies show "25" feels smaller than "$25." If appropriate for your brand,
+                  minimize currency symbols.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Testing Prices -->
+          <section id="testing" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Testing Your Prices</h2>
+
+            <p>
+              Don't guess—test. Here's how to experiment with pricing without destroying
+              your business.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Safe Ways to Test</h3>
+
+            <ol class="space-y-4 my-6">
+              <li>
+                <strong>1. New customer testing.</strong> Offer different prices to new customers
+                only. Existing customers keep current prices.
+              </li>
+              <li>
+                <strong>2. Geographic testing.</strong> Different prices in different markets or
+                locations.
+              </li>
+              <li>
+                <strong>3. Time-based testing.</strong> Change prices and measure results over
+                2-4 weeks, then compare periods.
+              </li>
+              <li>
+                <strong>4. Package testing.</strong> Create new bundles at different price points
+                rather than changing existing prices.
+              </li>
+              <li>
+                <strong>5. Ask directly.</strong> Survey customers: "Would you pay X for Y?"
+                (People overstate willingness to pay, so discount responses by 20-30%.)
+              </li>
+            </ol>
+
+            <div class="card bg-amber-500/10 border-amber-500/30 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-2">Warning: Avoid Price Discrimination Traps</h3>
+              <p class="text-[var(--color-muted)] mb-0">
+                Different prices for different customers can backfire if discovered. Be
+                transparent about why prices vary (volume discounts, loyalty rewards, different
+                service levels). Never vary prices by demographics.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">When to Raise Prices</h3>
+            <ul class="space-y-2">
+              <li><strong>You're at capacity.</strong> If you can't serve more customers, raise prices.</li>
+              <li><strong>No one complains.</strong> If everyone accepts your price, it's probably too low.</li>
+              <li><strong>Your costs increased.</strong> Pass some (not all) to customers.</li>
+              <li><strong>You improved quality.</strong> Better product = higher price.</li>
+              <li><strong>Annual review.</strong> At minimum, adjust for inflation yearly.</li>
+            </ul>
+          </section>
+
+          <!-- CTA -->
+          <section class="mt-16 p-8 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-2xl border border-emerald-500/20 text-center">
+            <h2 class="text-2xl font-bold mb-3">Calculate Your Target Price</h2>
+            <p class="text-[var(--color-muted)] mb-6 max-w-lg mx-auto">
+              Use our Profit Margin Calculator to see how different prices affect your bottom line.
+            </p>
+            <a
+              href="/tools/profit-margin-calculator"
+              class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Try the Calculator
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,459 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Cash Flow Basics: Why Profitable Businesses Fail";
+const description = "Learn the fundamentals of cash flow management. Understand why profit doesn't equal cash, how to forecast cash flow, and avoid running out of money.";
+const publishedDate = "2026-02-05";
+const modifiedDate = "2026-02-05";
+
+const tableOfContents = [
+  { id: 'profit-vs-cash', label: 'Profit vs. Cash Flow' },
+  { id: 'cash-flow-statement', label: 'Reading a Cash Flow Statement' },
+  { id: 'timing-problem', label: 'The Timing Problem' },
+  { id: 'forecasting', label: 'Simple Cash Flow Forecasting' },
+  { id: 'improve-cash-flow', label: 'Improving Your Cash Flow' },
+  { id: 'warning-signs', label: 'Warning Signs' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishedDate}
+  modifiedTime={modifiedDate}
+  author="SmallBizCalc"
+  section="Financial Guides"
+  tags={["cash flow", "cash management", "small business finance", "working capital"]}
+>
+  <article class="py-8 md:py-12">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-[var(--color-foreground)]">Guides</a>
+            <span>/</span>
+            <span>Financial Guides</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{title}</h1>
+
+          <div class="flex items-center gap-4 text-sm text-[var(--color-muted)]">
+            <time datetime={publishedDate}>Updated Feb 2026</time>
+            <span>·</span>
+            <span>10 min read</span>
+          </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="mb-10 p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+          <h2 class="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wide mb-3">Contents</h2>
+          <ul class="space-y-2">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-sm hover:text-emerald-500 transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+
+          <!-- Intro -->
+          <p class="lead text-xl text-[var(--color-muted)]">
+            Here's a brutal truth: 82% of small businesses that fail do so because of cash flow
+            problems. Not because they weren't profitable on paper—but because they ran out of
+            actual money to pay bills. This guide explains why that happens and how to prevent it.
+          </p>
+
+          <!-- Profit vs Cash -->
+          <section id="profit-vs-cash" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Profit vs. Cash Flow: Not the Same Thing</h2>
+
+            <p>
+              Profit is an accounting concept. Cash flow is reality. You can be profitable
+              and still go bankrupt if you don't have cash when bills are due.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-4 my-8">
+              <div class="card p-6">
+                <h4 class="font-semibold mb-3 text-emerald-500">Profit</h4>
+                <ul class="text-sm text-[var(--color-muted)] space-y-2 mb-0">
+                  <li>Revenue minus expenses</li>
+                  <li>Recorded when earned (not when paid)</li>
+                  <li>Includes non-cash items (depreciation)</li>
+                  <li>Can exist on paper without cash</li>
+                </ul>
+              </div>
+              <div class="card p-6">
+                <h4 class="font-semibold mb-3 text-blue-500">Cash Flow</h4>
+                <ul class="text-sm text-[var(--color-muted)] space-y-2 mb-0">
+                  <li>Money in minus money out</li>
+                  <li>Recorded when cash moves</li>
+                  <li>Only counts actual cash</li>
+                  <li>What you need to pay bills</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card bg-amber-500/10 border-amber-500/30 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-2">The Classic Trap</h3>
+              <p class="text-[var(--color-muted)] mb-0">
+                You invoice a client $10,000 in January. Accounting says you have $10,000
+                revenue. But the client pays net-60. You won't see cash until March. Meanwhile,
+                rent is due February 1st.
+              </p>
+            </div>
+          </section>
+
+          <!-- Cash Flow Statement -->
+          <section id="cash-flow-statement" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Reading a Cash Flow Statement</h2>
+
+            <p>
+              A cash flow statement shows where money came from and where it went. It has
+              three sections:
+            </p>
+
+            <div class="space-y-4 my-8">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">1. Operating Activities</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Cash from your core business: customer payments, supplier payments,
+                  payroll, rent. This should be positive for a healthy business. It's
+                  the most important section.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">2. Investing Activities</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Cash spent on long-term assets: equipment, property, vehicles. Usually
+                  negative (you're spending). A growing business invests; a dying one doesn't.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">3. Financing Activities</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Cash from loans, investors, or owner contributions. Also loan repayments
+                  and dividends. Positive when raising money, negative when paying it back.
+                </p>
+              </div>
+            </div>
+
+            <div class="card p-6 my-8">
+              <h4 class="font-semibold mb-4">Simple Cash Flow Example</h4>
+              <div class="font-mono text-sm space-y-2">
+                <div class="flex justify-between">
+                  <span>Starting Cash</span>
+                  <span>$15,000</span>
+                </div>
+                <div class="border-b border-[var(--color-border)] pb-2">
+                  <div class="font-semibold mt-2">Operating Activities</div>
+                  <div class="flex justify-between text-[var(--color-muted)] pl-4">
+                    <span>Customer payments received</span>
+                    <span>+$45,000</span>
+                  </div>
+                  <div class="flex justify-between text-[var(--color-muted)] pl-4">
+                    <span>Supplier payments</span>
+                    <span>-$20,000</span>
+                  </div>
+                  <div class="flex justify-between text-[var(--color-muted)] pl-4">
+                    <span>Payroll</span>
+                    <span>-$15,000</span>
+                  </div>
+                  <div class="flex justify-between text-[var(--color-muted)] pl-4">
+                    <span>Rent & utilities</span>
+                    <span>-$4,000</span>
+                  </div>
+                  <div class="flex justify-between font-medium pl-4">
+                    <span>Net Operating</span>
+                    <span>+$6,000</span>
+                  </div>
+                </div>
+                <div class="border-b border-[var(--color-border)] pb-2">
+                  <div class="font-semibold">Investing Activities</div>
+                  <div class="flex justify-between text-[var(--color-muted)] pl-4">
+                    <span>New equipment</span>
+                    <span>-$3,000</span>
+                  </div>
+                </div>
+                <div class="border-b border-[var(--color-border)] pb-2">
+                  <div class="font-semibold">Financing Activities</div>
+                  <div class="flex justify-between text-[var(--color-muted)] pl-4">
+                    <span>Loan repayment</span>
+                    <span>-$1,000</span>
+                  </div>
+                </div>
+                <div class="flex justify-between font-bold pt-2">
+                  <span>Ending Cash</span>
+                  <span>$17,000</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- The Timing Problem -->
+          <section id="timing-problem" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">The Timing Problem</h2>
+
+            <p>
+              The #1 cash flow killer is timing mismatch: you pay for things before customers
+              pay you. Here's how it plays out:
+            </p>
+
+            <div class="card bg-red-500/10 border-red-500/30 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-4">A Profitable Business Running Out of Cash</h3>
+              <div class="text-sm space-y-3 text-[var(--color-muted)]">
+                <p><strong>January:</strong> You land a $50,000 contract. Exciting!</p>
+                <p><strong>February:</strong> You buy $20,000 in materials and hire contractors for $15,000. Cash out: $35,000.</p>
+                <p><strong>March:</strong> Project delivered. Invoice sent with net-30 terms.</p>
+                <p><strong>April:</strong> Rent ($5,000) and payroll ($10,000) are due. Still waiting on payment.</p>
+                <p><strong>April 15:</strong> You're $15,000 short on cash. The client finally pays April 30.</p>
+                <p class="font-medium text-[var(--color-foreground)]">
+                  Profit on paper: $15,000. Cash in bank when bills are due: negative.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Common Timing Traps</h3>
+            <ul class="space-y-2">
+              <li><strong>Inventory:</strong> You buy inventory months before selling it</li>
+              <li><strong>Net terms:</strong> Customers pay in 30-60-90 days</li>
+              <li><strong>Seasonal business:</strong> Revenue spikes but costs are constant</li>
+              <li><strong>Growth:</strong> Scaling requires upfront investment before returns</li>
+              <li><strong>Project work:</strong> Expenses during project, payment after completion</li>
+            </ul>
+          </section>
+
+          <!-- Forecasting -->
+          <section id="forecasting" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Simple Cash Flow Forecasting</h2>
+
+            <p>
+              You don't need fancy software. A spreadsheet with 13 weeks (one quarter) of
+              projections will catch most problems before they happen.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">The 13-Week Cash Flow Forecast</h3>
+
+            <ol class="space-y-4 my-6">
+              <li>
+                <strong>1. Start with current cash balance.</strong> What's in the bank today?
+              </li>
+              <li>
+                <strong>2. List expected cash inflows by week.</strong> Be conservative. Only
+                count money you're confident will arrive. Include:
+                <ul class="mt-2 ml-4 space-y-1 text-[var(--color-muted)]">
+                  <li>Customer payments (based on actual invoices and their terms)</li>
+                  <li>Recurring revenue</li>
+                  <li>Any other expected deposits</li>
+                </ul>
+              </li>
+              <li>
+                <strong>3. List expected cash outflows by week.</strong> Be thorough. Include:
+                <ul class="mt-2 ml-4 space-y-1 text-[var(--color-muted)]">
+                  <li>Payroll (including taxes)</li>
+                  <li>Rent/lease payments</li>
+                  <li>Supplier payments</li>
+                  <li>Loan payments</li>
+                  <li>Insurance, subscriptions, utilities</li>
+                  <li>Estimated variable costs for new sales</li>
+                </ul>
+              </li>
+              <li>
+                <strong>4. Calculate weekly ending balance.</strong> Starting + Inflows - Outflows.
+              </li>
+              <li>
+                <strong>5. Flag any week where balance goes negative or near zero.</strong>
+                That's your warning sign.
+              </li>
+            </ol>
+
+            <div class="card bg-emerald-500/5 border-emerald-500/20 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-2">Pro Tip: The 80% Rule</h3>
+              <p class="text-[var(--color-muted)] mb-0">
+                Multiply expected inflows by 80%. Some payments will be late or not come at
+                all. This builds in a safety margin. If your forecast still works at 80%,
+                you're probably safe.
+              </p>
+            </div>
+          </section>
+
+          <!-- Improve Cash Flow -->
+          <section id="improve-cash-flow" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Improving Your Cash Flow</h2>
+
+            <p>
+              You have two levers: get money in faster, or slow money going out. Here are
+              concrete tactics for both.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Speed Up Inflows</h3>
+
+            <div class="space-y-4 my-6">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Invoice Immediately</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Don't wait until month-end. Invoice the same day you deliver. Every day
+                  you delay is a day longer until payment.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Shorten Payment Terms</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Net-30 is standard but not mandatory. Try net-15 or net-7 for smaller
+                  invoices. Offer 2% discount for payment within 10 days.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Require Deposits</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  For projects or custom work, get 25-50% upfront. This covers your initial
+                  costs and filters out non-serious clients.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Accept Multiple Payment Methods</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Make it easy to pay you. Credit cards, ACH, even PayPal. Yes, there are
+                  fees, but getting paid faster is usually worth it.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Follow Up on Late Payments</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Send reminders at day 25, day 30, and day 35. Call on day 45. Be polite
+                  but persistent. The squeaky wheel gets paid.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Slow Down Outflows</h3>
+
+            <div class="space-y-4 my-6">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Negotiate Supplier Terms</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Ask for net-30 or net-45 instead of paying upfront. Good suppliers want
+                  your repeat business and will often agree.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Time Your Payments Strategically</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Pay on the due date, not before. If a bill is due the 15th, schedule
+                  payment for the 15th, not the 1st.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Reduce Inventory</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Every dollar in inventory is a dollar not in your bank. Order more
+                  frequently in smaller quantities if possible.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Lease Instead of Buy</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Equipment leases spread costs over time. Yes, you pay more total, but
+                  you preserve cash for operations.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Keep a Line of Credit</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Get approved when you don't need it. A business line of credit is
+                  insurance against timing gaps. Only use it short-term.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Warning Signs -->
+          <section id="warning-signs" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Warning Signs of Cash Flow Problems</h2>
+
+            <p>
+              These symptoms mean you need to act fast:
+            </p>
+
+            <div class="card bg-red-500/10 border-red-500/30 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-4">Red Flags</h3>
+              <ul class="space-y-3 text-sm mb-0">
+                <li class="flex items-start gap-3">
+                  <span class="text-red-500 mt-1">●</span>
+                  <span><strong>Delaying payroll</strong> — The clearest sign you're in trouble</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-red-500 mt-1">●</span>
+                  <span><strong>Paying bills late consistently</strong> — Not by choice, but necessity</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-red-500 mt-1">●</span>
+                  <span><strong>Using credit cards for operating expenses</strong> — Dangerous spiral</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-red-500 mt-1">●</span>
+                  <span><strong>Turning down sales</strong> — Because you can't fund the work</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-red-500 mt-1">●</span>
+                  <span><strong>AR aging increasing</strong> — Customers taking longer to pay</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-red-500 mt-1">●</span>
+                  <span><strong>Cash balance trending down</strong> — Less cash each month despite profits</span>
+                </li>
+              </ul>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Emergency Actions</h3>
+            <p>
+              If you're already in a cash crunch:
+            </p>
+
+            <ol class="space-y-3 my-6">
+              <li><strong>1. Call your biggest outstanding invoices.</strong> Ask for immediate payment or partial payment.</li>
+              <li><strong>2. Talk to your landlord/biggest vendors.</strong> Negotiate payment plans before you miss payments.</li>
+              <li><strong>3. Cut non-essential spending immediately.</strong> Subscriptions, travel, discretionary purchases.</li>
+              <li><strong>4. Consider invoice factoring.</strong> Get 80-90% of invoice value now (expensive, but better than closing).</li>
+              <li><strong>5. Owner injection.</strong> If you have personal savings, a short-term loan to the business may bridge the gap.</li>
+            </ol>
+          </section>
+
+          <!-- CTA -->
+          <section class="mt-16 p-8 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-2xl border border-emerald-500/20 text-center">
+            <h2 class="text-2xl font-bold mb-3">Monitor Your Business Health</h2>
+            <p class="text-[var(--color-muted)] mb-6 max-w-lg mx-auto">
+              Use our calculators to track profit margins, break-even points, and more.
+            </p>
+            <a
+              href="/tools"
+              class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Explore Tools
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

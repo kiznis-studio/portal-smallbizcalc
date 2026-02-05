@@ -1,0 +1,384 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Break-Even Analysis: Know When You'll Start Making Money";
+const description = "Learn how to calculate your break-even point, use it for pricing decisions, and plan for profitability. Includes formulas, examples, and common mistakes.";
+const publishedDate = "2026-02-05";
+const modifiedDate = "2026-02-05";
+
+const tableOfContents = [
+  { id: 'what-is-breakeven', label: 'What Is Break-Even?' },
+  { id: 'the-formula', label: 'The Break-Even Formula' },
+  { id: 'step-by-step', label: 'Calculating Step by Step' },
+  { id: 'real-examples', label: 'Real-World Examples' },
+  { id: 'using-breakeven', label: 'Using Break-Even for Decisions' },
+  { id: 'limitations', label: 'Limitations to Know' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishedDate}
+  modifiedTime={modifiedDate}
+  author="SmallBizCalc"
+  section="Financial Guides"
+  tags={["break-even analysis", "break-even point", "small business planning", "profitability"]}
+>
+  <article class="py-8 md:py-12">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-[var(--color-foreground)]">Guides</a>
+            <span>/</span>
+            <span>Financial Guides</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{title}</h1>
+
+          <div class="flex items-center gap-4 text-sm text-[var(--color-muted)]">
+            <time datetime={publishedDate}>Updated Feb 2026</time>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="mb-10 p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+          <h2 class="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wide mb-3">Contents</h2>
+          <ul class="space-y-2">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-sm hover:text-emerald-500 transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+
+          <!-- Intro -->
+          <p class="lead text-xl text-[var(--color-muted)]">
+            Every business has a magic number: the point where revenue covers all costs and you
+            start actually making money. Break-even analysis helps you find that number—and make
+            smarter decisions about pricing, costs, and growth.
+          </p>
+
+          <!-- What Is Break-Even -->
+          <section id="what-is-breakeven" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">What Is Break-Even?</h2>
+
+            <p>
+              The break-even point is where your total revenue equals your total costs. Below it,
+              you're losing money. Above it, you're profitable.
+            </p>
+
+            <div class="card p-6 my-8 text-center">
+              <div class="text-lg font-mono">
+                Revenue = Fixed Costs + Variable Costs
+              </div>
+              <p class="text-sm text-[var(--color-muted)] mt-3 mb-0">
+                At break-even, profit is exactly $0
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Why Break-Even Matters</h3>
+            <ul class="space-y-2">
+              <li><strong>Planning:</strong> Know how many sales you need before launching</li>
+              <li><strong>Pricing:</strong> See how price changes affect profitability</li>
+              <li><strong>Goal-setting:</strong> Set realistic sales targets</li>
+              <li><strong>Risk assessment:</strong> Understand your cushion if sales drop</li>
+              <li><strong>Investment decisions:</strong> Evaluate if new equipment/hires pay off</li>
+            </ul>
+          </section>
+
+          <!-- The Formula -->
+          <section id="the-formula" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">The Break-Even Formula</h2>
+
+            <p>
+              There are two ways to express break-even: in units sold or in dollars of revenue.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-4 my-8">
+              <div class="card p-6">
+                <h4 class="font-semibold mb-3">Break-Even in Units</h4>
+                <code class="block bg-[var(--color-background)] p-3 rounded text-sm mb-3">
+                  Fixed Costs ÷ (Price - Variable Cost per Unit)
+                </code>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Answers: "How many units do I need to sell?"
+                </p>
+              </div>
+              <div class="card p-6">
+                <h4 class="font-semibold mb-3">Break-Even in Dollars</h4>
+                <code class="block bg-[var(--color-background)] p-3 rounded text-sm mb-3">
+                  Fixed Costs ÷ Contribution Margin Ratio
+                </code>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Answers: "How much revenue do I need?"
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Key Terms Explained</h3>
+
+            <div class="space-y-4 my-6">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Fixed Costs</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Costs that stay the same regardless of sales: rent, salaries, insurance,
+                  software subscriptions, loan payments. You pay these whether you sell 0 units or 1,000.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Variable Costs</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Costs that change with each sale: materials, shipping, sales commissions,
+                  payment processing fees. Sell more = pay more in variable costs.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">Contribution Margin</h4>
+                <p class="text-sm text-[var(--color-muted)] mb-0">
+                  Price minus variable cost per unit. This is what each sale "contributes" toward
+                  covering fixed costs. Also expressed as a ratio: (Price - Variable Cost) ÷ Price.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step by Step -->
+          <section id="step-by-step" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Calculating Step by Step</h2>
+
+            <p>
+              Let's walk through a real calculation for a coffee shop.
+            </p>
+
+            <div class="card bg-emerald-500/5 border-emerald-500/20 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-4">Coffee Shop Example</h3>
+
+              <div class="space-y-4 text-sm">
+                <div>
+                  <strong>Step 1: List Fixed Costs (monthly)</strong>
+                  <ul class="text-[var(--color-muted)] mt-2 space-y-1">
+                    <li>Rent: $3,000</li>
+                    <li>Salaries: $8,000</li>
+                    <li>Insurance: $400</li>
+                    <li>Utilities: $600</li>
+                    <li>Equipment loans: $500</li>
+                    <li><strong>Total Fixed: $12,500/month</strong></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <strong>Step 2: Calculate Variable Cost per Coffee</strong>
+                  <ul class="text-[var(--color-muted)] mt-2 space-y-1">
+                    <li>Coffee beans: $0.50</li>
+                    <li>Cup, lid, sleeve: $0.25</li>
+                    <li>Milk/cream: $0.30</li>
+                    <li>Card processing (3%): $0.15</li>
+                    <li><strong>Total Variable: $1.20/coffee</strong></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <strong>Step 3: Determine Price</strong>
+                  <p class="text-[var(--color-muted)] mt-2">Average coffee price: $5.00</p>
+                </div>
+
+                <div>
+                  <strong>Step 4: Calculate Contribution Margin</strong>
+                  <p class="text-[var(--color-muted)] mt-2">
+                    $5.00 - $1.20 = <strong>$3.80 per coffee</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <strong>Step 5: Calculate Break-Even</strong>
+                  <p class="text-[var(--color-muted)] mt-2">
+                    $12,500 ÷ $3.80 = <strong>3,290 coffees/month</strong><br>
+                    Or about <strong>110 coffees per day</strong> (30 days)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Now the owner knows: sell fewer than 110 coffees daily and you're losing money.
+              Sell more and you're profitable. Every coffee beyond 110 adds $3.80 to profit.
+            </p>
+          </section>
+
+          <!-- Real Examples -->
+          <section id="real-examples" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Real-World Examples</h2>
+
+            <div class="overflow-x-auto my-8">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-3 px-4 font-semibold">Business</th>
+                    <th class="text-right py-3 px-4 font-semibold">Fixed/Mo</th>
+                    <th class="text-right py-3 px-4 font-semibold">Price</th>
+                    <th class="text-right py-3 px-4 font-semibold">Var Cost</th>
+                    <th class="text-right py-3 px-4 font-semibold">Break-Even</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Freelance Designer</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$2,000</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$100/hr</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$5/hr</td>
+                    <td class="py-3 px-4 text-right font-medium">21 hours</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">E-commerce Store</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$5,000</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$40 avg</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$18 avg</td>
+                    <td class="py-3 px-4 text-right font-medium">228 orders</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Food Truck</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$4,500</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$12</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$4</td>
+                    <td class="py-3 px-4 text-right font-medium">563 meals</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">SaaS Product</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$15,000</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$49/mo</td>
+                    <td class="py-3 px-4 text-right text-[var(--color-muted)]">$3/mo</td>
+                    <td class="py-3 px-4 text-right font-medium">326 customers</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Using Break-Even -->
+          <section id="using-breakeven" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Using Break-Even for Decisions</h2>
+
+            <p>
+              Break-even analysis isn't just a one-time calculation. Use it to model different scenarios.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Scenario Analysis</h3>
+
+            <div class="space-y-6 my-8">
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">"What if I raise prices 10%?"</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Coffee shop at $5.50: new contribution margin = $4.30. New break-even =
+                  2,907 coffees (down from 3,290). You need 12% fewer sales to break even.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">"What if I hire another employee?"</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Adding $3,000/month salary: new fixed costs = $15,500. New break-even =
+                  4,079 coffees. You need 789 more sales just to cover the hire.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <h4 class="font-semibold mb-2">"What if I find a cheaper supplier?"</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Reducing variable cost to $1.00: new contribution margin = $4.00. New
+                  break-even = 3,125 coffees. That $0.20 savings cuts break-even by 165 coffees.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4">Target Profit Analysis</h3>
+            <p>
+              You can also calculate how many sales you need to hit a specific profit target:
+            </p>
+
+            <div class="card p-6 my-8">
+              <h4 class="font-semibold mb-3">Units for Target Profit</h4>
+              <code class="block bg-[var(--color-background)] p-3 rounded text-sm mb-3">
+                (Fixed Costs + Target Profit) ÷ Contribution Margin
+              </code>
+              <p class="text-sm text-[var(--color-muted)] mb-0">
+                Coffee shop wants $5,000 profit: ($12,500 + $5,000) ÷ $3.80 = 4,605 coffees/month
+              </p>
+            </div>
+          </section>
+
+          <!-- Limitations -->
+          <section id="limitations" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Limitations to Know</h2>
+
+            <p>
+              Break-even analysis is useful, but it simplifies reality. Keep these limitations in mind:
+            </p>
+
+            <div class="card bg-amber-500/10 border-amber-500/30 p-6 my-8">
+              <h3 class="font-semibold text-lg mb-4">Where Break-Even Falls Short</h3>
+              <ul class="space-y-3 text-sm text-[var(--color-muted)] mb-0">
+                <li>
+                  <strong>Assumes constant prices:</strong> In reality, you might discount
+                  for volume or adjust prices seasonally.
+                </li>
+                <li>
+                  <strong>Assumes linear costs:</strong> Variable costs may decrease at
+                  scale (bulk discounts) or increase (overtime pay).
+                </li>
+                <li>
+                  <strong>Ignores time value:</strong> Breaking even in 6 months is very
+                  different from breaking even in 3 years.
+                </li>
+                <li>
+                  <strong>Single product focus:</strong> Most businesses sell multiple
+                  products with different margins. You need a blended analysis.
+                </li>
+                <li>
+                  <strong>Doesn't account for growth costs:</strong> Scaling often requires
+                  stepped increases in fixed costs (new hires, bigger space).
+                </li>
+              </ul>
+            </div>
+
+            <p>
+              Despite these limitations, break-even analysis gives you a concrete target to
+              aim for. Use it as a starting point, not the final word.
+            </p>
+          </section>
+
+          <!-- CTA -->
+          <section class="mt-16 p-8 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-2xl border border-emerald-500/20 text-center">
+            <h2 class="text-2xl font-bold mb-3">Calculate Your Break-Even Point</h2>
+            <p class="text-[var(--color-muted)] mb-6 max-w-lg mx-auto">
+              Use our Break-Even Calculator to find your magic number in seconds.
+            </p>
+            <a
+              href="/tools/break-even-calculator"
+              class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Try the Calculator
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>
