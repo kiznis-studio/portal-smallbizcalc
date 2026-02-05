@@ -1,0 +1,470 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Cash Flow Forecaster";
+const description = "Project your monthly cash flow for the next 12 months. Identify potential shortfalls before they happen and plan for seasonal variations.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-3xl font-bold mb-4">{title}</h1>
+      <p class="text-[var(--color-muted)] mb-8">
+        Enter your starting cash, expected monthly inflows, and outflows to see your projected
+        cash position over the next 12 months. Quickly identify months where you might run short.
+      </p>
+
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <!-- Starting Cash -->
+        <div class="card p-6">
+          <label for="starting-cash" class="block text-sm font-medium mb-2">Starting Cash Balance</label>
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+            <input
+              type="number"
+              id="starting-cash"
+              class="input pl-7 w-full"
+              placeholder="25,000"
+              min="0"
+              step="1000"
+            />
+          </div>
+          <p class="text-xs text-[var(--color-muted)] mt-1">Cash in bank right now</p>
+        </div>
+
+        <!-- Monthly Inflows -->
+        <div class="card p-6">
+          <label for="monthly-inflows" class="block text-sm font-medium mb-2">Expected Monthly Inflows</label>
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+            <input
+              type="number"
+              id="monthly-inflows"
+              class="input pl-7 w-full"
+              placeholder="15,000"
+              min="0"
+              step="1000"
+            />
+          </div>
+          <p class="text-xs text-[var(--color-muted)] mt-1">Average revenue collected</p>
+        </div>
+
+        <!-- Monthly Outflows -->
+        <div class="card p-6">
+          <label for="monthly-outflows" class="block text-sm font-medium mb-2">Expected Monthly Outflows</label>
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+            <input
+              type="number"
+              id="monthly-outflows"
+              class="input pl-7 w-full"
+              placeholder="12,000"
+              min="0"
+              step="1000"
+            />
+          </div>
+          <p class="text-xs text-[var(--color-muted)] mt-1">Rent, payroll, supplies, etc.</p>
+        </div>
+      </div>
+
+      <!-- Seasonal Adjustments -->
+      <div class="card p-6 mb-8">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-semibold">Seasonal Adjustments <span class="text-[var(--color-muted)] font-normal">(optional)</span></h2>
+          <button id="toggle-seasonal" class="text-sm text-emerald-500 hover:underline">
+            Add seasonal variations
+          </button>
+        </div>
+
+        <div id="seasonal-inputs" class="hidden">
+          <p class="text-sm text-[var(--color-muted)] mb-4">
+            Adjust the percentage for months that differ from your average. 100% = normal, 150% = 50% higher, 75% = 25% lower.
+          </p>
+          <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2">
+            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
+              <div>
+                <label class="text-xs text-[var(--color-muted)] block text-center mb-1">{month}</label>
+                <input
+                  type="number"
+                  class="input w-full text-center text-sm seasonal-input"
+                  data-month={i}
+                  value="100"
+                  min="0"
+                  max="500"
+                  step="5"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <button
+        id="calculate-btn"
+        class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors mb-8"
+      >
+        Generate Forecast
+      </button>
+
+      <!-- Results -->
+      <div id="results" class="hidden">
+        <!-- Summary Cards -->
+        <div class="grid sm:grid-cols-3 gap-4 mb-8">
+          <div class="card p-5">
+            <div class="text-sm text-[var(--color-muted)] mb-1">Ending Cash (Month 12)</div>
+            <div id="ending-cash" class="text-2xl font-bold text-emerald-500">$0</div>
+          </div>
+          <div class="card p-5">
+            <div class="text-sm text-[var(--color-muted)] mb-1">Lowest Point</div>
+            <div id="lowest-cash" class="text-2xl font-bold">$0</div>
+            <div id="lowest-month" class="text-xs text-[var(--color-muted)]">Month 0</div>
+          </div>
+          <div class="card p-5">
+            <div class="text-sm text-[var(--color-muted)] mb-1">Average Monthly Net</div>
+            <div id="avg-net" class="text-2xl font-bold">$0</div>
+          </div>
+        </div>
+
+        <!-- Status Alert -->
+        <div id="status-alert" class="card p-5 mb-8 hidden">
+          <div class="flex items-start gap-3">
+            <svg id="status-icon" class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <div id="status-title" class="font-semibold"></div>
+              <div id="status-message" class="text-sm text-[var(--color-muted)]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="card p-6 mb-8">
+          <h2 class="font-semibold mb-4">12-Month Cash Flow Projection</h2>
+          <div id="chart-container" class="h-64 relative">
+            <!-- Chart will be rendered here -->
+          </div>
+        </div>
+
+        <!-- Monthly Table -->
+        <div class="card p-6">
+          <h2 class="font-semibold mb-4">Month-by-Month Breakdown</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 px-3">Month</th>
+                  <th class="text-right py-2 px-3">Starting</th>
+                  <th class="text-right py-2 px-3">Inflows</th>
+                  <th class="text-right py-2 px-3">Outflows</th>
+                  <th class="text-right py-2 px-3">Net</th>
+                  <th class="text-right py-2 px-3">Ending</th>
+                </tr>
+              </thead>
+              <tbody id="forecast-table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips Section -->
+      <div class="mt-12 grid md:grid-cols-2 gap-6">
+        <div class="card p-6">
+          <h3 class="font-semibold mb-3">Using This Forecast</h3>
+          <ul class="space-y-2 text-sm text-[var(--color-muted)]">
+            <li>• Use 80% of expected inflows to be conservative</li>
+            <li>• Update monthly with actual numbers</li>
+            <li>• Flag any month where ending cash drops below 2 months of expenses</li>
+            <li>• Plan financing needs 2-3 months before cash gets tight</li>
+          </ul>
+        </div>
+        <div class="card p-6 bg-emerald-500/5 border-emerald-500/20">
+          <h3 class="font-semibold mb-3">💡 Learn More</h3>
+          <p class="text-sm text-[var(--color-muted)] mb-3">
+            Understanding cash flow is critical for business survival. Our guide covers why
+            profitable businesses fail and how to manage cash effectively.
+          </p>
+          <a href="/guides/cash-flow-basics" class="text-sm text-emerald-500 hover:underline">
+            Read Cash Flow Basics →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const startingCashInput = document.getElementById('starting-cash') as HTMLInputElement;
+  const monthlyInflowsInput = document.getElementById('monthly-inflows') as HTMLInputElement;
+  const monthlyOutflowsInput = document.getElementById('monthly-outflows') as HTMLInputElement;
+  const calculateBtn = document.getElementById('calculate-btn');
+  const results = document.getElementById('results');
+  const toggleSeasonalBtn = document.getElementById('toggle-seasonal');
+  const seasonalInputs = document.getElementById('seasonal-inputs');
+  const seasonalFields = document.querySelectorAll('.seasonal-input') as NodeListOf<HTMLInputElement>;
+
+  const endingCashEl = document.getElementById('ending-cash');
+  const lowestCashEl = document.getElementById('lowest-cash');
+  const lowestMonthEl = document.getElementById('lowest-month');
+  const avgNetEl = document.getElementById('avg-net');
+  const statusAlert = document.getElementById('status-alert');
+  const statusIcon = document.getElementById('status-icon');
+  const statusTitle = document.getElementById('status-title');
+  const statusMessage = document.getElementById('status-message');
+  const chartContainer = document.getElementById('chart-container');
+  const forecastTable = document.getElementById('forecast-table');
+
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  let seasonalVisible = false;
+
+  function formatCurrency(amount: number): string {
+    const isNegative = amount < 0;
+    const formatted = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(Math.abs(amount));
+    return isNegative ? '-' + formatted : formatted;
+  }
+
+  function getSeasonalFactors(): number[] {
+    const factors: number[] = [];
+    seasonalFields.forEach((input) => {
+      factors.push((parseFloat(input.value) || 100) / 100);
+    });
+    return factors;
+  }
+
+  function calculateForecast() {
+    const startingCash = parseFloat(startingCashInput.value) || 0;
+    const baseInflows = parseFloat(monthlyInflowsInput.value) || 0;
+    const baseOutflows = parseFloat(monthlyOutflowsInput.value) || 0;
+
+    if (baseInflows === 0 && baseOutflows === 0) {
+      return;
+    }
+
+    const seasonalFactors = getSeasonalFactors();
+    const currentMonth = new Date().getMonth();
+
+    // Calculate forecast
+    const forecast: Array<{
+      month: string;
+      starting: number;
+      inflows: number;
+      outflows: number;
+      net: number;
+      ending: number;
+    }> = [];
+
+    let balance = startingCash;
+    let lowestBalance = startingCash;
+    let lowestBalanceMonth = 0;
+    let totalNet = 0;
+
+    for (let i = 0; i < 12; i++) {
+      const monthIndex = (currentMonth + i) % 12;
+      const seasonFactor = seasonalFactors[monthIndex];
+
+      const inflows = baseInflows * seasonFactor;
+      const outflows = baseOutflows; // Outflows typically don't vary as much
+      const net = inflows - outflows;
+      const starting = balance;
+      const ending = balance + net;
+
+      forecast.push({
+        month: monthNames[monthIndex],
+        starting,
+        inflows,
+        outflows,
+        net,
+        ending
+      });
+
+      totalNet += net;
+      balance = ending;
+
+      if (ending < lowestBalance) {
+        lowestBalance = ending;
+        lowestBalanceMonth = i + 1;
+      }
+    }
+
+    // Update summary
+    if (endingCashEl) endingCashEl.textContent = formatCurrency(balance);
+    if (lowestCashEl) {
+      lowestCashEl.textContent = formatCurrency(lowestBalance);
+      lowestCashEl.className = lowestBalance < 0 ? 'text-2xl font-bold text-red-500' : 'text-2xl font-bold';
+    }
+    if (lowestMonthEl) lowestMonthEl.textContent = 'Month ' + lowestBalanceMonth + ' (' + (forecast[lowestBalanceMonth - 1]?.month || '') + ')';
+    if (avgNetEl) {
+      const avgNet = totalNet / 12;
+      avgNetEl.textContent = formatCurrency(avgNet);
+      avgNetEl.className = avgNet >= 0 ? 'text-2xl font-bold text-emerald-500' : 'text-2xl font-bold text-red-500';
+    }
+
+    // Status alert
+    if (statusAlert && statusIcon && statusTitle && statusMessage) {
+      statusAlert.classList.remove('hidden');
+
+      if (lowestBalance < 0) {
+        statusAlert.className = 'card p-5 mb-8 bg-red-500/10 border-red-500/30';
+        statusIcon.setAttribute('class', 'w-5 h-5 flex-shrink-0 mt-0.5 text-red-500');
+        statusIcon.querySelector('path')?.setAttribute('d', 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z');
+        statusTitle.textContent = 'Cash Shortfall Detected';
+        statusMessage.textContent = 'Your cash goes negative in month ' + lowestBalanceMonth + '. Consider reducing expenses, accelerating collections, or arranging financing.';
+      } else if (lowestBalance < baseOutflows * 2) {
+        statusAlert.className = 'card p-5 mb-8 bg-amber-500/10 border-amber-500/30';
+        statusIcon.setAttribute('class', 'w-5 h-5 flex-shrink-0 mt-0.5 text-amber-500');
+        statusIcon.querySelector('path')?.setAttribute('d', 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z');
+        statusTitle.textContent = 'Low Cash Buffer';
+        statusMessage.textContent = 'Your lowest point is less than 2 months of expenses. Consider building a larger cash reserve.';
+      } else {
+        statusAlert.className = 'card p-5 mb-8 bg-emerald-500/10 border-emerald-500/30';
+        statusIcon.setAttribute('class', 'w-5 h-5 flex-shrink-0 mt-0.5 text-emerald-500');
+        statusIcon.querySelector('path')?.setAttribute('d', 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z');
+        statusTitle.textContent = 'Healthy Cash Position';
+        statusMessage.textContent = 'You maintain a positive cash position throughout the forecast period. Your lowest point covers ' + Math.floor(lowestBalance / baseOutflows) + ' months of expenses.';
+      }
+    }
+
+    // Render chart
+    if (chartContainer) {
+      renderChart(forecast, chartContainer);
+    }
+
+    // Render table
+    if (forecastTable) {
+      // Clear existing rows
+      while (forecastTable.firstChild) {
+        forecastTable.removeChild(forecastTable.firstChild);
+      }
+
+      forecast.forEach((row) => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-[var(--color-border)]';
+        if (row.ending < 0) {
+          tr.className += ' bg-red-500/10';
+        }
+
+        const monthTd = document.createElement('td');
+        monthTd.className = 'text-left py-2 px-3 font-medium';
+        monthTd.textContent = row.month;
+
+        const startingTd = document.createElement('td');
+        startingTd.className = 'text-right py-2 px-3 text-[var(--color-muted)]';
+        startingTd.textContent = formatCurrency(row.starting);
+
+        const inflowsTd = document.createElement('td');
+        inflowsTd.className = 'text-right py-2 px-3 text-emerald-500';
+        inflowsTd.textContent = formatCurrency(row.inflows);
+
+        const outflowsTd = document.createElement('td');
+        outflowsTd.className = 'text-right py-2 px-3 text-red-400';
+        outflowsTd.textContent = formatCurrency(row.outflows);
+
+        const netTd = document.createElement('td');
+        netTd.className = row.net >= 0 ? 'text-right py-2 px-3 text-emerald-500' : 'text-right py-2 px-3 text-red-500';
+        netTd.textContent = formatCurrency(row.net);
+
+        const endingTd = document.createElement('td');
+        endingTd.className = row.ending < 0 ? 'text-right py-2 px-3 font-medium text-red-500' : 'text-right py-2 px-3 font-medium';
+        endingTd.textContent = formatCurrency(row.ending);
+
+        tr.appendChild(monthTd);
+        tr.appendChild(startingTd);
+        tr.appendChild(inflowsTd);
+        tr.appendChild(outflowsTd);
+        tr.appendChild(netTd);
+        tr.appendChild(endingTd);
+
+        forecastTable.appendChild(tr);
+      });
+    }
+
+    // Show results
+    if (results) results.classList.remove('hidden');
+  }
+
+  function renderChart(forecast: Array<{month: string, ending: number}>, container: HTMLElement) {
+    const values = forecast.map(f => f.ending);
+    const maxVal = Math.max(...values, 0);
+    const minVal = Math.min(...values, 0);
+    const range = maxVal - minVal || 1;
+
+    // Clear container
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    // Create chart wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex items-end justify-between h-full gap-1 pt-6 pb-6 relative';
+
+    // Add zero line if there are negative values
+    if (minVal < 0) {
+      const zeroLine = document.createElement('div');
+      zeroLine.className = 'absolute left-0 right-0 border-t-2 border-dashed border-[var(--color-muted)] opacity-30';
+      zeroLine.style.bottom = ((Math.abs(minVal) / range) * 100) + '%';
+      wrapper.appendChild(zeroLine);
+    }
+
+    // Create bars
+    forecast.forEach((row) => {
+      const barContainer = document.createElement('div');
+      barContainer.className = 'flex-1 flex flex-col items-center';
+
+      const bar = document.createElement('div');
+      const barHeight = Math.abs(row.ending) / range * 100;
+
+      if (row.ending >= 0) {
+        bar.className = 'w-full rounded-t bg-emerald-500 transition-all duration-500';
+      } else {
+        bar.className = 'w-full rounded-b bg-red-500 transition-all duration-500';
+        barContainer.className = 'flex-1 flex flex-col items-center justify-end';
+      }
+      bar.style.height = barHeight + '%';
+
+      const label = document.createElement('div');
+      label.className = 'text-xs text-[var(--color-muted)] mt-2';
+      label.textContent = row.month;
+
+      barContainer.appendChild(bar);
+      barContainer.appendChild(label);
+      wrapper.appendChild(barContainer);
+    });
+
+    container.appendChild(wrapper);
+  }
+
+  toggleSeasonalBtn?.addEventListener('click', () => {
+    seasonalVisible = !seasonalVisible;
+    if (seasonalInputs) {
+      seasonalInputs.classList.toggle('hidden', !seasonalVisible);
+    }
+    if (toggleSeasonalBtn) {
+      toggleSeasonalBtn.textContent = seasonalVisible ? 'Hide seasonal variations' : 'Add seasonal variations';
+    }
+  });
+
+  calculateBtn?.addEventListener('click', calculateForecast);
+
+  // Calculate on Enter key
+  [startingCashInput, monthlyInflowsInput, monthlyOutflowsInput].forEach(input => {
+    input?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculateForecast();
+    });
+  });
+</script>

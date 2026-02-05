@@ -1,0 +1,455 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Business Loan Calculator";
+const description = "Calculate monthly loan payments, total interest costs, and compare different loan options. See amortization schedule and true cost of borrowing.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          Enter your loan details to see monthly payments, total interest, and the true cost of borrowing.
+        </p>
+
+        <div class="card p-6 space-y-6">
+          <!-- Loan Amount -->
+          <div>
+            <label for="loan-amount" class="block text-sm font-medium mb-2">Loan Amount</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="loan-amount"
+                class="input pl-7 w-full"
+                placeholder="50,000"
+                min="0"
+                step="1000"
+              />
+            </div>
+          </div>
+
+          <!-- Interest Rate -->
+          <div>
+            <label for="interest-rate" class="block text-sm font-medium mb-2">Annual Interest Rate</label>
+            <div class="relative">
+              <input
+                type="number"
+                id="interest-rate"
+                class="input pr-7 w-full"
+                placeholder="8.5"
+                min="0"
+                max="100"
+                step="0.1"
+              />
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">%</span>
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">APR (Annual Percentage Rate)</p>
+          </div>
+
+          <!-- Loan Term -->
+          <div>
+            <label for="loan-term" class="block text-sm font-medium mb-2">Loan Term</label>
+            <div class="flex gap-3">
+              <input
+                type="number"
+                id="loan-term"
+                class="input flex-1"
+                placeholder="5"
+                min="1"
+                max="30"
+                step="1"
+              />
+              <select id="term-unit" class="input w-28">
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Origination Fee (optional) -->
+          <div>
+            <label for="origination-fee" class="block text-sm font-medium mb-2">
+              Origination Fee <span class="text-[var(--color-muted)]">(optional)</span>
+            </label>
+            <div class="relative">
+              <input
+                type="number"
+                id="origination-fee"
+                class="input pr-7 w-full"
+                placeholder="2"
+                min="0"
+                max="10"
+                step="0.1"
+              />
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">%</span>
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">One-time fee charged at loan closing</p>
+          </div>
+
+          <button
+            id="calculate-btn"
+            class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Calculate Loan
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <h2 class="text-xl font-semibold mb-4">Loan Summary</h2>
+
+          <div class="grid sm:grid-cols-2 gap-4 mb-6">
+            <!-- Monthly Payment -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Monthly Payment</div>
+              <div id="monthly-payment" class="text-2xl font-bold text-emerald-500">$0</div>
+            </div>
+
+            <!-- Total Interest -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Total Interest</div>
+              <div id="total-interest" class="text-2xl font-bold">$0</div>
+            </div>
+
+            <!-- Total Cost -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Total Cost of Loan</div>
+              <div id="total-cost" class="text-2xl font-bold">$0</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">Principal + Interest + Fees</div>
+            </div>
+
+            <!-- Effective Rate -->
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Effective Interest Rate</div>
+              <div id="effective-rate" class="text-2xl font-bold">0%</div>
+              <div class="text-xs text-[var(--color-muted)] mt-1">True cost including fees</div>
+            </div>
+          </div>
+
+          <!-- Payment Breakdown Visual -->
+          <div class="card p-5 mb-6">
+            <div class="text-sm font-medium mb-3">Payment Breakdown</div>
+            <div class="flex h-8 rounded-lg overflow-hidden">
+              <div id="principal-bar" class="bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
+              <div id="interest-bar" class="bg-amber-500 transition-all duration-500" style="width: 0%"></div>
+              <div id="fees-bar" class="bg-red-400 transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-xs mt-2">
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>Principal: <span id="principal-pct">0%</span></span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span>Interest: <span id="interest-pct">0%</span></span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                <span>Fees: <span id="fees-pct">0%</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Amortization Summary -->
+          <div class="card p-5">
+            <div class="flex justify-between items-center mb-4">
+              <div class="text-sm font-medium">Amortization Schedule</div>
+              <button id="toggle-schedule" class="text-xs text-emerald-500 hover:underline">
+                Show first year
+              </button>
+            </div>
+            <div id="amortization-table" class="hidden overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-2 px-2">#</th>
+                    <th class="text-right py-2 px-2">Payment</th>
+                    <th class="text-right py-2 px-2">Principal</th>
+                    <th class="text-right py-2 px-2">Interest</th>
+                    <th class="text-right py-2 px-2">Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amortization-body">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Panel -->
+      <div class="lg:pt-20">
+        <div class="card p-6 mb-6">
+          <h3 class="font-semibold mb-3">Understanding Business Loans</h3>
+          <div class="space-y-3 text-sm text-[var(--color-muted)]">
+            <p>
+              <strong class="text-[var(--color-foreground)]">Monthly Payment</strong> is your
+              fixed payment amount, calculated using the loan amount, interest rate, and term.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Total Interest</strong> is how
+              much you'll pay beyond the original loan amount over the life of the loan.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Origination Fee</strong> is a
+              one-time charge (usually 1-5%) taken from your loan proceeds. A $50,000 loan
+              with a 2% fee means you receive $49,000.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-6 mb-6">
+          <h3 class="font-semibold mb-3">Typical Business Loan Rates (2026)</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">SBA 7(a) Loans</span>
+              <span>Prime + 2.25-4.75%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Bank Term Loans</span>
+              <span>6-13%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Online Lenders</span>
+              <span>9-99%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--color-muted)]">Equipment Financing</span>
+              <span>4-30%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-6 bg-emerald-500/5 border-emerald-500/20">
+          <h3 class="font-semibold mb-2">💡 Loan Shopping Tip</h3>
+          <p class="text-sm text-[var(--color-muted)]">
+            Always compare the <strong>total cost of loan</strong>, not just monthly payments.
+            A lower rate with high fees can cost more than a higher rate with no fees.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Tools -->
+    <div class="mt-16 pt-8 border-t border-[var(--color-border)]">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Break-Even Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Find how many sales cover your costs</p>
+        </a>
+        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Profit Margin Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Calculate margins from revenue and costs</p>
+        </a>
+        <a href="/guides/cash-flow-basics" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Cash Flow Guide</div>
+          <p class="text-sm text-[var(--color-muted)]">Manage cash flow and avoid shortfalls</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const loanAmountInput = document.getElementById('loan-amount') as HTMLInputElement;
+  const interestRateInput = document.getElementById('interest-rate') as HTMLInputElement;
+  const loanTermInput = document.getElementById('loan-term') as HTMLInputElement;
+  const termUnitSelect = document.getElementById('term-unit') as HTMLSelectElement;
+  const originationFeeInput = document.getElementById('origination-fee') as HTMLInputElement;
+  const calculateBtn = document.getElementById('calculate-btn');
+  const results = document.getElementById('results');
+  const toggleScheduleBtn = document.getElementById('toggle-schedule');
+  const amortizationTable = document.getElementById('amortization-table');
+  const amortizationBody = document.getElementById('amortization-body');
+
+  // Result elements
+  const monthlyPaymentEl = document.getElementById('monthly-payment');
+  const totalInterestEl = document.getElementById('total-interest');
+  const totalCostEl = document.getElementById('total-cost');
+  const effectiveRateEl = document.getElementById('effective-rate');
+  const principalBar = document.getElementById('principal-bar');
+  const interestBar = document.getElementById('interest-bar');
+  const feesBar = document.getElementById('fees-bar');
+  const principalPct = document.getElementById('principal-pct');
+  const interestPct = document.getElementById('interest-pct');
+  const feesPct = document.getElementById('fees-pct');
+
+  let amortizationSchedule: Array<{month: number, payment: number, principal: number, interest: number, balance: number}> = [];
+
+  function formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  function formatCurrencyPrecise(amount: number): string {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount);
+  }
+
+  function calculateLoan() {
+    const loanAmount = parseFloat(loanAmountInput.value) || 0;
+    const annualRate = parseFloat(interestRateInput.value) || 0;
+    let termMonths = parseFloat(loanTermInput.value) || 0;
+    const originationFee = parseFloat(originationFeeInput.value) || 0;
+
+    if (loanAmount <= 0 || annualRate < 0 || termMonths <= 0) {
+      return;
+    }
+
+    // Convert years to months if needed
+    if (termUnitSelect.value === 'years') {
+      termMonths = termMonths * 12;
+    }
+
+    const monthlyRate = annualRate / 100 / 12;
+    let monthlyPayment: number;
+    let totalInterest: number;
+
+    if (monthlyRate === 0) {
+      // No interest loan
+      monthlyPayment = loanAmount / termMonths;
+      totalInterest = 0;
+    } else {
+      // Standard amortization formula
+      monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1);
+      totalInterest = (monthlyPayment * termMonths) - loanAmount;
+    }
+
+    const originationAmount = loanAmount * (originationFee / 100);
+    const totalCost = loanAmount + totalInterest + originationAmount;
+
+    // Calculate effective rate (APR including fees)
+    const actualReceived = loanAmount - originationAmount;
+    const effectiveRate = ((totalInterest + originationAmount) / actualReceived) / (termMonths / 12) * 100;
+
+    // Update results
+    if (monthlyPaymentEl) monthlyPaymentEl.textContent = formatCurrency(monthlyPayment);
+    if (totalInterestEl) totalInterestEl.textContent = formatCurrency(totalInterest);
+    if (totalCostEl) totalCostEl.textContent = formatCurrency(totalCost);
+    if (effectiveRateEl) effectiveRateEl.textContent = effectiveRate.toFixed(2) + '%';
+
+    // Update breakdown bars
+    const principalPctValue = (loanAmount / totalCost) * 100;
+    const interestPctValue = (totalInterest / totalCost) * 100;
+    const feesPctValue = (originationAmount / totalCost) * 100;
+
+    if (principalBar) principalBar.style.width = principalPctValue + '%';
+    if (interestBar) interestBar.style.width = interestPctValue + '%';
+    if (feesBar) feesBar.style.width = feesPctValue + '%';
+    if (principalPct) principalPct.textContent = principalPctValue.toFixed(1) + '%';
+    if (interestPct) interestPct.textContent = interestPctValue.toFixed(1) + '%';
+    if (feesPct) feesPct.textContent = feesPctValue.toFixed(1) + '%';
+
+    // Generate amortization schedule
+    amortizationSchedule = [];
+    let balance = loanAmount;
+    for (let month = 1; month <= termMonths; month++) {
+      const interestPayment = balance * monthlyRate;
+      const principalPayment = monthlyPayment - interestPayment;
+      balance = Math.max(0, balance - principalPayment);
+
+      amortizationSchedule.push({
+        month,
+        payment: monthlyPayment,
+        principal: principalPayment,
+        interest: interestPayment,
+        balance
+      });
+    }
+
+    // Show results
+    if (results) results.classList.remove('hidden');
+
+    // Reset amortization table
+    if (amortizationTable) amortizationTable.classList.add('hidden');
+    if (toggleScheduleBtn) toggleScheduleBtn.textContent = 'Show first year';
+  }
+
+  function toggleAmortization() {
+    if (!amortizationTable || !amortizationBody || !toggleScheduleBtn) return;
+
+    const isHidden = amortizationTable.classList.contains('hidden');
+
+    if (isHidden) {
+      // Clear existing rows
+      while (amortizationBody.firstChild) {
+        amortizationBody.removeChild(amortizationBody.firstChild);
+      }
+
+      // Show first 12 months
+      const monthsToShow = Math.min(12, amortizationSchedule.length);
+
+      for (let i = 0; i < monthsToShow; i++) {
+        const row = amortizationSchedule[i];
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-[var(--color-border)]';
+
+        const monthTd = document.createElement('td');
+        monthTd.className = 'py-2 px-2 text-[var(--color-muted)]';
+        monthTd.textContent = row.month.toString();
+
+        const paymentTd = document.createElement('td');
+        paymentTd.className = 'py-2 px-2 text-right';
+        paymentTd.textContent = formatCurrencyPrecise(row.payment);
+
+        const principalTd = document.createElement('td');
+        principalTd.className = 'py-2 px-2 text-right text-emerald-500';
+        principalTd.textContent = formatCurrencyPrecise(row.principal);
+
+        const interestTd = document.createElement('td');
+        interestTd.className = 'py-2 px-2 text-right text-amber-500';
+        interestTd.textContent = formatCurrencyPrecise(row.interest);
+
+        const balanceTd = document.createElement('td');
+        balanceTd.className = 'py-2 px-2 text-right';
+        balanceTd.textContent = formatCurrencyPrecise(row.balance);
+
+        tr.appendChild(monthTd);
+        tr.appendChild(paymentTd);
+        tr.appendChild(principalTd);
+        tr.appendChild(interestTd);
+        tr.appendChild(balanceTd);
+
+        amortizationBody.appendChild(tr);
+      }
+
+      amortizationTable.classList.remove('hidden');
+      toggleScheduleBtn.textContent = 'Hide schedule';
+    } else {
+      amortizationTable.classList.add('hidden');
+      toggleScheduleBtn.textContent = 'Show first year';
+    }
+  }
+
+  calculateBtn?.addEventListener('click', calculateLoan);
+  toggleScheduleBtn?.addEventListener('click', toggleAmortization);
+
+  // Calculate on Enter key
+  [loanAmountInput, interestRateInput, loanTermInput, originationFeeInput].forEach(input => {
+    input?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculateLoan();
+    });
+  });
+</script>
