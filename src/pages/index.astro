@@ -68,8 +68,15 @@ const comingSoon = [
   description="Free calculators for small business owners. Calculate profit margins, markups, break-even points, and more. Make smarter financial decisions."
 >
   <!-- Hero Section -->
-  <section class="py-16 md:py-24">
-    <div class="container">
+  <section class="py-16 md:py-24 relative overflow-hidden">
+    <!-- Background: Subtle dot grid pattern -->
+    <div class="absolute inset-0 opacity-40 dark:opacity-20" style="background-image: radial-gradient(circle at 1px 1px, rgb(16 185 129 / 0.15) 1px, transparent 0); background-size: 24px 24px;"></div>
+    <!-- Background: Gradient accent -->
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgb(16 185 129 / 0.04) 0%, transparent 50%, rgb(52 211 153 / 0.02) 100%);"></div>
+    <!-- Decorative growth chart accent -->
+    <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 dark:opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 60 L60 0&quot; stroke=&quot;%2310b981&quot; stroke-width=&quot;1&quot; fill=&quot;none&quot;/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+
+    <div class="container relative z-10">
       <div class="max-w-3xl">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-6">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,7 +231,10 @@ const comingSoon = [
   <!-- CTA -->
   <section class="py-16">
     <div class="container">
-      <div class="max-w-2xl mx-auto text-center p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20">
+      <div class="max-w-2xl mx-auto text-center p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 relative overflow-hidden">
+        <!-- Subtle dot pattern overlay -->
+        <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(circle at 1px 1px, rgb(16 185 129 / 0.2) 1px, transparent 0); background-size: 16px 16px;"></div>
+        <div class="relative z-10">
         <h2 class="text-2xl font-bold mb-3">Ready to crunch the numbers?</h2>
         <p class="text-[var(--color-muted)] mb-6">
           Start with our most popular calculator and see exactly where your margins stand.
@@ -238,6 +248,7 @@ const comingSoon = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </a>
+        </div>
       </div>
     </div>
   </section>
