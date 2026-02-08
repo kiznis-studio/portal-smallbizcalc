@@ -31,34 +31,56 @@ const tools = [
   }
 ];
 
-const comingSoon = [
+const moreTools = [
   {
-    title: "Pricing Calculator",
-    description: "Calculate optimal prices using cost-plus, value-based, or competitive pricing strategies.",
-    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>`
+    title: "Cash Flow Forecaster",
+    description: "Project 12 months of cash flow with seasonal adjustments and shortfall alerts.",
+    href: "/tools/cash-flow",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+    </svg>`,
+    tag: "New"
   },
   {
     title: "Business Loan Calculator",
     description: "Estimate monthly payments, total interest, and compare loan options for your business.",
-    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    href: "/tools/loan",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-    </svg>`
+    </svg>`,
+    tag: "New"
   },
   {
-    title: "Cash Flow Calculator",
-    description: "Project your cash flow and identify potential shortfalls before they become problems.",
-    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-    </svg>`
+    title: "ROI Calculator",
+    description: "Analyze investment returns, compare options, and calculate payback periods.",
+    href: "/tools/roi",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    </svg>`,
+    tag: "New"
+  }
+];
+
+const guides = [
+  {
+    title: "Understanding Profit Margins",
+    description: "Gross, operating, and net margins explained with industry benchmarks.",
+    href: "/guides/profit-margins"
   },
   {
-    title: "Payroll Calculator",
-    description: "Estimate employee costs including taxes, benefits, and total compensation.",
-    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-    </svg>`
+    title: "Pricing Strategy for Small Business",
+    description: "Cost-plus, value-based, and competitive pricing methods compared.",
+    href: "/guides/pricing-strategy"
+  },
+  {
+    title: "Break-Even Analysis Explained",
+    description: "How to calculate your break-even point with real-world examples.",
+    href: "/guides/break-even-analysis"
+  },
+  {
+    title: "Cash Flow Basics",
+    description: "Why profitable businesses fail and how to forecast cash flow.",
+    href: "/guides/cash-flow-basics"
   }
 ];
 ---
@@ -172,19 +194,59 @@ const comingSoon = [
     </div>
   </section>
 
-  <!-- Coming Soon -->
+  <!-- More Calculators -->
   <section class="py-16 bg-[var(--color-card)]">
     <div class="container">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl font-bold mb-8">Coming Soon</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {comingSoon.map((tool) => (
-            <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] opacity-70">
-              <div class="w-12 h-12 rounded-xl bg-[var(--color-border)] flex items-center justify-center text-[var(--color-muted)] mb-4" set:html={tool.icon} />
-              <h3 class="font-semibold mb-2">{tool.title}</h3>
-              <p class="text-sm text-[var(--color-muted)]">{tool.description}</p>
-            </div>
+        <h2 class="text-2xl font-bold mb-8">More Calculators</h2>
+        <div class="space-y-4">
+          {moreTools.map((tool) => (
+            <a
+              href={tool.href}
+              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] hover:border-emerald-500/50 transition-colors"
+            >
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500" set:html={tool.icon} />
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="text-xl font-semibold">{tool.title}</h3>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500">
+                      {tool.tag}
+                    </span>
+                  </div>
+                  <p class="text-[var(--color-muted)]">{tool.description}</p>
+                </div>
+                <svg class="w-5 h-5 text-[var(--color-muted)] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
           ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Guides -->
+  <section class="py-16">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-3">Business Finance Guides</h2>
+        <p class="text-[var(--color-muted)] mb-8">In-depth articles to help you understand the numbers behind your business.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {guides.map((guide) => (
+            <a
+              href={guide.href}
+              class="p-6 rounded-xl border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors group"
+            >
+              <h3 class="font-semibold mb-2 group-hover:text-emerald-500 transition-colors">{guide.title}</h3>
+              <p class="text-sm text-[var(--color-muted)]">{guide.description}</p>
+              <span class="inline-block mt-3 text-sm text-emerald-500 font-medium">Read guide →</span>
+            </a>
+          ))}
+        </div>
+        <div class="text-center mt-6">
+          <a href="/guides" class="text-emerald-500 hover:text-emerald-600 font-medium">Browse all guides →</a>
         </div>
       </div>
     </div>
