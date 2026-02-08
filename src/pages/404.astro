@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = "Page Not Found";
+const description = "The page you're looking for doesn't exist or has been moved.";
+---
+
+<Base title={title} description={description}>
+  <section class="container py-20 md:py-32">
+    <div class="max-w-2xl mx-auto text-center">
+      <!-- 404 Badge -->
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-[var(--color-accent-subtle)] mb-8">
+        <span class="text-4xl font-bold text-[var(--color-accent)]">404</span>
+      </div>
+
+      <h1 class="text-3xl md:text-4xl font-semibold mb-4">
+        Page not found
+      </h1>
+
+      <p class="text-lg text-[var(--color-muted)] mb-8 max-w-md mx-auto">
+        The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+      </p>
+
+      <!-- Action buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="btn btn-primary">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Go Home
+        </a>
+        <a href="/tools/profit-margin" class="btn btn-secondary">
+          Try Profit Margin Calculator
+        </a>
+      </div>
+
+      <!-- Helpful links -->
+      <div class="mt-16 pt-8 border-t border-[var(--color-border)]">
+        <p class="text-sm text-[var(--color-subtle)] mb-4">Or check out our calculators:</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/tools/profit-margin" class="text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+            Profit Margin
+          </a>
+          <span class="text-[var(--color-border)]">·</span>
+          <a href="/tools/break-even" class="text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+            Break-Even
+          </a>
+          <span class="text-[var(--color-border)]">·</span>
+          <a href="/tools/cash-flow" class="text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+            Cash Flow
+          </a>
+          <span class="text-[var(--color-border)]">·</span>
+          <a href="/tools/roi" class="text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+            ROI Calculator
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
