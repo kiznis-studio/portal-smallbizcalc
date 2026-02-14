@@ -390,7 +390,7 @@ const tableOfContents = [
               Use our Break-Even Calculator to find your magic number in seconds.
             </p>
             <a
-              href="/tools/break-even-calculator"
+              href="/tools/break-even"
               class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors"
             >
               Try the Calculator
@@ -404,4 +404,14 @@ const tableOfContents = [
       </div>
     </div>
   </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://smallbizcalc.com/guides/" },
+      { "@type": "ListItem", "position": 3, "name": "Break-Even Analysis", "item": "https://smallbizcalc.com/guides/break-even-analysis" }
+    ]
+  })} />
 </Base>

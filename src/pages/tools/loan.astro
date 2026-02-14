@@ -262,6 +262,26 @@ const description = "Calculate monthly loan payments, total interest costs, and 
       </div>
     </div>
   </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Business Loan Calculator",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/loan",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Business Loan Calculator", "item": "https://smallbizcalc.com/tools/loan" }
+    ]
+  })} />
 </Base>
 
 <script>

@@ -350,4 +350,14 @@ const tableOfContents = [
       </div>
     </div>
   </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://smallbizcalc.com/guides/" },
+      { "@type": "ListItem", "position": 3, "name": "Understanding Profit Margins", "item": "https://smallbizcalc.com/guides/profit-margins" }
+    ]
+  })} />
 </Base>

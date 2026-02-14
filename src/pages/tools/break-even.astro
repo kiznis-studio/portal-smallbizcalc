@@ -254,7 +254,46 @@ const description = "Calculate your break-even point in units and revenue. Find 
         </div>
       </div>
     </div>
+
+    <!-- Related Calculators -->
+    <div class="max-w-5xl mx-auto mt-12">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Profit Margin Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Calculate gross and net margins</div>
+        </a>
+        <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Cash Flow Forecaster</div>
+          <div class="text-sm text-[var(--color-muted)]">12-month cash flow projection</div>
+        </a>
+        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Business Loan Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Calculate loan payments and interest</div>
+        </a>
+      </div>
+    </div>
   </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Break-Even Calculator",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/break-even",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Break-Even Calculator", "item": "https://smallbizcalc.com/tools/break-even" }
+    ]
+  })} />
 </Base>
 
 <script type="module">

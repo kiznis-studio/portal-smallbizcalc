@@ -200,7 +200,46 @@ const description = "Project your monthly cash flow for the next 12 months. Iden
         </div>
       </div>
     </div>
+
+    <!-- Related Calculators -->
+    <div class="max-w-5xl mx-auto mt-12">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Break-Even Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Find your break-even point</div>
+        </a>
+        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Business Loan Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Calculate loan payments and interest</div>
+        </a>
+        <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">ROI Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Analyze return on investment</div>
+        </a>
+      </div>
+    </div>
   </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Cash Flow Forecaster",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/cash-flow",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Cash Flow Forecaster", "item": "https://smallbizcalc.com/tools/cash-flow" }
+    ]
+  })} />
 </Base>
 
 <script>

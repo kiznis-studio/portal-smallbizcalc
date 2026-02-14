@@ -275,7 +275,46 @@ const description = "Calculate the right markup and selling price for your produ
         </div>
       </div>
     </div>
+
+    <!-- Related Calculators -->
+    <div class="max-w-5xl mx-auto mt-12">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Profit Margin Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Calculate gross and net margins</div>
+        </a>
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Break-Even Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Find your break-even point</div>
+        </a>
+        <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">ROI Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Analyze return on investment</div>
+        </a>
+      </div>
+    </div>
   </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Markup Calculator",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/markup",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Markup Calculator", "item": "https://smallbizcalc.com/tools/markup" }
+    ]
+  })} />
 </Base>
 
 <script type="module">
