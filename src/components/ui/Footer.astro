@@ -23,6 +23,13 @@ const legal = [
   { href: '/privacy', label: 'Privacy Policy' },
   { href: '/terms', label: 'Terms of Use' },
 ];
+
+const network = [
+  { href: 'https://wagedex.com', label: 'WageDex', desc: 'Salary Data' },
+  { href: 'https://creatorscalc.com', label: 'CreatorsCalc', desc: 'Creator Finance Tools' },
+  { href: 'https://calcmesh.com', label: 'CalcMesh', desc: 'All-Purpose Calculators' },
+  { href: 'https://areazine.com', label: 'Areazine', desc: 'City Data & Safety Alerts' },
+];
 ---
 
 <footer class="border-t border-[var(--color-border)] bg-[var(--color-card)] mt-auto">
@@ -93,8 +100,20 @@ const legal = [
       </div>
     </div>
 
+    <!-- Our Network -->
+    <div class="border-t border-[var(--color-border)] mt-10 pt-8">
+      <h3 class="text-xs font-semibold text-[var(--color-foreground)] uppercase tracking-wider mb-4">Our Network</h3>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        {network.map(item => (
+          <a href={item.href} target="_blank" rel="noopener" class="text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors" title={item.desc}>
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
     <!-- Bottom bar -->
-    <div class="border-t border-[var(--color-border)] mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div class="border-t border-[var(--color-border)] mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3">
       <p class="text-sm text-[var(--color-muted)]">
         © {currentYear} {siteName}. All rights reserved.
       </p>

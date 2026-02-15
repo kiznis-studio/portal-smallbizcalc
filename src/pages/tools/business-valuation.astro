@@ -1,0 +1,418 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Business Valuation Calculator";
+const description = "Estimate what your small business is worth using multiple valuation methods — SDE multiple, revenue multiple, and asset-based approaches.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <nav class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-6">
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Tools</a>
+      <span>/</span>
+      <span>{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-2">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">Estimate your business value using three common methods.</p>
+
+        <div class="card p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">Business Financials</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1" for="revenue">Annual Revenue</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="revenue" placeholder="500,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="ownerSalary">Owner's Salary / Draws</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="ownerSalary" placeholder="80,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="netProfit">Net Profit (after all expenses)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="netProfit" placeholder="120,000" class="input pl-7 w-full" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="depreciation">Depreciation & Amortization</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="depreciation" placeholder="15,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="interest">Interest Expense</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="interest" placeholder="5,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="oneTime">One-Time / Non-Recurring Expenses</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="oneTime" placeholder="10,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="totalAssets">Total Business Assets (equipment, inventory, etc.)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="totalAssets" placeholder="100,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="totalLiabilities">Total Liabilities (loans, debts)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="totalLiabilities" placeholder="30,000" class="input pl-7 w-full" min="0" step="1000" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="industry">Industry</label>
+              <select id="industry" class="input w-full">
+                <option value="general">General / Other (2-3x SDE)</option>
+                <option value="professional">Professional Services (2-4x SDE)</option>
+                <option value="ecommerce">E-Commerce / Online (3-4x SDE)</option>
+                <option value="saas">SaaS / Software (4-8x SDE)</option>
+                <option value="restaurant">Restaurant / Food Service (1.5-2.5x SDE)</option>
+                <option value="retail">Retail (1.5-3x SDE)</option>
+                <option value="construction">Construction / Trades (1.5-3x SDE)</option>
+                <option value="healthcare">Healthcare / Medical (3-6x SDE)</option>
+                <option value="manufacturing">Manufacturing (2-4x SDE)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="calculateBtn" class="btn btn-primary w-full mt-6">Calculate Business Value</button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden space-y-4">
+          <div class="card p-6 border-emerald-500/30">
+            <h3 class="text-sm font-medium text-[var(--color-muted)] mb-1">Estimated Business Value Range</h3>
+            <div class="text-3xl font-bold text-emerald-500" id="valueRange">-</div>
+            <div class="text-sm text-[var(--color-muted)] mt-1" id="valueMidpoint">-</div>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="font-semibold mb-3">Seller's Discretionary Earnings (SDE)</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-[var(--color-muted)]">Net Profit</span><span id="sdeNetProfit">-</span></div>
+              <div class="flex justify-between"><span class="text-[var(--color-muted)]">+ Owner's Salary</span><span id="sdeOwnerSalary">-</span></div>
+              <div class="flex justify-between"><span class="text-[var(--color-muted)]">+ Depreciation & Amort.</span><span id="sdeDepreciation">-</span></div>
+              <div class="flex justify-between"><span class="text-[var(--color-muted)]">+ Interest Expense</span><span id="sdeInterest">-</span></div>
+              <div class="flex justify-between"><span class="text-[var(--color-muted)]">+ One-Time Expenses</span><span id="sdeOneTime">-</span></div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2 mt-2 font-semibold"><span>SDE Total</span><span id="sdeTotal">-</span></div>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="font-semibold mb-3">Valuation Methods</h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <span class="text-sm font-medium">SDE Multiple Method</span>
+                  <span class="font-semibold text-emerald-500" id="sdeValue">-</span>
+                </div>
+                <div class="text-xs text-[var(--color-muted)]" id="sdeMultipleRange">-</div>
+                <div class="w-full bg-[var(--color-surface)] rounded-full h-2 mt-2">
+                  <div class="bg-emerald-500 h-2 rounded-full" id="sdeBar" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <span class="text-sm font-medium">Revenue Multiple Method</span>
+                  <span class="font-semibold text-blue-500" id="revenueValue">-</span>
+                </div>
+                <div class="text-xs text-[var(--color-muted)]" id="revenueMultipleRange">-</div>
+                <div class="w-full bg-[var(--color-surface)] rounded-full h-2 mt-2">
+                  <div class="bg-blue-500 h-2 rounded-full" id="revenueBar" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <span class="text-sm font-medium">Asset-Based Method</span>
+                  <span class="font-semibold text-purple-500" id="assetValue">-</span>
+                </div>
+                <div class="text-xs text-[var(--color-muted)]">Total assets minus liabilities</div>
+                <div class="w-full bg-[var(--color-surface)] rounded-full h-2 mt-2">
+                  <div class="bg-purple-500 h-2 rounded-full" id="assetBar" style="width: 0%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="advice" class="card p-6"></div>
+        </div>
+      </div>
+
+      <!-- Guide -->
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-2xl font-bold mb-4">How Business Valuation Works</h2>
+
+        <p class="text-[var(--color-muted)] mb-4">
+          Whether you're planning to sell, seeking investment, or just curious, knowing what your business is worth is essential. There's no single "right" answer — professionals typically use multiple methods and triangulate.
+        </p>
+
+        <h3 class="text-lg font-semibold mt-8 mb-3">Method 1: SDE Multiple (Most Common for Small Businesses)</h3>
+        <p class="text-[var(--color-muted)] mb-4">
+          <strong class="text-[var(--color-foreground)]">Seller's Discretionary Earnings (SDE)</strong> represents the total financial benefit a single owner-operator gets from the business. It adds back the owner's salary, depreciation, interest, and one-time expenses to net profit.
+        </p>
+        <p class="text-[var(--color-muted)] mb-4">
+          A buyer then applies a <strong class="text-[var(--color-foreground)]">multiple</strong> (typically 1.5x to 4x for small businesses) based on industry, growth trajectory, customer concentration, and other risk factors.
+        </p>
+
+        <div class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-4 my-6 text-sm">
+          <div class="font-semibold mb-2">Typical SDE Multiples by Industry</div>
+          <div class="space-y-1 text-[var(--color-muted)]">
+            <div class="flex justify-between"><span>Restaurant / Food Service</span><span>1.5 - 2.5x</span></div>
+            <div class="flex justify-between"><span>Retail</span><span>1.5 - 3.0x</span></div>
+            <div class="flex justify-between"><span>Construction / Trades</span><span>1.5 - 3.0x</span></div>
+            <div class="flex justify-between"><span>General / Services</span><span>2.0 - 3.0x</span></div>
+            <div class="flex justify-between"><span>Professional Services</span><span>2.0 - 4.0x</span></div>
+            <div class="flex justify-between"><span>Manufacturing</span><span>2.0 - 4.0x</span></div>
+            <div class="flex justify-between"><span>E-Commerce / Online</span><span>3.0 - 4.0x</span></div>
+            <div class="flex justify-between"><span>Healthcare / Medical</span><span>3.0 - 6.0x</span></div>
+            <div class="flex justify-between"><span>SaaS / Software</span><span>4.0 - 8.0x</span></div>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold mt-8 mb-3">Method 2: Revenue Multiple</h3>
+        <p class="text-[var(--color-muted)] mb-4">
+          Sometimes used for high-growth or pre-profit businesses. Revenue multiples range from 0.5x to 3x for most small businesses. SaaS companies can command 5-10x revenue. This method is less reliable for established businesses since it ignores profitability.
+        </p>
+
+        <h3 class="text-lg font-semibold mt-8 mb-3">Method 3: Asset-Based</h3>
+        <p class="text-[var(--color-muted)] mb-4">
+          Total assets minus total liabilities. Best for asset-heavy businesses (manufacturing, real estate, equipment rental) or businesses being liquidated. Undervalues service businesses where the real asset is customer relationships and recurring revenue.
+        </p>
+
+        <h3 class="text-lg font-semibold mt-8 mb-3">What Increases Your Multiple?</h3>
+        <div class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-4 my-6 text-sm">
+          <div class="space-y-2 text-[var(--color-muted)]">
+            <p><strong class="text-[var(--color-foreground)]">Recurring revenue</strong> — Subscriptions and contracts are worth more than one-time sales</p>
+            <p><strong class="text-[var(--color-foreground)]">Customer diversification</strong> — No single customer should be more than 15-20% of revenue</p>
+            <p><strong class="text-[var(--color-foreground)]">Growth trajectory</strong> — Growing 20%+ year-over-year commands premium multiples</p>
+            <p><strong class="text-[var(--color-foreground)]">Owner independence</strong> — Businesses that run without the owner are worth more</p>
+            <p><strong class="text-[var(--color-foreground)]">Clean financials</strong> — Audited or reviewed statements reduce buyer risk</p>
+            <p><strong class="text-[var(--color-foreground)]">Documented processes</strong> — SOPs and training manuals ease transition</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold mt-8 mb-3">When to Get a Professional Valuation</h3>
+        <p class="text-[var(--color-muted)] mb-4">
+          This calculator gives you a ballpark estimate. For actual transactions, hire a Certified Business Appraiser (CBA) or Accredited Senior Appraiser (ASA). Professional valuations cost $3,000-$10,000 but are essential for:
+        </p>
+        <ul class="text-[var(--color-muted)] text-sm space-y-1 mb-6">
+          <li>Selling the business</li>
+          <li>Partnership buyouts</li>
+          <li>Divorce proceedings</li>
+          <li>Estate planning</li>
+          <li>SBA loan applications</li>
+          <li>Insurance claims</li>
+        </ul>
+
+        <div class="p-4 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-muted)] mt-8">
+          <strong class="text-[var(--color-foreground)]">Disclaimer:</strong> This calculator provides rough estimates for informational purposes only. It is not a substitute for a professional business valuation. Actual business value depends on many factors not captured here. Consult a certified business appraiser for accurate valuations.
+        </div>
+
+        <div class="mt-8">
+          <h3 class="font-semibold mb-3">Related Tools</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-sm">
+            <a href="/tools/profit-margin" class="p-3 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+              <div class="font-semibold">Profit Margin Calculator</div>
+              <div class="text-[var(--color-muted)]">Analyze your margins</div>
+            </a>
+            <a href="/tools/roi" class="p-3 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+              <div class="font-semibold">ROI Calculator</div>
+              <div class="text-[var(--color-muted)]">Measure investment returns</div>
+            </a>
+            <a href="/tools/cash-flow" class="p-3 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+              <div class="font-semibold">Cash Flow Forecaster</div>
+              <div class="text-[var(--color-muted)]">Project monthly cash flow</div>
+            </a>
+            <a href="/tools/employee-cost" class="p-3 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+              <div class="font-semibold">Employee Cost Calculator</div>
+              <div class="text-[var(--color-muted)]">True cost of hiring</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const industryMultiples = {
+      general: { sdeLow: 2, sdeHigh: 3, revLow: 0.5, revHigh: 1.5 },
+      professional: { sdeLow: 2, sdeHigh: 4, revLow: 0.75, revHigh: 2 },
+      ecommerce: { sdeLow: 3, sdeHigh: 4, revLow: 1, revHigh: 2.5 },
+      saas: { sdeLow: 4, sdeHigh: 8, revLow: 3, revHigh: 8 },
+      restaurant: { sdeLow: 1.5, sdeHigh: 2.5, revLow: 0.3, revHigh: 0.8 },
+      retail: { sdeLow: 1.5, sdeHigh: 3, revLow: 0.3, revHigh: 1 },
+      construction: { sdeLow: 1.5, sdeHigh: 3, revLow: 0.3, revHigh: 1 },
+      healthcare: { sdeLow: 3, sdeHigh: 6, revLow: 1, revHigh: 3 },
+      manufacturing: { sdeLow: 2, sdeHigh: 4, revLow: 0.5, revHigh: 2 }
+    };
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD',
+        minimumFractionDigits: 0, maximumFractionDigits: 0
+      }).format(value);
+    }
+
+    function getVal(id) {
+      return parseFloat(document.getElementById(id).value) || 0;
+    }
+
+    function calculate() {
+      const revenue = getVal('revenue');
+      const ownerSalary = getVal('ownerSalary');
+      const netProfit = getVal('netProfit');
+      const depreciation = getVal('depreciation');
+      const interest = getVal('interest');
+      const oneTime = getVal('oneTime');
+      const totalAssets = getVal('totalAssets');
+      const totalLiabilities = getVal('totalLiabilities');
+      const industry = document.getElementById('industry').value;
+
+      if (revenue <= 0 && netProfit <= 0) return;
+
+      const sde = netProfit + ownerSalary + depreciation + interest + oneTime;
+      const multiples = industryMultiples[industry];
+      const sdeLowVal = sde * multiples.sdeLow;
+      const sdeHighVal = sde * multiples.sdeHigh;
+      const sdeMidVal = (sdeLowVal + sdeHighVal) / 2;
+
+      const revLowVal = revenue * multiples.revLow;
+      const revHighVal = revenue * multiples.revHigh;
+      const revMidVal = (revLowVal + revHighVal) / 2;
+
+      const assetVal = totalAssets - totalLiabilities;
+
+      const allValues = [sdeLowVal, sdeHighVal, revLowVal, revHighVal, assetVal].filter(v => v > 0);
+      const overallLow = Math.min(...allValues);
+      const overallHigh = Math.max(...allValues);
+      const maxVal = overallHigh;
+
+      document.getElementById('sdeNetProfit').textContent = formatCurrency(netProfit);
+      document.getElementById('sdeOwnerSalary').textContent = formatCurrency(ownerSalary);
+      document.getElementById('sdeDepreciation').textContent = formatCurrency(depreciation);
+      document.getElementById('sdeInterest').textContent = formatCurrency(interest);
+      document.getElementById('sdeOneTime').textContent = formatCurrency(oneTime);
+      document.getElementById('sdeTotal').textContent = formatCurrency(sde);
+
+      document.getElementById('valueRange').textContent = formatCurrency(sdeLowVal) + ' - ' + formatCurrency(sdeHighVal);
+      document.getElementById('valueMidpoint').textContent = 'SDE-based midpoint: ' + formatCurrency(sdeMidVal);
+
+      document.getElementById('sdeValue').textContent = formatCurrency(sdeLowVal) + ' - ' + formatCurrency(sdeHighVal);
+      document.getElementById('sdeMultipleRange').textContent = multiples.sdeLow + 'x - ' + multiples.sdeHigh + 'x SDE of ' + formatCurrency(sde);
+      document.getElementById('sdeBar').style.width = maxVal > 0 ? Math.round((sdeMidVal / maxVal) * 100) + '%' : '0%';
+
+      document.getElementById('revenueValue').textContent = formatCurrency(revLowVal) + ' - ' + formatCurrency(revHighVal);
+      document.getElementById('revenueMultipleRange').textContent = multiples.revLow + 'x - ' + multiples.revHigh + 'x revenue of ' + formatCurrency(revenue);
+      document.getElementById('revenueBar').style.width = maxVal > 0 ? Math.round((revMidVal / maxVal) * 100) + '%' : '0%';
+
+      document.getElementById('assetValue').textContent = formatCurrency(assetVal);
+      document.getElementById('assetBar').style.width = maxVal > 0 ? Math.round((Math.max(assetVal, 0) / maxVal) * 100) + '%' : '0%';
+
+      const adviceEl = document.getElementById('advice');
+      while (adviceEl.firstChild) adviceEl.removeChild(adviceEl.firstChild);
+
+      const heading = document.createElement('h3');
+      heading.className = 'font-semibold mb-3';
+      heading.textContent = 'Analysis';
+      adviceEl.appendChild(heading);
+
+      const items = [];
+
+      const profitMargin = revenue > 0 ? (netProfit / revenue * 100) : 0;
+      if (profitMargin < 10) {
+        items.push('Your net profit margin is ' + profitMargin.toFixed(1) + '% — below 10%. Improving profitability before selling would significantly increase your valuation.');
+      } else if (profitMargin > 20) {
+        items.push('Strong profit margin of ' + profitMargin.toFixed(1) + '%. This supports a higher-end multiple in your industry range.');
+      }
+
+      if (sde > 0 && assetVal > sdeHighVal) {
+        items.push('Your asset value exceeds the earnings-based valuation. This could indicate underutilized assets or a strong asset-heavy business.');
+      }
+
+      if (sde > 0 && assetVal < sdeLowVal * 0.3) {
+        items.push('Your earnings significantly exceed your asset base — typical for service businesses. Buyers will focus on SDE multiple, not assets.');
+      }
+
+      if (ownerSalary > netProfit * 2) {
+        items.push('Owner compensation is high relative to net profit. A buyer will need to replace you — factor in a market-rate manager salary to adjust SDE for buyer perspective.');
+      }
+
+      if (industry === 'saas') {
+        items.push('SaaS valuations heavily depend on recurring revenue metrics: MRR, churn rate, and net revenue retention. Prepare these numbers for buyers.');
+      }
+
+      if (items.length === 0) {
+        items.push('Your business shows solid financials. Focus on documenting processes and diversifying your customer base to command the higher end of the multiple range.');
+      }
+
+      items.forEach(function(text) {
+        const p = document.createElement('p');
+        p.className = 'text-sm text-[var(--color-muted)] mb-2';
+        p.textContent = text;
+        adviceEl.appendChild(p);
+      });
+
+      document.getElementById('results').classList.remove('hidden');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', calculate);
+
+    document.querySelectorAll('input, select').forEach(function(el) {
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+  </script>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/business-valuation",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Business Valuation Calculator", "item": "https://smallbizcalc.com/tools/business-valuation" }
+    ]
+  })} />
+</Base>

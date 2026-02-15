@@ -1,0 +1,535 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Employee Cost Calculator";
+const description = "Calculate the true cost of hiring an employee. See the full picture: salary, payroll taxes, benefits, and overhead — what a new hire actually costs your business.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          A $50,000 salary rarely costs $50,000. Enter the details below to see the true annual cost of a new hire, including taxes, benefits, and overhead.
+        </p>
+
+        <div class="card p-6 space-y-6">
+          <!-- Annual Salary -->
+          <div>
+            <label for="salary" class="block text-sm font-medium mb-2">Annual Base Salary</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="salary"
+                class="input pl-7 w-full"
+                placeholder="50,000"
+                min="0"
+                step="100"
+              />
+            </div>
+          </div>
+
+          <!-- State -->
+          <div>
+            <label for="state-suta" class="block text-sm font-medium mb-2">State Unemployment Rate (SUTA)</label>
+            <div class="relative">
+              <input
+                type="number"
+                id="state-suta"
+                class="input pr-7 w-full"
+                placeholder="3.0"
+                min="0"
+                max="15"
+                step="0.1"
+                value="3.0"
+              />
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">%</span>
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Varies by state: 0.5%-8%+. New employers typically pay 2-4%.</p>
+          </div>
+
+          <!-- Health Insurance -->
+          <div>
+            <label for="health-monthly" class="block text-sm font-medium mb-2">Health Insurance (Employer Monthly Cost)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="health-monthly"
+                class="input pl-7 w-full"
+                placeholder="600"
+                min="0"
+                step="10"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Average employer cost: $600/mo (single), $1,400/mo (family)</p>
+          </div>
+
+          <!-- 401k Match -->
+          <div>
+            <label for="retirement-match" class="block text-sm font-medium mb-2">401(k) Employer Match</label>
+            <div class="relative">
+              <input
+                type="number"
+                id="retirement-match"
+                class="input pr-7 w-full"
+                placeholder="3"
+                min="0"
+                max="100"
+                step="0.5"
+              />
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">%</span>
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Common: 3-6% of salary. Enter 0 if no retirement plan.</p>
+          </div>
+
+          <!-- PTO Days -->
+          <div>
+            <label for="pto-days" class="block text-sm font-medium mb-2">Paid Time Off (Days/Year)</label>
+            <input
+              type="number"
+              id="pto-days"
+              class="input w-full"
+              placeholder="15"
+              min="0"
+              max="365"
+              step="1"
+            />
+            <p class="text-xs text-[var(--color-muted)] mt-1">Include vacation + sick + holidays. Average: 15-25 days.</p>
+          </div>
+
+          <!-- Other Benefits -->
+          <div>
+            <label for="other-annual" class="block text-sm font-medium mb-2">Other Annual Costs (Optional)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+              <input
+                type="number"
+                id="other-annual"
+                class="input pl-7 w-full"
+                placeholder="3,000"
+                min="0"
+                step="100"
+              />
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-1">Training, equipment, software, office space, workers' comp, etc.</p>
+          </div>
+
+          <button
+            id="calculate-btn"
+            class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Calculate True Cost
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <h2 class="text-xl font-semibold mb-4">True Employee Cost</h2>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Total Annual Cost</div>
+              <div id="total-annual" class="text-2xl font-bold text-emerald-500">$0</div>
+            </div>
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Effective Hourly Cost</div>
+              <div id="hourly-cost" class="text-2xl font-bold text-emerald-500">$0</div>
+            </div>
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Cost Multiplier</div>
+              <div id="cost-multiplier" class="text-2xl font-bold text-emerald-500">1.0x</div>
+            </div>
+            <div class="card p-5">
+              <div class="text-sm text-[var(--color-muted)] mb-1">Monthly Cost</div>
+              <div id="monthly-cost" class="text-2xl font-bold text-emerald-500">$0</div>
+            </div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="card p-5 mt-4">
+            <h3 class="font-medium mb-3">Cost Breakdown</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">Base Salary</span>
+                <span id="bd-salary">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ Social Security (6.2%)</span>
+                <span id="bd-ss">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ Medicare (1.45%)</span>
+                <span id="bd-medicare">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ FUTA (0.6%)</span>
+                <span id="bd-futa">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ SUTA</span>
+                <span id="bd-suta">$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
+                <span class="font-medium">Payroll Taxes Subtotal</span>
+                <span id="bd-taxes-total" class="font-medium">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ Health Insurance</span>
+                <span id="bd-health">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ 401(k) Match</span>
+                <span id="bd-retirement">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ PTO Cost</span>
+                <span id="bd-pto">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ Other Costs</span>
+                <span id="bd-other">$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
+                <span class="font-medium">= Total Annual Cost</span>
+                <span id="bd-total" class="font-medium text-emerald-500">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Context -->
+          <div id="context-card" class="card p-5 mt-4">
+            <h3 class="font-medium mb-3">What This Means</h3>
+            <div id="context-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Content -->
+      <div class="lg:border-l lg:border-[var(--color-border)] lg:pl-12">
+        <h2 class="text-xl font-semibold mb-4">The True Cost of Hiring</h2>
+
+        <div class="prose prose-sm">
+          <h3 class="text-lg font-medium mt-6 mb-3">Why Salary Is Not the Full Cost</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            When you hire someone at a $50,000 salary, the actual cost to your business is typically $62,500-$70,000. Employer payroll taxes, health insurance, retirement contributions, and paid time off add 25-40% on top of the base salary.
+          </p>
+          <p class="text-[var(--color-muted)] mb-4">
+            Understanding this multiplier is critical for budgeting, pricing your services, and deciding when you can afford to hire.
+          </p>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Mandatory Employer Costs</h3>
+          <div class="space-y-4">
+            <div class="card p-4 bg-emerald-500/5 border-emerald-500/20">
+              <div class="font-medium text-emerald-500 mb-1">FICA (7.65%)</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Social Security (6.2% up to $168,600 in 2025) + Medicare (1.45%, no cap). This is non-negotiable — every employer pays it.
+              </p>
+            </div>
+            <div class="card p-4 bg-emerald-500/5 border-emerald-500/20">
+              <div class="font-medium text-emerald-500 mb-1">FUTA (0.6%)</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Federal unemployment tax on the first $7,000 of wages. Maximum $42/employee/year after state credit.
+              </p>
+            </div>
+            <div class="card p-4 bg-emerald-500/5 border-emerald-500/20">
+              <div class="font-medium text-emerald-500 mb-1">SUTA (0.5-8%+)</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                State unemployment tax. Rates vary dramatically by state, industry, and claims history. New employers usually pay 2-4%.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Common Voluntary Benefits</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 font-medium">Benefit</th>
+                  <th class="text-right py-2 font-medium">Typical Cost</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Health Insurance (single)</td>
+                  <td class="text-right">$7,200/yr</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Health Insurance (family)</td>
+                  <td class="text-right">$16,800/yr</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">401(k) Match (3-6%)</td>
+                  <td class="text-right">$1,500-$3,000</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Workers' Compensation</td>
+                  <td class="text-right">$500-$3,000</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Training & Development</td>
+                  <td class="text-right">$1,000-$3,000</td>
+                </tr>
+                <tr>
+                  <td class="py-2">Equipment & Software</td>
+                  <td class="text-right">$1,000-$5,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Cost Multiplier by Role</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 font-medium">Role Type</th>
+                  <th class="text-right py-2 font-medium">Multiplier</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Part-time (no benefits)</td>
+                  <td class="text-right">1.08-1.12x</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Full-time (basic benefits)</td>
+                  <td class="text-right">1.25-1.35x</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Full-time (full benefits)</td>
+                  <td class="text-right">1.35-1.50x</td>
+                </tr>
+                <tr>
+                  <td class="py-2">Executive (premium package)</td>
+                  <td class="text-right">1.50-2.00x</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Employee vs Contractor</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Employee:</strong> You pay taxes + benefits, but get loyalty, training investment, and control over schedule</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Contractor:</strong> Higher hourly rate, but no taxes or benefits — often cheaper for project-based work</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Rule of thumb:</strong> A contractor at 1.3x the employee hourly rate costs roughly the same after benefits</span>
+            </li>
+          </ul>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">When Can You Afford to Hire?</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Revenue threshold:</strong> The hire should generate 2-3x their total cost in revenue or savings</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Cash reserve:</strong> Have 3-6 months of their total cost in reserve before hiring</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Start lean:</strong> Consider part-time or contractor arrangements before committing to full-time</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Calculators -->
+    <div class="max-w-5xl mx-auto mt-12">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Profit Margin Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Check if you can afford new hires</div>
+        </a>
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Break-Even Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Factor hiring costs into break-even</div>
+        </a>
+        <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Cash Flow Forecaster</div>
+          <div class="text-sm text-[var(--color-muted)]">Project cash impact of new hires</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Employee Cost Calculator",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/employee-cost",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Employee Cost Calculator", "item": "https://smallbizcalc.com/tools/employee-cost" }
+    ]
+  })} />
+</Base>
+
+<script type="module">
+  const salaryInput = document.getElementById('salary');
+  const sutaInput = document.getElementById('state-suta');
+  const healthInput = document.getElementById('health-monthly');
+  const retirementInput = document.getElementById('retirement-match');
+  const ptoInput = document.getElementById('pto-days');
+  const otherInput = document.getElementById('other-annual');
+  const calculateBtn = document.getElementById('calculate-btn');
+  const resultsSection = document.getElementById('results');
+
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  function getContext(multiplier, totalCost, salary) {
+    const container = document.getElementById('context-content');
+    container.textContent = '';
+
+    let rating, color, advice;
+
+    if (multiplier <= 1.15) {
+      rating = 'Lean Hire (taxes only)';
+      color = 'text-green-500';
+      advice = 'With minimal benefits, your cost is mostly payroll taxes. This is typical for part-time hires or startups without benefit packages. Consider adding at least basic health insurance to attract better candidates.';
+    } else if (multiplier <= 1.30) {
+      rating = 'Standard Cost';
+      color = 'text-emerald-500';
+      advice = 'Your cost multiplier is in the normal range for small businesses offering basic benefits. To make this hire worthwhile, they should generate at least ' + formatCurrency(totalCost * 2) + ' in annual revenue or equivalent cost savings.';
+    } else if (multiplier <= 1.45) {
+      rating = 'Full Benefits Package';
+      color = 'text-yellow-500';
+      advice = 'You are offering a competitive benefits package. This is great for retention and recruiting quality talent. Make sure your margins support this level of investment per employee.';
+    } else {
+      rating = 'Premium Package';
+      color = 'text-orange-500';
+      advice = 'Your total cost is significantly above the base salary. This is common for senior hires or high-cost-of-living areas. Ensure the role generates proportional value — target at least ' + formatCurrency(totalCost * 2.5) + ' in annual impact.';
+    }
+
+    const ratingDiv = document.createElement('div');
+    ratingDiv.className = 'text-lg font-medium mb-2 ' + color;
+    ratingDiv.textContent = rating + ' (' + multiplier.toFixed(2) + 'x salary)';
+
+    const adviceP = document.createElement('p');
+    adviceP.className = 'text-sm text-[var(--color-muted)]';
+    adviceP.textContent = advice;
+
+    const equivalentP = document.createElement('p');
+    equivalentP.className = 'text-sm text-[var(--color-muted)] mt-2';
+    equivalentP.textContent = 'Equivalent contractor rate: roughly ' + formatCurrency(totalCost / 2080 * 1.1) + '-' + formatCurrency(totalCost / 2080 * 1.3) + '/hr to match this total cost.';
+
+    container.appendChild(ratingDiv);
+    container.appendChild(adviceP);
+    container.appendChild(equivalentP);
+  }
+
+  function calculate() {
+    const salary = parseFloat(salaryInput.value) || 0;
+    const sutaRate = (parseFloat(sutaInput.value) || 0) / 100;
+    const healthMonthly = parseFloat(healthInput.value) || 0;
+    const retirementPct = (parseFloat(retirementInput.value) || 0) / 100;
+    const ptoDays = parseFloat(ptoInput.value) || 0;
+    const otherAnnual = parseFloat(otherInput.value) || 0;
+
+    if (salary <= 0) {
+      alert('Please enter an annual salary greater than zero.');
+      return;
+    }
+
+    // Payroll taxes
+    const ssWageBase = 168600; // 2025 Social Security wage base
+    const ssTaxable = Math.min(salary, ssWageBase);
+    const socialSecurity = ssTaxable * 0.062;
+    const medicare = salary * 0.0145;
+    const futaWageBase = 7000;
+    const futa = Math.min(salary, futaWageBase) * 0.006;
+    const sutaWageBase = Math.min(salary, futaWageBase); // Simplified: most states use similar base
+    const suta = sutaWageBase * sutaRate;
+    const totalTaxes = socialSecurity + medicare + futa + suta;
+
+    // Benefits
+    const healthAnnual = healthMonthly * 12;
+    const retirementAnnual = salary * retirementPct;
+
+    // PTO cost (salary already includes PTO pay, but this shows the productivity cost)
+    const dailyRate = salary / 260; // 260 working days
+    const ptoCost = ptoDays * dailyRate;
+
+    // Total
+    const totalCost = salary + totalTaxes + healthAnnual + retirementAnnual + otherAnnual;
+    // Note: PTO is shown for awareness but salary already covers it
+    const totalWithPtoContext = totalCost;
+
+    const multiplier = totalCost / salary;
+    const workingHours = (260 - ptoDays) * 8; // Actual productive hours
+    const hourlyCost = totalCost / workingHours;
+    const monthlyCost = totalCost / 12;
+
+    // Update summary
+    document.getElementById('total-annual').textContent = formatCurrency(totalCost);
+    document.getElementById('hourly-cost').textContent = formatCurrency(hourlyCost) + '/hr';
+    document.getElementById('cost-multiplier').textContent = multiplier.toFixed(2) + 'x';
+    document.getElementById('monthly-cost').textContent = formatCurrency(monthlyCost) + '/mo';
+
+    // Update breakdown
+    document.getElementById('bd-salary').textContent = formatCurrency(salary);
+    document.getElementById('bd-ss').textContent = formatCurrency(socialSecurity);
+    document.getElementById('bd-medicare').textContent = formatCurrency(medicare);
+    document.getElementById('bd-futa').textContent = formatCurrency(futa);
+    document.getElementById('bd-suta').textContent = formatCurrency(suta);
+    document.getElementById('bd-taxes-total').textContent = formatCurrency(totalTaxes);
+    document.getElementById('bd-health').textContent = formatCurrency(healthAnnual);
+    document.getElementById('bd-retirement').textContent = formatCurrency(retirementAnnual);
+    document.getElementById('bd-pto').textContent = ptoDays + ' days (' + formatCurrency(ptoCost) + ' productivity cost)';
+    document.getElementById('bd-other').textContent = formatCurrency(otherAnnual);
+    document.getElementById('bd-total').textContent = formatCurrency(totalCost);
+
+    // Context
+    getContext(multiplier, totalCost, salary);
+
+    // Show results
+    resultsSection.classList.remove('hidden');
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  calculateBtn.addEventListener('click', calculate);
+
+  [salaryInput, sutaInput, healthInput, retirementInput, ptoInput, otherInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculate();
+    });
+  });
+</script>

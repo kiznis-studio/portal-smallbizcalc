@@ -1,0 +1,639 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Startup Cost Estimator";
+const description = "Estimate your total startup costs by category — licenses, equipment, marketing, inventory, and operating reserves. Get a realistic budget before you launch.";
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <nav class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-6">
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Tools</a>
+      <span>/</span>
+      <span>{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Calculator -->
+      <div>
+        <h1 class="text-3xl font-bold mb-2">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">Add your expected costs category by category. We will total everything and recommend a cash reserve.</p>
+
+        <!-- Business Type Selector -->
+        <div class="card p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">Business Type</h2>
+          <p class="text-sm text-[var(--color-muted)] mb-3">Select a template to pre-fill typical costs, or start from scratch.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <button data-template="blank" class="template-btn active px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors">From Scratch</button>
+            <button data-template="online" class="template-btn px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors">Online Store</button>
+            <button data-template="service" class="template-btn px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors">Service Biz</button>
+            <button data-template="retail" class="template-btn px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors">Retail Shop</button>
+            <button data-template="restaurant" class="template-btn px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors">Restaurant</button>
+            <button data-template="freelance" class="template-btn px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors">Freelance</button>
+          </div>
+        </div>
+
+        <!-- One-Time Costs -->
+        <div class="card p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">One-Time Startup Costs</h2>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1" for="legal">Legal & Registration</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Business license, LLC filing, permits, trademark</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="legal" placeholder="0" class="input pl-7 w-full" min="0" step="50" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="equipment">Equipment & Furniture</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Computer, desk, machinery, tools, POS system</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="equipment" placeholder="0" class="input pl-7 w-full" min="0" step="100" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="buildout">Space Buildout / Renovation</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Leasehold improvements, signage, deposits</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="buildout" placeholder="0" class="input pl-7 w-full" min="0" step="500" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="inventory">Initial Inventory / Supplies</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Opening stock, raw materials, packaging</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="inventory" placeholder="0" class="input pl-7 w-full" min="0" step="100" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="branding">Branding & Website</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Logo, domain, website design, business cards</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="branding" placeholder="0" class="input pl-7 w-full" min="0" step="50" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="otherOneTime">Other One-Time Costs</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Training, consulting, initial marketing campaign</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="otherOneTime" placeholder="0" class="input pl-7 w-full" min="0" step="50" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Costs -->
+        <div class="card p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">Monthly Operating Costs</h2>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1" for="rent">Rent / Lease</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="rent" placeholder="0" class="input pl-7 w-full" min="0" step="50" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="utilities">Utilities & Internet</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="utilities" placeholder="0" class="input pl-7 w-full" min="0" step="25" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="insurance">Insurance</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">General liability, professional, property</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="insurance" placeholder="0" class="input pl-7 w-full" min="0" step="25" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="software">Software & Subscriptions</label>
+              <p class="text-xs text-[var(--color-muted)] mb-1">Accounting, email, CRM, project management</p>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="software" placeholder="0" class="input pl-7 w-full" min="0" step="10" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="marketing">Marketing & Advertising</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="marketing" placeholder="0" class="input pl-7 w-full" min="0" step="50" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="payroll">Payroll (if hiring)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="payroll" placeholder="0" class="input pl-7 w-full" min="0" step="100" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1" for="otherMonthly">Other Monthly Costs</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                <input type="number" id="otherMonthly" placeholder="0" class="input pl-7 w-full" min="0" step="25" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reserve Months -->
+        <div class="card p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">Cash Reserve</h2>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="reserveMonths">Months of Operating Reserve</label>
+            <p class="text-xs text-[var(--color-muted)] mb-2">How many months of expenses to keep in reserve? 3-6 months is recommended.</p>
+            <select id="reserveMonths" class="input w-full">
+              <option value="3">3 months (minimum)</option>
+              <option value="6" selected>6 months (recommended)</option>
+              <option value="9">9 months (conservative)</option>
+              <option value="12">12 months (very conservative)</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="calculate-btn" class="w-full py-3 px-6 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+          Estimate Total Startup Cost
+        </button>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8">
+          <div class="card p-6 bg-emerald-500/5 border-emerald-500/20">
+            <h2 class="text-lg font-semibold mb-4">Your Startup Cost Estimate</h2>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="text-center p-3 bg-[var(--color-surface)] rounded-lg">
+                <div class="text-2xl font-bold text-emerald-500" id="total-startup">$0</div>
+                <div class="text-xs text-[var(--color-muted)]">Total to Launch</div>
+              </div>
+              <div class="text-center p-3 bg-[var(--color-surface)] rounded-lg">
+                <div class="text-2xl font-bold" id="monthly-burn">$0</div>
+                <div class="text-xs text-[var(--color-muted)]">Monthly Burn Rate</div>
+              </div>
+              <div class="text-center p-3 bg-[var(--color-surface)] rounded-lg">
+                <div class="text-2xl font-bold" id="one-time-total">$0</div>
+                <div class="text-xs text-[var(--color-muted)]">One-Time Costs</div>
+              </div>
+              <div class="text-center p-3 bg-[var(--color-surface)] rounded-lg">
+                <div class="text-2xl font-bold" id="reserve-total">$0</div>
+                <div class="text-xs text-[var(--color-muted)]">Cash Reserve</div>
+              </div>
+            </div>
+
+            <!-- Breakdown -->
+            <div class="space-y-2 text-sm mb-6">
+              <h3 class="font-medium mb-2">Cost Breakdown</h3>
+              <div id="breakdown-list" class="space-y-1"></div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2 mt-2">
+                <span class="font-medium">One-Time Subtotal</span>
+                <span id="bd-onetime" class="font-medium">$0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--color-muted)]">+ Monthly Costs x <span id="bd-months">6</span> months reserve</span>
+                <span id="bd-reserve">$0</span>
+              </div>
+              <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
+                <span class="font-medium">= Total Capital Needed</span>
+                <span id="bd-total" class="font-medium text-emerald-500">$0</span>
+              </div>
+            </div>
+
+            <!-- Context -->
+            <div id="context-card" class="card p-5">
+              <h3 class="font-medium mb-3">What This Means</h3>
+              <div id="context-content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Content -->
+      <div class="lg:border-l lg:border-[var(--color-border)] lg:pl-12">
+        <h2 class="text-xl font-semibold mb-4">Startup Cost Planning Guide</h2>
+
+        <div class="prose prose-sm">
+          <h3 class="text-lg font-medium mt-6 mb-3">Why You Need a Startup Budget</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            Most businesses fail not from bad ideas but from running out of money. A realistic startup budget helps you understand exactly how much capital you need before generating revenue, and prevents the number one mistake: underestimating costs by 30-50%.
+          </p>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Typical Startup Costs by Business Type</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 font-medium">Business Type</th>
+                  <th class="text-right py-2 font-medium">Typical Range</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Freelance / Consulting</td>
+                  <td class="text-right">$500 - $5,000</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Online Store (e-commerce)</td>
+                  <td class="text-right">$2,000 - $15,000</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Service Business</td>
+                  <td class="text-right">$5,000 - $25,000</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">Retail Shop</td>
+                  <td class="text-right">$25,000 - $100,000</td>
+                </tr>
+                <tr>
+                  <td class="py-2">Restaurant / Food Service</td>
+                  <td class="text-right">$50,000 - $250,000+</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Costs People Forget</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Permits & licenses:</strong> Health permits, fire inspection, zoning approval — $200-$2,000+ depending on industry and location</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Insurance:</strong> General liability alone runs $500-$3,000/year for most small businesses</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Professional services:</strong> Accountant setup, legal review, bookkeeping — $1,000-$5,000 in year one</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Security deposits:</strong> First/last month rent, utility deposits, equipment leases — often 2-3 months of rent</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Working capital gap:</strong> The time between paying suppliers and collecting from customers (30-90 days)</span>
+            </li>
+          </ul>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">The Cash Reserve Rule</h3>
+          <p class="text-[var(--color-muted)] mb-4">
+            Keep 3-6 months of operating expenses in reserve. This is not optional — it is the difference between surviving a slow start and closing down. Most businesses take 6-18 months to become profitable.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-2 font-medium">Reserve Level</th>
+                  <th class="text-right py-2 font-medium">Best For</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">3 months</td>
+                  <td class="text-right">Freelance, side business, low overhead</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">6 months</td>
+                  <td class="text-right">Most small businesses (recommended)</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border)]">
+                  <td class="py-2">9 months</td>
+                  <td class="text-right">Seasonal business, slow ramp-up</td>
+                </tr>
+                <tr>
+                  <td class="py-2">12 months</td>
+                  <td class="text-right">Restaurant, retail, high fixed costs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Funding Your Startup</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Personal savings:</strong> The most common source. No debt, no giving up equity, full control</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>SBA loans:</strong> Government-backed loans with favorable terms (SBA 7(a) up to $5M, microloans up to $50K)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Business credit cards:</strong> Good for small purchases and building business credit. Watch the interest rates</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">•</span>
+              <span><strong>Friends & family:</strong> If going this route, put everything in writing with clear repayment terms</span>
+            </li>
+          </ul>
+
+          <h3 class="text-lg font-medium mt-6 mb-3">Launch Checklist</h3>
+          <ul class="space-y-2 text-[var(--color-muted)]">
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Register business entity (LLC, Corp, or sole proprietorship)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Get EIN from IRS (free, instant online)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Open business bank account (separate from personal)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Get required licenses and permits</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Set up accounting software (QuickBooks, Wave, FreshBooks)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Purchase insurance (general liability at minimum)</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-emerald-500">☐</span>
+              <span>Build cash reserve before launch, not after</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Calculators -->
+    <div class="max-w-5xl mx-auto mt-12">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Break-Even Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">When will your startup become profitable?</div>
+        </a>
+        <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Cash Flow Forecaster</div>
+          <div class="text-sm text-[var(--color-muted)]">Project monthly cash flow post-launch</div>
+        </a>
+        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-semibold">Business Loan Calculator</div>
+          <div class="text-sm text-[var(--color-muted)]">Compare funding options and payments</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Startup Cost Estimator",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/startup-cost",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Startup Cost Estimator", "item": "https://smallbizcalc.com/tools/startup-cost" }
+    ]
+  })} />
+</Base>
+
+<script type="module">
+  const templates = {
+    blank: {},
+    online: {
+      legal: 500, equipment: 1500, buildout: 0, inventory: 3000, branding: 2000, otherOneTime: 500,
+      rent: 0, utilities: 100, insurance: 100, software: 200, marketing: 500, payroll: 0, otherMonthly: 50
+    },
+    service: {
+      legal: 1000, equipment: 3000, buildout: 0, inventory: 0, branding: 2500, otherOneTime: 1000,
+      rent: 500, utilities: 150, insurance: 200, software: 150, marketing: 800, payroll: 0, otherMonthly: 100
+    },
+    retail: {
+      legal: 1500, equipment: 10000, buildout: 15000, inventory: 20000, branding: 3000, otherOneTime: 2000,
+      rent: 3000, utilities: 400, insurance: 300, software: 100, marketing: 1000, payroll: 4000, otherMonthly: 200
+    },
+    restaurant: {
+      legal: 3000, equipment: 50000, buildout: 30000, inventory: 5000, branding: 3000, otherOneTime: 5000,
+      rent: 5000, utilities: 800, insurance: 500, software: 200, marketing: 1500, payroll: 8000, otherMonthly: 500
+    },
+    freelance: {
+      legal: 300, equipment: 2000, buildout: 0, inventory: 0, branding: 500, otherOneTime: 200,
+      rent: 0, utilities: 50, insurance: 100, software: 100, marketing: 200, payroll: 0, otherMonthly: 50
+    }
+  };
+
+  const fields = {
+    oneTime: ['legal', 'equipment', 'buildout', 'inventory', 'branding', 'otherOneTime'],
+    monthly: ['rent', 'utilities', 'insurance', 'software', 'marketing', 'payroll', 'otherMonthly']
+  };
+
+  const fieldLabels = {
+    legal: 'Legal & Registration',
+    equipment: 'Equipment & Furniture',
+    buildout: 'Space Buildout',
+    inventory: 'Initial Inventory',
+    branding: 'Branding & Website',
+    otherOneTime: 'Other One-Time',
+    rent: 'Rent / Lease',
+    utilities: 'Utilities & Internet',
+    insurance: 'Insurance',
+    software: 'Software & Subscriptions',
+    marketing: 'Marketing & Advertising',
+    payroll: 'Payroll',
+    otherMonthly: 'Other Monthly'
+  };
+
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  // Template buttons
+  document.querySelectorAll('.template-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active', 'border-emerald-500', 'bg-emerald-500/10'));
+      btn.classList.add('active', 'border-emerald-500', 'bg-emerald-500/10');
+
+      const template = templates[btn.dataset.template];
+      if (!template) {
+        // Blank - clear all
+        [...fields.oneTime, ...fields.monthly].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+      } else {
+        Object.entries(template).forEach(([id, value]) => {
+          const el = document.getElementById(id);
+          if (el) el.value = value;
+        });
+      }
+    });
+  });
+
+  function calculate() {
+    let oneTimeTotal = 0;
+    let monthlyTotal = 0;
+
+    fields.oneTime.forEach(id => {
+      oneTimeTotal += parseFloat(document.getElementById(id).value) || 0;
+    });
+
+    fields.monthly.forEach(id => {
+      monthlyTotal += parseFloat(document.getElementById(id).value) || 0;
+    });
+
+    const reserveMonths = parseInt(document.getElementById('reserveMonths').value) || 6;
+    const reserveTotal = monthlyTotal * reserveMonths;
+    const grandTotal = oneTimeTotal + reserveTotal;
+
+    // Update summary
+    document.getElementById('total-startup').textContent = formatCurrency(grandTotal);
+    document.getElementById('monthly-burn').textContent = formatCurrency(monthlyTotal) + '/mo';
+    document.getElementById('one-time-total').textContent = formatCurrency(oneTimeTotal);
+    document.getElementById('reserve-total').textContent = formatCurrency(reserveTotal);
+
+    // Build breakdown
+    const list = document.getElementById('breakdown-list');
+    list.textContent = '';
+
+    fields.oneTime.forEach(id => {
+      const val = parseFloat(document.getElementById(id).value) || 0;
+      if (val > 0) {
+        const row = document.createElement('div');
+        row.className = 'flex justify-between';
+        const label = document.createElement('span');
+        label.className = 'text-[var(--color-muted)]';
+        label.textContent = fieldLabels[id];
+        const amount = document.createElement('span');
+        amount.textContent = formatCurrency(val);
+        row.appendChild(label);
+        row.appendChild(amount);
+        list.appendChild(row);
+      }
+    });
+
+    // Monthly costs summary
+    if (monthlyTotal > 0) {
+      const monthlyHeader = document.createElement('div');
+      monthlyHeader.className = 'flex justify-between mt-2 pt-2 border-t border-[var(--color-border)]';
+      const mhLabel = document.createElement('span');
+      mhLabel.className = 'font-medium';
+      mhLabel.textContent = 'Monthly Costs';
+      const mhAmount = document.createElement('span');
+      mhAmount.className = 'font-medium';
+      mhAmount.textContent = formatCurrency(monthlyTotal) + '/mo';
+      monthlyHeader.appendChild(mhLabel);
+      monthlyHeader.appendChild(mhAmount);
+      list.appendChild(monthlyHeader);
+
+      fields.monthly.forEach(id => {
+        const val = parseFloat(document.getElementById(id).value) || 0;
+        if (val > 0) {
+          const row = document.createElement('div');
+          row.className = 'flex justify-between';
+          const label = document.createElement('span');
+          label.className = 'text-[var(--color-muted)]';
+          label.textContent = fieldLabels[id];
+          const amount = document.createElement('span');
+          amount.textContent = formatCurrency(val) + '/mo';
+          row.appendChild(label);
+          row.appendChild(amount);
+          list.appendChild(row);
+        }
+      });
+    }
+
+    document.getElementById('bd-onetime').textContent = formatCurrency(oneTimeTotal);
+    document.getElementById('bd-months').textContent = reserveMonths;
+    document.getElementById('bd-reserve').textContent = formatCurrency(reserveTotal);
+    document.getElementById('bd-total').textContent = formatCurrency(grandTotal);
+
+    // Context
+    const container = document.getElementById('context-content');
+    container.textContent = '';
+
+    let advice, color, label;
+    if (grandTotal < 5000) {
+      label = 'Lean Startup';
+      color = 'text-green-500';
+      advice = 'Your startup costs are very low, typical for freelance or online businesses. This is achievable with personal savings alone. Focus on validating your idea quickly before investing more.';
+    } else if (grandTotal < 25000) {
+      label = 'Moderate Investment';
+      color = 'text-emerald-500';
+      advice = 'This is a typical range for service businesses and online stores. Consider a mix of savings and a small business credit line. An SBA microloan (up to $50K) could cover this comfortably.';
+    } else if (grandTotal < 100000) {
+      label = 'Significant Investment';
+      color = 'text-yellow-500';
+      advice = 'At this level, you likely need outside funding or substantial savings. Look into SBA 7(a) loans, which offer favorable terms for amounts up to $5M. Have a solid business plan ready.';
+    } else {
+      label = 'Major Capital Requirement';
+      color = 'text-orange-500';
+      advice = 'This level of investment typically requires a combination of funding sources: personal capital, SBA loans, and possibly investors. Consider phased buildout to reduce initial capital needs.';
+    }
+
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'text-lg font-medium mb-2 ' + color;
+    labelDiv.textContent = label + ' — ' + formatCurrency(grandTotal);
+
+    const adviceP = document.createElement('p');
+    adviceP.className = 'text-sm text-[var(--color-muted)] mb-2';
+    adviceP.textContent = advice;
+
+    const runwayP = document.createElement('p');
+    runwayP.className = 'text-sm text-[var(--color-muted)]';
+    if (monthlyTotal > 0) {
+      runwayP.textContent = 'At ' + formatCurrency(monthlyTotal) + '/month burn rate, your ' + reserveMonths + '-month reserve of ' + formatCurrency(reserveTotal) + ' gives you runway to reach profitability. You need to generate at least ' + formatCurrency(monthlyTotal) + '/month in revenue to break even on operating costs.';
+    } else {
+      runwayP.textContent = 'With no recurring monthly costs, your one-time investment of ' + formatCurrency(oneTimeTotal) + ' is all you need to get started.';
+    }
+
+    container.appendChild(labelDiv);
+    container.appendChild(adviceP);
+    container.appendChild(runwayP);
+
+    // Show results
+    const results = document.getElementById('results');
+    results.classList.remove('hidden');
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  document.getElementById('calculate-btn').addEventListener('click', calculate);
+
+  // Enter key support
+  document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculate();
+    });
+  });
+</script>
