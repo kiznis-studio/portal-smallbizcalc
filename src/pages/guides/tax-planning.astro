@@ -1,0 +1,578 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Tax Planning for Small Business: Quarterly Strategies & Deductions";
+const description = "Quarterly tax strategies, common deductions, and how to avoid surprises at tax time. A practical guide for US small business owners.";
+const publishedDate = "2026-02-15";
+const modifiedDate = "2026-02-15";
+
+const tableOfContents = [
+  { id: 'why-tax-planning', label: 'Why Tax Planning Matters' },
+  { id: 'estimated-taxes', label: 'Understanding Estimated Taxes' },
+  { id: 'common-deductions', label: 'Common Business Deductions' },
+  { id: 'business-structure', label: 'Choosing Your Business Structure' },
+  { id: 'record-keeping', label: 'Record Keeping' },
+  { id: 'year-end-strategies', label: 'Year-End Tax Strategies' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishedDate}
+  modifiedTime={modifiedDate}
+  author="SmallBizCalc"
+  section="Financial Guides"
+  tags={["tax planning", "small business taxes", "tax deductions", "quarterly taxes", "estimated taxes"]}
+>
+  <article class="py-8 md:py-12">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-[var(--color-foreground)]">Guides</a>
+            <span>/</span>
+            <span>Financial Guides</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{title}</h1>
+
+          <div class="flex items-center gap-4 text-sm text-[var(--color-muted)]">
+            <time datetime={publishedDate}>Updated Feb 2026</time>
+            <span>&middot;</span>
+            <span>14 min read</span>
+          </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="mb-10 p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+          <div class="font-semibold mb-3">In This Guide</div>
+          <ul class="space-y-2 text-sm">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-[var(--color-muted)] hover:text-[var(--color-accent)]">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Content -->
+        <div class="prose prose-lg max-w-none">
+          <!-- Intro -->
+          <p class="lead text-xl text-[var(--color-muted)] mb-8">
+            Most small business owners think about taxes once a year&mdash;in April, when it's already too late to do anything about them. The result? Bigger tax bills, missed deductions, and penalties for underpayment. Tax planning isn't about cheating the system. It's about understanding the rules well enough to keep more of what you've earned.
+          </p>
+
+          <!-- Why Tax Planning Matters -->
+          <section id="why-tax-planning" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Why Tax Planning Matters</h2>
+
+            <p class="mb-4">
+              As a small business owner, you're responsible for both the employer and employee portions of Social Security and Medicare&mdash;that's the self-employment (SE) tax at 15.3% on top of your income tax. If you earn $80,000 in net business income, you'll owe roughly $12,240 in SE tax alone before income tax even enters the picture.
+            </p>
+
+            <p class="mb-4">
+              Without planning, those numbers sneak up on you. The IRS expects you to pay taxes as you earn income, not in one lump sum at year-end. If you owe more than $1,000 at filing time, you'll face underpayment penalties. That means quarterly estimated payments are mandatory for most self-employed people and small business owners.
+            </p>
+
+            <p class="mb-4">
+              The good news? The tax code is loaded with deductions specifically designed for small businesses. Home office expenses, equipment purchases, retirement contributions, health insurance premiums&mdash;these can reduce your taxable income by tens of thousands of dollars. But only if you plan ahead and keep good records.
+            </p>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mb-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">The Real Cost of Not Planning</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                A business owner earning $100,000 with no tax strategy might pay $28,000&ndash;$32,000 in combined taxes. The same owner with a basic plan&mdash;maxing out a solo 401(k), claiming home office, and timing equipment purchases&mdash;could reduce that by $8,000&ndash;$12,000. That's not a loophole. It's just knowing the rules.
+              </p>
+            </div>
+
+            <p class="mb-4">
+              Tax planning also protects your cash flow. If you set aside money for taxes throughout the year and pay quarterly, you'll never face a devastating April surprise. You can budget with confidence, reinvest in growth, and sleep better knowing the IRS isn't going to send you a penalty notice.
+            </p>
+          </section>
+
+          <!-- Understanding Estimated Taxes -->
+          <section id="estimated-taxes" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Understanding Estimated Taxes</h2>
+
+            <p class="mb-4">
+              If you're self-employed, a sole proprietor, a partner, or an S-Corp shareholder, you likely need to make quarterly estimated tax payments. The IRS uses a pay-as-you-go system&mdash;they want their money throughout the year, not all at once on April 15th.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">2026 Quarterly Due Dates</h3>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-3 px-4">Quarter</th>
+                    <th class="text-left py-3 px-4">Income Period</th>
+                    <th class="text-left py-3 px-4">Payment Due</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Q1</td>
+                    <td class="py-3 px-4">Jan 1 &ndash; Mar 31</td>
+                    <td class="py-3 px-4 font-semibold">April 15, 2026</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Q2</td>
+                    <td class="py-3 px-4">Apr 1 &ndash; May 31</td>
+                    <td class="py-3 px-4 font-semibold">June 16, 2026</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Q3</td>
+                    <td class="py-3 px-4">Jun 1 &ndash; Aug 31</td>
+                    <td class="py-3 px-4 font-semibold">September 15, 2026</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Q4</td>
+                    <td class="py-3 px-4">Sep 1 &ndash; Dec 31</td>
+                    <td class="py-3 px-4 font-semibold">January 15, 2027</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="mb-4">
+              Notice that the quarters aren't equal. Q2 only covers two months (April and May), while Q4 covers four months (September through December). This is an IRS quirk, not a typo. Plan your cash flow accordingly&mdash;your Q4 payment often needs to be larger if your business has a strong holiday season.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">The Safe Harbor Rule</h3>
+
+            <p class="mb-4">
+              You can avoid underpayment penalties even if you owe money at tax time by meeting one of the IRS "safe harbor" thresholds:
+            </p>
+
+            <div class="space-y-4 mb-6">
+              <div class="p-4 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h4 class="font-semibold mb-2">Option 1: 100% of Prior Year Tax</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Pay at least 100% of last year's total tax liability through estimated payments (or withholding). If your AGI exceeded $150,000 last year, the threshold is 110%. This is the simplest approach&mdash;you know exactly what you owed last year, so divide by four and pay that amount each quarter.
+                </p>
+              </div>
+
+              <div class="p-4 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h4 class="font-semibold mb-2">Option 2: 90% of Current Year Tax</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Pay at least 90% of this year's tax liability through estimated payments. This requires you to estimate your current year income accurately. It works best when your income is stable and predictable.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mb-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">Practical Example</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Say you owed $20,000 in total tax last year and your AGI was under $150,000. Your safe harbor is $20,000. Divide by four and pay $5,000 per quarter. Even if your income grows and you actually owe $28,000 this year, you won't face penalties&mdash;you just pay the $8,000 difference at filing time.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">How to Make Payments</h3>
+
+            <p class="mb-4">
+              Use IRS Form 1040-ES to calculate your estimated tax. Payments can be made through:
+            </p>
+
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>IRS Direct Pay</strong> (irs.gov/directpay) &mdash; free bank transfer, instant confirmation</li>
+              <li><strong>EFTPS</strong> (Electronic Federal Tax Payment System) &mdash; requires enrollment, but allows scheduling</li>
+              <li><strong>IRS2Go app</strong> &mdash; mobile payments via bank account or card</li>
+              <li><strong>Credit/debit card</strong> &mdash; processing fees apply (1.85&ndash;1.98% for credit cards)</li>
+              <li><strong>Mail a check</strong> with a 1040-ES payment voucher &mdash; slowest, no instant confirmation</li>
+            </ul>
+
+            <p class="mb-4">
+              IRS Direct Pay is the best option for most people. It's free, immediate, and you get a confirmation number. Set calendar reminders two weeks before each due date so you never miss a payment.
+            </p>
+          </section>
+
+          <!-- Common Business Deductions -->
+          <section id="common-deductions" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Common Business Deductions</h2>
+
+            <p class="mb-4">
+              Deductions reduce your taxable income, which reduces both your income tax and your self-employment tax. Every legitimate deduction you miss is money you're giving away. Here are the most valuable ones for small business owners:
+            </p>
+
+            <div class="space-y-6">
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Home Office Deduction</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  If you use part of your home regularly and exclusively for business, you can deduct a portion of your rent/mortgage, utilities, insurance, and maintenance. There are two methods:
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-sm text-[var(--color-muted)] mb-3">
+                  <li><strong>Simplified method:</strong> $5 per square foot, up to 300 sq ft (max $1,500/year). Easy, no receipts needed.</li>
+                  <li><strong>Regular method:</strong> Calculate the percentage of your home used for business and deduct that percentage of actual expenses. More paperwork, but often a bigger deduction.</li>
+                </ul>
+                <div class="bg-[var(--color-background)] p-3 rounded text-sm">
+                  <strong>Example:</strong> Your home is 1,500 sq ft. Your office is 150 sq ft (10%). Your annual housing costs are $24,000. Regular method deduction: $2,400. Simplified method: $750. The regular method wins by $1,650 in this case.
+                </div>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Equipment &amp; Section 179</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Section 179 lets you deduct the full purchase price of qualifying business equipment in the year you buy it, rather than depreciating it over several years. For 2026, the deduction limit is $1,220,000 with a spending cap of $3,050,000.
+                </p>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Qualifying items include computers, software, office furniture, machinery, and vehicles used for business. This is one of the most powerful deductions available because it lets you reduce taxable income immediately.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded text-sm">
+                  <strong>Example:</strong> You buy a $3,000 laptop and a $2,000 standing desk for your business. Under Section 179, you can deduct the full $5,000 this year instead of spreading it over 5&ndash;7 years.
+                </div>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Vehicle Expenses</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  If you use your vehicle for business, you have two options:
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-sm text-[var(--color-muted)] mb-3">
+                  <li><strong>Standard mileage rate (2026):</strong> 67 cents per mile for business driving. Track your miles and multiply.</li>
+                  <li><strong>Actual expense method:</strong> Deduct the business-use percentage of gas, insurance, maintenance, depreciation, and registration.</li>
+                </ul>
+                <p class="text-sm text-[var(--color-muted)]">
+                  The standard mileage rate is simpler, but if you drive an expensive or gas-hungry vehicle, actual expenses may be higher. You must choose one method for each vehicle and generally stick with it. Commuting miles never count&mdash;only travel between business locations, to client meetings, or for business errands.
+                </p>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Health Insurance Premiums</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Self-employed individuals can deduct 100% of health insurance premiums for themselves, their spouse, and dependents. This is an "above the line" deduction, meaning it reduces your adjusted gross income (AGI) even if you don't itemize. It covers medical, dental, and qualifying long-term care insurance.
+                </p>
+                <p class="text-sm text-[var(--color-muted)]">
+                  <strong>Important:</strong> You can't take this deduction for any month you were eligible for an employer-subsidized health plan (including a spouse's plan). The deduction also can't exceed your net self-employment income.
+                </p>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Retirement Contributions</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  This is the single biggest tax shelter available to self-employed business owners. Options include:
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-sm text-[var(--color-muted)] mb-3">
+                  <li><strong>Solo 401(k):</strong> Contribute up to $23,500 as employee (2026 limit) plus up to 25% of net self-employment income as employer. Total limit: $70,000 ($77,500 if 50+).</li>
+                  <li><strong>SEP-IRA:</strong> Contribute up to 25% of net self-employment income, max $70,000. Simpler setup than Solo 401(k), but no employee catch-up contributions.</li>
+                  <li><strong>SIMPLE IRA:</strong> Employee contributions up to $16,500 ($20,000 if 50+). Best for small businesses with employees.</li>
+                </ul>
+                <div class="bg-[var(--color-background)] p-3 rounded text-sm">
+                  <strong>Example:</strong> You earn $100,000 in net self-employment income. With a Solo 401(k), you can defer $23,500 as an employee plus ~$18,587 as employer (20% of adjusted net earnings). Total: $42,087 in tax-deductible retirement savings. At the 24% tax bracket, that saves you over $10,000 in income tax alone.
+                </div>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Business Meals</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Business meals are 50% deductible when you're eating with a client, prospect, or business associate and the meal has a clear business purpose. You don't need to discuss business during the meal, but the meal must be associated with active business conduct.
+                </p>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Keep your receipt and note who you were with and the business purpose. A quick note on the back of the receipt ("Lunch with Sarah from ABC Corp &mdash; discussed Q3 project proposal") is sufficient. Entertainment expenses (concerts, sporting events) are not deductible, even if you discuss business.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mt-6">
+              <p class="text-sm">
+                <strong>Track your impact:</strong> Every deduction improves your bottom line. Use our <a href="/tools/profit-margin" class="text-emerald-600 dark:text-emerald-400 hover:underline">Profit Margin Calculator</a> to see how reducing your tax burden affects your net margins.
+              </p>
+            </div>
+          </section>
+
+          <!-- Choosing Your Business Structure -->
+          <section id="business-structure" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Choosing Your Business Structure</h2>
+
+            <p class="mb-4">
+              Your business structure directly determines how much tax you pay. Many small business owners start as sole proprietors because it's the default&mdash;no paperwork required. But as income grows, restructuring can save thousands in taxes every year.
+            </p>
+
+            <div class="space-y-6">
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Sole Proprietor / Single-Member LLC</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  The simplest structure. All business income flows directly to your personal tax return (Schedule C). You pay income tax plus self-employment tax (15.3%) on all net profits. No separate business tax return is required.
+                </p>
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">Simple setup</span>
+                  <span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">Low cost</span>
+                  <span class="px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400">Full SE tax on all profits</span>
+                  <span class="px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400">No liability protection (sole prop)</span>
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Best for:</strong> Businesses earning under $50,000&ndash;$60,000 in net profit, or just starting out. The simplicity isn't worth giving up when the tax savings of other structures are minimal at lower income levels.
+                </p>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">S-Corporation Election</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  An LLC or corporation can elect S-Corp status with the IRS (Form 2553). The key benefit: you split income between a "reasonable salary" (subject to payroll taxes) and distributions (not subject to SE tax). This can save significant money as income grows.
+                </p>
+                <div class="flex flex-wrap gap-2 text-xs mb-3">
+                  <span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">SE tax savings</span>
+                  <span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">Liability protection</span>
+                  <span class="px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400">Payroll required</span>
+                  <span class="px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400">More admin &amp; accounting costs</span>
+                </div>
+                <div class="bg-[var(--color-background)] p-3 rounded text-sm">
+                  <strong>Example:</strong> You earn $120,000 in net profit. As a sole proprietor, you pay SE tax on the full $120,000 = ~$18,360. As an S-Corp, you pay yourself a reasonable salary of $70,000 (payroll taxes: ~$10,710) and take $50,000 as a distribution (no SE tax). Annual savings: ~$7,650. Even after accounting for $2,000&ndash;$3,000 in extra accounting/payroll costs, you're ahead by $4,000&ndash;$5,000.
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Best for:</strong> Businesses consistently earning $60,000+ in net profit. The crossover point where S-Corp savings exceed the extra compliance costs is typically around $50,000&ndash;$70,000, depending on your state and accounting costs.
+                </p>
+              </div>
+
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">C-Corporation</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  C-Corps pay a flat 21% corporate tax rate. Profits distributed as dividends are taxed again at the shareholder level (double taxation). This rarely makes sense for small businesses unless you're retaining significant earnings in the company or planning to raise investment capital.
+                </p>
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">21% flat rate</span>
+                  <span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">Best for retaining earnings</span>
+                  <span class="px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400">Double taxation on distributions</span>
+                  <span class="px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400">Most complex</span>
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Best for:</strong> Businesses retaining over $100,000+ annually in the company, or those seeking VC/angel investment. Most small service businesses and freelancers should avoid C-Corp status.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mt-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">When to Switch Structures</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Don't rush into an S-Corp election. Run the numbers first. The savings need to exceed the added costs of payroll processing ($50&ndash;$150/month), a separate business tax return ($500&ndash;$1,500/year), and potentially more complex bookkeeping. Use our <a href="/tools/roi" class="text-emerald-600 dark:text-emerald-400 hover:underline">ROI Calculator</a> to model the costs vs. savings before deciding.
+              </p>
+            </div>
+          </section>
+
+          <!-- Record Keeping -->
+          <section id="record-keeping" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Record Keeping</h2>
+
+            <p class="mb-4">
+              Good records are the foundation of tax planning. Without them, you'll miss deductions, make errors on your return, and have no defense in an audit. The IRS doesn't require a specific bookkeeping system&mdash;they just require that your records clearly show income and expenses.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">What to Track</h3>
+
+            <p class="mb-4">
+              At minimum, you should be recording every transaction related to your business:
+            </p>
+
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Income:</strong> Every payment received, including date, source, amount, and method (invoice, cash, digital payment)</li>
+              <li><strong>Expenses:</strong> Every business purchase with receipt, including date, vendor, amount, and business purpose</li>
+              <li><strong>Mileage:</strong> Date, starting/ending location, business purpose, and miles driven for each trip</li>
+              <li><strong>Home office:</strong> Total home square footage, office square footage, and annual housing costs</li>
+              <li><strong>Assets:</strong> Purchase date, cost, and business-use percentage for equipment, furniture, and vehicles</li>
+              <li><strong>Bank statements:</strong> Monthly statements for all business accounts (checking, savings, credit cards)</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">How Long to Keep Records</h3>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-3 px-4">Document Type</th>
+                    <th class="text-left py-3 px-4">Retention Period</th>
+                    <th class="text-left py-3 px-4">Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Tax returns</td>
+                    <td class="py-3 px-4 font-semibold">7 years</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">IRS can audit up to 6 years for substantial understatement</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Income/expense records</td>
+                    <td class="py-3 px-4 font-semibold">7 years</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Must support your tax return claims</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Receipts under $75</td>
+                    <td class="py-3 px-4 font-semibold">3 years</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">IRS generally doesn't require receipts under $75, but keep them</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4">Asset records (equipment)</td>
+                    <td class="py-3 px-4 font-semibold">Life of asset + 7 years</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Need to prove depreciation basis if audited</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Employment tax records</td>
+                    <td class="py-3 px-4 font-semibold">4 years</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">IRS requirement for payroll records</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Software Recommendations</h3>
+
+            <p class="mb-4">
+              You don't need expensive software to keep good records, but the right tool makes everything easier. Here's what works for different business sizes:
+            </p>
+
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Freelancers &amp; solo operators:</strong> Wave (free), or a spreadsheet with disciplined weekly updates. Wave handles invoicing and basic bookkeeping at no cost.</li>
+              <li><strong>Growing businesses ($50K+ revenue):</strong> QuickBooks Self-Employed ($15/mo) or FreshBooks ($17/mo). Both categorize expenses automatically from bank feeds and generate tax-ready reports.</li>
+              <li><strong>S-Corps &amp; businesses with employees:</strong> QuickBooks Online ($30+/mo) or Xero ($15+/mo). Full double-entry accounting, payroll integration, and multi-user access for your accountant.</li>
+              <li><strong>Receipt tracking:</strong> Use your phone. Take a photo of every receipt immediately. Apps like Dext (formerly Receipt Bank) or even the built-in camera with a dedicated "Receipts" folder work fine. The goal is to never lose a receipt.</li>
+            </ul>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">The Weekly Bookkeeping Habit</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Set aside 30 minutes every week (Friday afternoon works well) to categorize transactions and file receipts. This one habit prevents the December scramble where you're digging through a shoebox of receipts. Thirty minutes weekly is far less painful than 30 hours in January.
+              </p>
+            </div>
+          </section>
+
+          <!-- Year-End Tax Strategies -->
+          <section id="year-end-strategies" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Year-End Tax Strategies</h2>
+
+            <p class="mb-4">
+              The last quarter of the year is when tax planning pays its biggest dividends. You have a clear picture of your annual income, and there's still time to take action. Here are strategies that can meaningfully reduce your tax bill:
+            </p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Defer Income</h3>
+
+            <p class="mb-4">
+              If you're a cash-basis taxpayer (most small businesses are), you're taxed on income when you receive it, not when you earn it. In November and December, consider:
+            </p>
+
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Delay invoicing:</strong> Send invoices in late December so payments arrive in January. You defer the income to the next tax year.</li>
+              <li><strong>Delay project completion:</strong> If a large project wraps up in December, see if the final milestone payment can be scheduled for early January.</li>
+              <li><strong>Be strategic, not greedy:</strong> Only defer income if you expect to be in the same or lower tax bracket next year. If your income is growing rapidly, deferral could actually cost you more if you land in a higher bracket.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Accelerate Deductions</h3>
+
+            <p class="mb-4">
+              The flip side of deferring income: pull deductible expenses into the current year.
+            </p>
+
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Buy equipment before Dec 31:</strong> That new laptop, software subscription, or office furniture? Buy it now to claim the Section 179 deduction this year.</li>
+              <li><strong>Prepay expenses:</strong> Pay January rent in December, renew annual subscriptions, stock up on supplies. The IRS generally allows you to prepay and deduct up to 12 months of expenses.</li>
+              <li><strong>Pay outstanding bills:</strong> Any business bills sitting in your inbox? Pay them before year-end so they count as this year's expenses.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Max Out Retirement Contributions</h3>
+
+            <p class="mb-4">
+              Retirement contributions are the most powerful year-end strategy because the amounts are so large. If you haven't maxed out your contributions, this is the time:
+            </p>
+
+            <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)] mb-6">
+              <h4 class="font-semibold mb-3">2026 Contribution Limits</h4>
+              <div class="space-y-2 text-sm font-mono">
+                <p>Solo 401(k) employee: $23,500 ($31,000 if 50+)</p>
+                <p>Solo 401(k) total: $70,000 ($77,500 if 50+)</p>
+                <p>SEP-IRA: 25% of net SE income, up to $70,000</p>
+                <p>SIMPLE IRA: $16,500 ($20,000 if 50+)</p>
+                <p class="border-t border-[var(--color-border)] pt-2 mt-2 font-sans">
+                  <strong>Deadline:</strong> Solo 401(k) employee contributions must be made by Dec 31. Employer contributions and SEP-IRA contributions can be made until your tax filing deadline (April 15, or October 15 with extension).
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mb-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">Year-End Dollar Impact</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Let's say you earn $80,000 and haven't made any retirement contributions yet. You contribute $23,500 to your Solo 401(k) before December 31st. Your taxable income drops to $56,500. At the 22% bracket, that contribution saves you $5,170 in federal income tax&mdash;plus about $3,595 in self-employment tax (the deductible half). Total immediate savings: roughly $8,765. And the money grows tax-deferred for retirement.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Other Year-End Moves</h3>
+
+            <ul class="list-disc list-inside space-y-2 mb-6 text-[var(--color-muted)]">
+              <li><strong>Review estimated payments:</strong> Run your numbers in November. If you're short, you can increase your Q4 estimated payment (due January 15) to avoid penalties.</li>
+              <li><strong>Harvest investment losses:</strong> If you have taxable brokerage accounts, sell losing positions to offset gains. You can deduct up to $3,000 in net capital losses against ordinary income.</li>
+              <li><strong>Charitable contributions:</strong> If you itemize deductions, charitable donations reduce your taxable income. Consider donating appreciated stock directly to avoid capital gains tax.</li>
+              <li><strong>HSA contributions:</strong> If you have a high-deductible health plan, max out your Health Savings Account ($4,300 individual, $8,550 family for 2026). Triple tax benefit: deductible going in, grows tax-free, tax-free withdrawals for medical expenses.</li>
+              <li><strong>Review your business structure:</strong> December is the time to evaluate whether switching to an S-Corp makes sense for next year. The Form 2553 election is generally due by March 15 for the current tax year.</li>
+            </ul>
+          </section>
+
+          <!-- Related Guides & Tools -->
+          <aside class="mt-12 pt-8 border-t border-[var(--color-border)]">
+            <h3 class="font-semibold mb-4">Related Guides & Tools</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <a href="/guides/profit-margins" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">Understanding Profit Margins</div>
+                <div class="text-sm text-[var(--color-muted)]">See how tax savings impact your bottom line</div>
+              </a>
+              <a href="/guides/cash-flow-basics" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">Cash Flow Basics</div>
+                <div class="text-sm text-[var(--color-muted)]">Manage cash flow around quarterly tax payments</div>
+              </a>
+              <a href="/tools/profit-margin" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">Profit Margin Calculator</div>
+                <div class="text-sm text-[var(--color-muted)]">Calculate gross, operating, and net margins</div>
+              </a>
+              <a href="/tools/roi" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">ROI Calculator</div>
+                <div class="text-sm text-[var(--color-muted)]">Model the ROI of switching business structures</div>
+              </a>
+            </div>
+
+            <!-- Business Gifts CTA -->
+            <div class="mt-6 p-5 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+              <h4 class="font-semibold mb-2">Level Up Your Business Skills</h4>
+              <p class="text-sm text-[var(--color-muted)] mb-3">
+                Online learning platforms are a tax-deductible business expense. Invest in skills that improve your margins.
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <a href="https://giftegy.com/reviews/masterclass" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors" target="_blank" rel="noopener">MasterClass</a>
+                <a href="https://giftegy.com/reviews/skillshare" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors" target="_blank" rel="noopener">Skillshare</a>
+                <a href="https://giftegy.com/guides/gifts-for-creatives" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors" target="_blank" rel="noopener">More business tools &rarr;</a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- CTA -->
+          <section class="mt-12 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center">
+            <h3 class="text-xl font-semibold mb-3">Calculate Your Tax Impact</h3>
+            <p class="text-[var(--color-muted)] mb-4">
+              See how deductions and business structure changes affect your profitability with our free calculators.
+            </p>
+            <a href="/tools/profit-margin" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+              Try Profit Margin Calculator
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </section>
+
+          <!-- Disclaimer -->
+          <div class="mt-10 p-4 border border-[var(--color-border)] rounded-lg text-xs text-[var(--color-muted)]">
+            <strong>Disclaimer:</strong> This guide is for educational purposes only and does not constitute professional tax, legal, or financial advice. Tax laws change frequently and individual situations vary. Always consult a qualified tax professional or CPA before making tax planning decisions. SmallBizCalc is not responsible for actions taken based on this information. IRS figures cited are for the 2026 tax year and may be subject to adjustment.
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://smallbizcalc.com/guides/" },
+      { "@type": "ListItem", "position": 3, "name": "Tax Planning for Small Business", "item": "https://smallbizcalc.com/guides/tax-planning" }
+    ]
+  })} />
+</Base>

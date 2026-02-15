@@ -32,19 +32,23 @@ const guides = [
     description: 'Why profitable businesses fail and how to manage cash flow to avoid running out of money.',
     tag: 'Critical',
     readTime: '10 min'
+  },
+  {
+    href: '/guides/financial-ratios',
+    title: 'Financial Ratios Every Owner Should Know',
+    description: 'Key ratios every business owner should track and what they tell you about your business health.',
+    tag: 'Advanced',
+    readTime: '12 min'
+  },
+  {
+    href: '/guides/tax-planning',
+    title: 'Tax Planning for Small Business',
+    description: 'Quarterly tax strategies, deductions, and how to avoid surprises at tax time.',
+    tag: 'Essential',
+    readTime: '14 min'
   }
 ];
 
-const comingSoon = [
-  {
-    title: 'Financial Ratios Explained',
-    description: 'Key ratios every business owner should track and what they tell you about your business health.'
-  },
-  {
-    title: 'Tax Planning for Small Business',
-    description: 'Quarterly tax strategies, deductions, and how to avoid surprises at tax time.'
-  }
-];
 ---
 
 <Base title={title} description={description}>
@@ -82,21 +86,6 @@ const comingSoon = [
           </a>
         ))}
       </div>
-
-      <!-- Coming Soon -->
-      {comingSoon.length > 0 && (
-        <div class="mt-12">
-          <h2 class="text-lg font-semibold mb-4 text-[var(--color-muted)]">Coming Soon</h2>
-          <div class="space-y-4">
-            {comingSoon.map(guide => (
-              <div class="card p-4 opacity-60">
-                <h3 class="font-medium mb-1">{guide.title}</h3>
-                <p class="text-sm text-[var(--color-muted)]">{guide.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       <!-- CTA -->
       <div class="mt-12 card p-8 text-center bg-emerald-500/5 border-emerald-500/20">

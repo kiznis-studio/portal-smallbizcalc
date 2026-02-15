@@ -50,7 +50,6 @@ const calculators = [
 ];
 
 const liveCalcs = calculators.filter(c => c.status === 'live');
-const comingCalcs = calculators.filter(c => c.status === 'coming');
 
 const icons = {
   'chart-pie': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />',
@@ -92,30 +91,6 @@ const icons = {
         </a>
       ))}
     </div>
-
-    <!-- Coming Soon -->
-    {comingCalcs.length > 0 && (
-      <div>
-        <h2 class="text-2xl font-bold mb-6 text-center">Coming Soon</h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {comingCalcs.map(calc => (
-            <div class="card p-6 opacity-60">
-              <div class="w-12 h-12 rounded-lg bg-[var(--color-card)] flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-[var(--color-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <Fragment set:html={icons[calc.icon]} />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">
-                {calc.title}
-              </h3>
-              <p class="text-sm text-[var(--color-muted)]">
-                {calc.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    )}
 
     <!-- CTA -->
     <div class="mt-16 text-center">

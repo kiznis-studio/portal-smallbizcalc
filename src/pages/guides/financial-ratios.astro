@@ -1,0 +1,604 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = "Financial Ratios Every Small Business Owner Should Know";
+const description = "Learn the key financial ratios that reveal your business health. Current ratio, quick ratio, debt-to-equity, ROI, and more — with formulas and benchmarks.";
+const publishedDate = "2026-02-15";
+const modifiedDate = "2026-02-15";
+
+const tableOfContents = [
+  { id: 'why-ratios-matter', label: 'Why Financial Ratios Matter' },
+  { id: 'liquidity-ratios', label: 'Liquidity Ratios' },
+  { id: 'profitability-ratios', label: 'Profitability Ratios' },
+  { id: 'leverage-ratios', label: 'Leverage Ratios' },
+  { id: 'efficiency-ratios', label: 'Efficiency Ratios' },
+  { id: 'using-ratios-together', label: 'Using Ratios Together' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishedDate}
+  modifiedTime={modifiedDate}
+  author="SmallBizCalc"
+  section="Financial Guides"
+  tags={["financial ratios", "business metrics", "current ratio", "debt-to-equity", "small business finance"]}
+>
+  <article class="py-8 md:py-12">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-[var(--color-foreground)]">Guides</a>
+            <span>/</span>
+            <span>Financial Guides</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">{title}</h1>
+
+          <div class="flex items-center gap-4 text-sm text-[var(--color-muted)]">
+            <time datetime={publishedDate}>Updated Feb 2026</time>
+            <span>&middot;</span>
+            <span>12 min read</span>
+          </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="mb-10 p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+          <div class="font-semibold mb-3">In This Guide</div>
+          <ul class="space-y-2 text-sm">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-[var(--color-muted)] hover:text-[var(--color-accent)]">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Content -->
+        <div class="prose prose-lg max-w-none">
+          <!-- Intro -->
+          <p class="lead text-xl text-[var(--color-muted)] mb-8">
+            Your income statement tells you if you made money last month. Your balance sheet tells you what you own and owe. But financial ratios tell you the <em>story</em> behind those numbers — whether your business is healthy, getting stronger, or quietly heading toward trouble. You don't need an accounting degree to use them. You just need to know which ones matter and what they're telling you.
+          </p>
+
+          <!-- Why Ratios Matter -->
+          <section id="why-ratios-matter" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Why Financial Ratios Matter</h2>
+
+            <p class="mb-4">
+              Raw financial numbers are hard to interpret in isolation. Your business did $800,000 in revenue last year — is that good? You have $50,000 in debt — is that dangerous? You carry $120,000 in inventory — is that too much? Financial ratios turn these raw numbers into meaningful context by comparing one figure against another.
+            </p>
+
+            <p class="mb-4">
+              Think of ratios like vital signs at a doctor's office. Your blood pressure as a single number doesn't mean much, but compared against healthy ranges, it tells the doctor whether to relax or run more tests. Financial ratios work the same way. A current ratio of 2.5 tells you immediately that you have solid short-term liquidity. A debt-to-equity ratio of 4.0 tells you that you're heavily leveraged and vulnerable to downturns.
+            </p>
+
+            <p class="mb-4">
+              Ratios are especially powerful for three purposes: <strong>tracking trends over time</strong> (is your business getting healthier or weaker quarter by quarter?), <strong>comparing against industry benchmarks</strong> (how do you stack up against competitors?), and <strong>making decisions</strong> (should you take on more debt, hire more staff, or build up cash reserves?).
+            </p>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mb-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">When to Calculate Your Ratios</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                At minimum, calculate key ratios quarterly when you review financial statements. Monthly is better if your business has seasonal swings or you're in a growth phase. If you're applying for a loan or pitching investors, expect them to calculate these ratios themselves — know your numbers before they do.
+              </p>
+            </div>
+          </section>
+
+          <!-- Liquidity Ratios -->
+          <section id="liquidity-ratios" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Liquidity Ratios</h2>
+
+            <p class="mb-4">
+              Liquidity ratios answer a critical question: can you pay your bills? They measure your ability to cover short-term obligations — the invoices, loan payments, payroll, and expenses due in the next 12 months. A profitable business can still fail if it runs out of cash, so liquidity is arguably the most important category for small business owners to monitor.
+            </p>
+
+            <div class="space-y-6">
+              <!-- Current Ratio -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Current Ratio</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  The most widely used liquidity measure. It compares everything you could convert to cash within a year (current assets) against everything you owe within a year (current liabilities). Current assets include cash, accounts receivable, inventory, and prepaid expenses. Current liabilities include accounts payable, short-term loans, and upcoming debt payments.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Current Ratio = Current Assets &divide; Current Liabilities
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Sarah's bakery has $80,000 in current assets (cash, receivables, ingredient inventory) and $40,000 in current liabilities (supplier invoices, short-term loan payments). Current ratio = $80,000 &divide; $40,000 = <strong>2.0</strong>
+                </p>
+                <div class="mt-3 text-sm">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">Healthy:</span> 1.5 to 3.0 &nbsp;|&nbsp;
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">Watch:</span> 1.0 to 1.5 &nbsp;|&nbsp;
+                  <span class="text-red-600 dark:text-red-400 font-medium">Danger:</span> Below 1.0
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  A ratio below 1.0 means you owe more in the short term than you have available — a cash crunch is looming. Above 3.0 might mean you have too much idle cash or unsold inventory that could be put to better use.
+                </p>
+              </div>
+
+              <!-- Quick Ratio -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Quick Ratio (Acid Test)</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  A stricter version of the current ratio. It excludes inventory because inventory can be hard to sell quickly (especially perishable goods, seasonal items, or slow-moving stock). This gives you a more conservative picture of your ability to pay short-term debts.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Quick Ratio = (Current Assets - Inventory) &divide; Current Liabilities
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Sarah's bakery has $80,000 in current assets, but $25,000 of that is flour, sugar, and packaging inventory. Quick ratio = ($80,000 - $25,000) &divide; $40,000 = <strong>1.375</strong>
+                </p>
+                <div class="mt-3 text-sm">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">Healthy:</span> Above 1.0 &nbsp;|&nbsp;
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">Watch:</span> 0.5 to 1.0 &nbsp;|&nbsp;
+                  <span class="text-red-600 dark:text-red-400 font-medium">Danger:</span> Below 0.5
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  The quick ratio matters most for businesses with large inventory (retail, manufacturing, food service). If your business is service-based with little inventory, the current and quick ratios will be nearly identical.
+                </p>
+              </div>
+
+              <!-- Working Capital -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Working Capital</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Not technically a ratio but a dollar amount that shows your short-term financial cushion. It tells you how much money you'd have left if you paid off every short-term obligation today. Lenders look at this number closely.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Working Capital = Current Assets - Current Liabilities
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Sarah's bakery: $80,000 - $40,000 = <strong>$40,000</strong> in working capital. That's a $40,000 buffer to handle unexpected expenses, slow months, or growth opportunities.
+                </p>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  Negative working capital is a red flag — it means you'd need to borrow or sell long-term assets to cover what's due soon. Track this monthly and watch the trend. Declining working capital, even if still positive, signals trouble ahead.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Profitability Ratios -->
+          <section id="profitability-ratios" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Profitability Ratios</h2>
+
+            <p class="mb-4">
+              Profitability ratios measure how effectively your business generates profit from its operations. While revenue tells you how much you sell, these ratios tell you how much you actually <em>keep</em>. They're essential for comparing your performance against competitors and tracking whether your business is becoming more or less efficient over time.
+            </p>
+
+            <div class="space-y-6">
+              <!-- Gross Margin -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Gross Profit Margin</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Shows the percentage of revenue left after paying direct production costs (materials, labor to make the product, manufacturing overhead). This is your first-line profitability measure and tells you whether your core pricing and production are healthy.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Gross Margin = (Revenue - COGS) &divide; Revenue &times; 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Mike's retail store does $300,000 in revenue. His cost of goods (wholesale purchases, shipping to store) is $180,000. Gross margin = ($300,000 - $180,000) &divide; $300,000 = <strong>40%</strong>
+                </p>
+                <div class="mt-3 text-sm text-[var(--color-muted)]">
+                  <strong>Benchmarks:</strong> Software 70-85%, professional services 50-70%, retail 25-50%, grocery 25-30%, restaurants 60-70%. Read our <a href="/guides/profit-margins" class="text-emerald-600 dark:text-emerald-400 hover:underline">profit margins guide</a> for detailed industry breakdowns.
+                </div>
+              </div>
+
+              <!-- Net Margin -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Net Profit Margin</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  The bottom line — what percentage of every dollar in revenue you actually keep after <em>all</em> expenses: COGS, operating costs, interest, and taxes. This is the ratio most people mean when they say "profit margin."
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Net Margin = Net Income &divide; Revenue &times; 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Mike's store has $300,000 in revenue and $258,000 in total expenses (COGS + rent + salaries + taxes + everything else). Net income = $42,000. Net margin = $42,000 &divide; $300,000 = <strong>14%</strong>
+                </p>
+                <div class="mt-3 text-sm text-[var(--color-muted)]">
+                  <strong>Benchmarks:</strong> Software 15-25%, professional services 10-20%, retail 2-5%, grocery 1-3%. A shrinking gap between gross and net margin means your overhead is growing faster than revenue — a common trap in scaling businesses.
+                </div>
+              </div>
+
+              <!-- ROI -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Return on Investment (ROI)</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Measures the return generated from a specific investment, whether that's a marketing campaign, a new piece of equipment, or a business expansion. ROI helps you compare different investment options and decide where to put your money.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  ROI = (Net Profit from Investment - Cost of Investment) &divide; Cost of Investment &times; 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Mike spends $5,000 on a Google Ads campaign that generates $18,000 in sales with $10,800 in COGS. Net profit = $18,000 - $10,800 - $5,000 = $2,200. ROI = $2,200 &divide; $5,000 = <strong>44%</strong>
+                </p>
+                <div class="mt-3 text-sm text-[var(--color-muted)]">
+                  Any positive ROI means you made money on the investment. But compare it against alternatives — if a savings account earns 5% and your marketing campaign returns 8%, the campaign is better but not by much once you factor in risk and effort.
+                </div>
+              </div>
+
+              <!-- ROE -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Return on Equity (ROE)</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Shows how efficiently you're using the money you (and any other owners) have invested in the business. It answers: for every dollar of owner investment, how much profit does the business generate?
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  ROE = Net Income &divide; Owner's Equity &times; 100
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Mike invested $150,000 to start his store (equipment, initial inventory, buildout). After a year, net income is $42,000. ROE = $42,000 &divide; $150,000 = <strong>28%</strong>
+                </p>
+                <div class="mt-3 text-sm">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">Strong:</span> Above 15% &nbsp;|&nbsp;
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">Average:</span> 10-15% &nbsp;|&nbsp;
+                  <span class="text-red-600 dark:text-red-400 font-medium">Weak:</span> Below 10%
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  If your ROE is consistently below what you could earn in index funds (roughly 8-10% historically), you might be better off investing your capital elsewhere — at least financially. Many business owners accept lower ROE for the autonomy and fulfillment of running their own company, which is a valid choice.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+              <p class="text-sm">
+                <strong>Run the numbers:</strong> Use our <a href="/tools/profit-margin" class="text-emerald-600 dark:text-emerald-400 hover:underline">Profit Margin Calculator</a> to calculate gross and net margins instantly, or our <a href="/tools/roi" class="text-emerald-600 dark:text-emerald-400 hover:underline">ROI Calculator</a> to evaluate specific investments with payback period analysis.
+              </p>
+            </div>
+          </section>
+
+          <!-- Leverage Ratios -->
+          <section id="leverage-ratios" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Leverage Ratios</h2>
+
+            <p class="mb-4">
+              Leverage ratios reveal how much your business relies on debt versus equity (owner's money) to finance its operations. Debt isn't inherently bad — it lets you grow faster than self-funding alone. But too much debt creates fragility. If revenue dips or interest rates rise, heavily leveraged businesses are the first to struggle.
+            </p>
+
+            <p class="mb-4">
+              Lenders scrutinize leverage ratios before approving loans. If your ratios show you're already carrying heavy debt, getting additional financing becomes harder and more expensive. Knowing these numbers before you walk into a bank puts you in a stronger position.
+            </p>
+
+            <div class="space-y-6">
+              <!-- Debt-to-Equity -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Debt-to-Equity Ratio</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Compares total debt to owner's equity, showing how much of your business is financed by borrowing versus owner investment. It's the single most-watched leverage metric by banks and investors.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Debt-to-Equity = Total Liabilities &divide; Owner's Equity
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Lisa's consulting firm has $60,000 in total liabilities (small business loan + credit card balance + accounts payable) and $200,000 in equity (her original investment plus retained earnings). Debt-to-equity = $60,000 &divide; $200,000 = <strong>0.3</strong>
+                </p>
+                <div class="mt-3 text-sm">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">Conservative:</span> Below 1.0 &nbsp;|&nbsp;
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">Moderate:</span> 1.0 to 2.0 &nbsp;|&nbsp;
+                  <span class="text-red-600 dark:text-red-400 font-medium">Aggressive:</span> Above 2.0
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  A ratio of 0.3 means Lisa has borrowed $0.30 for every $1.00 of equity — very conservative. A ratio above 2.0 means the business owes more than twice what the owners have put in, which makes the business vulnerable to revenue swings. Capital-intensive industries (manufacturing, real estate) naturally run higher ratios than service businesses.
+                </p>
+              </div>
+
+              <!-- Debt Ratio -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Debt Ratio</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Shows what percentage of your total assets are financed by debt. While debt-to-equity compares debt to what owners put in, the debt ratio compares debt to everything the business owns.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Debt Ratio = Total Liabilities &divide; Total Assets
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Lisa's firm has $60,000 in liabilities and $260,000 in total assets (cash, equipment, receivables). Debt ratio = $60,000 &divide; $260,000 = <strong>0.23</strong> (or 23%)
+                </p>
+                <div class="mt-3 text-sm">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">Low risk:</span> Below 40% &nbsp;|&nbsp;
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">Moderate:</span> 40-60% &nbsp;|&nbsp;
+                  <span class="text-red-600 dark:text-red-400 font-medium">High risk:</span> Above 60%
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  A debt ratio of 23% means creditors have financed less than a quarter of Lisa's assets — the rest is owner-funded. The lower this number, the more financial flexibility you have to weather downturns or take on strategic debt when opportunity arises.
+                </p>
+              </div>
+
+              <!-- Interest Coverage -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Interest Coverage Ratio</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Measures how easily you can pay the interest on your debt from operating earnings. This is the ratio that tells you if your debt load is manageable or suffocating. Banks often require a minimum interest coverage ratio as a loan covenant.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Interest Coverage = Operating Income (EBIT) &divide; Interest Expense
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Lisa's firm earns $85,000 in operating income and pays $8,000 per year in interest on her business loan. Interest coverage = $85,000 &divide; $8,000 = <strong>10.6</strong>
+                </p>
+                <div class="mt-3 text-sm">
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">Comfortable:</span> Above 3.0 &nbsp;|&nbsp;
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">Tight:</span> 1.5 to 3.0 &nbsp;|&nbsp;
+                  <span class="text-red-600 dark:text-red-400 font-medium">Danger:</span> Below 1.5
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  Lisa can cover her interest payments 10.6 times over from operations — very comfortable. A ratio below 1.5 means that a modest revenue dip could make it hard to service debt. Below 1.0, you're not earning enough to cover interest alone, which means you're digging a deeper hole every month.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mt-6">
+              <div class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">A Note on "Good" Debt</div>
+              <p class="text-sm text-[var(--color-muted)]">
+                Borrowing to invest in equipment that increases production, inventory that meets proven demand, or marketing with trackable ROI can accelerate growth. The key test: does the borrowed money generate returns that exceed the interest cost? If yes, leverage is working for you. If no, you're paying interest to lose money faster.
+              </p>
+            </div>
+          </section>
+
+          <!-- Efficiency Ratios -->
+          <section id="efficiency-ratios" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Efficiency Ratios</h2>
+
+            <p class="mb-4">
+              Efficiency ratios (also called activity ratios) measure how well you use your assets to generate revenue. They expose operational bottlenecks — slow-moving inventory, customers who pay late, or underused equipment. These are the ratios that translate directly into actionable improvements.
+            </p>
+
+            <p class="mb-4">
+              While profitability tells you <em>what</em> you're earning, efficiency tells you <em>how well</em> you're running the machine. Two businesses with identical profit margins can have wildly different efficiency ratios, and the more efficient one will almost always be in a stronger position long-term.
+            </p>
+
+            <div class="space-y-6">
+              <!-- Inventory Turnover -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Inventory Turnover</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  How many times per year you sell through your entire inventory. A higher number means you're selling products quickly; a lower number means stock is sitting on shelves, tying up cash and potentially losing value.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Inventory Turnover = Cost of Goods Sold &divide; Average Inventory
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Mike's retail store has $180,000 in COGS and carries an average of $30,000 in inventory. Turnover = $180,000 &divide; $30,000 = <strong>6.0 times per year</strong> (or roughly every 2 months)
+                </p>
+                <div class="mt-3 text-sm text-[var(--color-muted)]">
+                  <strong>Benchmarks:</strong> Grocery 12-15 times/year, retail 4-8, manufacturing 4-6, luxury goods 2-4. Low turnover means dead capital sitting on shelves; extremely high turnover could mean you're understocked and missing sales.
+                </p>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  To convert to days: 365 &divide; turnover rate = days of inventory. Mike sells through inventory every 61 days. If that creeps up to 90 or 120 days, he should investigate which products are sitting and consider markdowns or discontinuation.
+                </p>
+              </div>
+
+              <!-- Receivables Turnover -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Accounts Receivable Turnover</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  How quickly customers pay their invoices. Critical for businesses that extend credit (B2B services, wholesale, construction). Slow-paying customers are borrowing from you interest-free, which strains your cash flow.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  AR Turnover = Net Credit Sales &divide; Average Accounts Receivable
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Lisa's consulting firm bills $400,000 per year and has an average of $50,000 in outstanding invoices. AR turnover = $400,000 &divide; $50,000 = <strong>8.0 times per year</strong>
+                </p>
+                <div class="mt-3 text-sm text-[var(--color-muted)]">
+                  <strong>Days Sales Outstanding (DSO):</strong> 365 &divide; 8.0 = <strong>46 days</strong> average collection time. If Lisa's payment terms are Net 30, she's getting paid about two weeks late on average. Time to follow up on aging invoices or tighten credit policies.
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  For businesses with cash-only sales (retail, restaurants, e-commerce), receivables turnover isn't relevant — your cash conversion is immediate, which is a significant advantage.
+                </p>
+              </div>
+
+              <!-- Asset Turnover -->
+              <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]">
+                <h3 class="font-semibold text-lg mb-2">Asset Turnover</h3>
+                <p class="text-sm text-[var(--color-muted)] mb-3">
+                  Shows how efficiently you use your total assets to generate revenue. It answers: for every dollar invested in assets, how many dollars of revenue do you produce? This is especially useful for comparing businesses of different sizes within the same industry.
+                </p>
+                <div class="bg-[var(--color-background)] p-3 rounded font-mono text-sm">
+                  Asset Turnover = Revenue &divide; Total Assets
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-3">
+                  <strong>Example:</strong> Mike's store generates $300,000 in revenue with $200,000 in total assets (inventory, fixtures, equipment, cash). Asset turnover = $300,000 &divide; $200,000 = <strong>1.5</strong>
+                </p>
+                <div class="mt-3 text-sm text-[var(--color-muted)]">
+                  <strong>Benchmarks:</strong> Retail and grocery typically 2.0-3.0 (low margins, high volume), software 0.5-1.0 (high margins, fewer assets), manufacturing 0.5-1.5. Service businesses often have high asset turnover because they need relatively few assets to generate revenue.
+                </div>
+                <p class="text-sm text-[var(--color-muted)] mt-2">
+                  An asset turnover of 1.5 means Mike generates $1.50 in revenue for every dollar of assets. If he buys $50,000 in new equipment, he should expect it to help generate at least $75,000 in additional revenue to maintain his current efficiency.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Using Ratios Together -->
+          <section id="using-ratios-together" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Using Ratios Together</h2>
+
+            <p class="mb-4">
+              Individual ratios are useful, but they become truly powerful when you read them together. A single ratio can be misleading — a high ROE might look great until you realize it's driven by massive debt rather than operational excellence. Looking at a cluster of ratios gives you the full picture.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">The Quick Health Check (5 Ratios)</h3>
+
+            <p class="mb-4">
+              You don't need to calculate all of these ratios every month. For a quick health check, focus on these five. They cover liquidity, profitability, leverage, and efficiency in about 10 minutes of work:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <th class="text-left py-3 px-4">Ratio</th>
+                    <th class="text-left py-3 px-4">What It Tells You</th>
+                    <th class="text-center py-3 px-4">Target</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium">Current Ratio</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Can I pay my bills?</td>
+                    <td class="text-center py-3 px-4">1.5 - 3.0</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium">Net Profit Margin</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Am I actually making money?</td>
+                    <td class="text-center py-3 px-4">Industry avg+</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium">Debt-to-Equity</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Am I overleveraged?</td>
+                    <td class="text-center py-3 px-4">Below 2.0</td>
+                  </tr>
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium">Receivables Turnover</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Are customers paying on time?</td>
+                    <td class="text-center py-3 px-4">Within terms</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4 font-medium">ROE</td>
+                    <td class="py-3 px-4 text-[var(--color-muted)]">Is my capital well deployed?</td>
+                    <td class="text-center py-3 px-4">Above 15%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Reading the Story</h3>
+
+            <p class="mb-4">
+              Here's how ratios work together in practice. Imagine you're reviewing quarterly numbers for a small retail business and you see:
+            </p>
+
+            <div class="p-5 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)] mb-6">
+              <h4 class="font-semibold mb-3">Scenario: Retail Business Quarterly Review</h4>
+              <div class="space-y-2 text-sm">
+                <p><strong>Current Ratio:</strong> 1.2 (down from 1.8 last quarter)</p>
+                <p><strong>Inventory Turnover:</strong> 3.0 (down from 5.0 last quarter)</p>
+                <p><strong>Gross Margin:</strong> 38% (stable)</p>
+                <p><strong>Net Margin:</strong> 4% (down from 8%)</p>
+                <p><strong>Debt-to-Equity:</strong> 1.8 (up from 1.2)</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[var(--color-border)] text-sm text-[var(--color-muted)]">
+                <strong>The story:</strong> Inventory is piling up (turnover dropped from 5 to 3), which is tying up cash (current ratio fell) and was likely financed with debt (D/E rose). Gross margin is stable, so pricing isn't the issue — but the extra carrying costs and interest are eating into net margin. <strong>Action:</strong> Run a clearance sale to move stale inventory, slow down purchasing, and use the freed-up cash to pay down the new debt.
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Common Ratio Patterns and What They Mean</h3>
+
+            <div class="space-y-4">
+              <div class="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-lg">
+                <h4 class="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">Healthy Growth</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Revenue rising, margins stable or improving, current ratio steady, debt-to-equity stable or falling. The business is growing without sacrificing financial health. Keep doing what you're doing.
+                </p>
+              </div>
+
+              <div class="p-4 bg-amber-500/5 border border-amber-500/20 rounded-lg">
+                <h4 class="font-semibold text-amber-700 dark:text-amber-400 mb-2">Growth at a Cost</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Revenue rising fast, but margins falling, current ratio declining, and debt-to-equity climbing. You're growing by spending aggressively. This can work short-term but is unsustainable. Focus on converting revenue growth into margin improvement before the debt catches up.
+                </p>
+              </div>
+
+              <div class="p-4 bg-red-500/5 border border-red-500/20 rounded-lg">
+                <h4 class="font-semibold text-red-700 dark:text-red-400 mb-2">Silent Decline</h4>
+                <p class="text-sm text-[var(--color-muted)]">
+                  Revenue stable, but current ratio falling, receivables turnover slowing, and working capital shrinking. The top line looks fine, but cash is quietly draining. Investigate: are customers paying slower? Are costs creeping up? Is inventory accumulating? Catch this early or it becomes a crisis.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-3">Industry Context Matters</h3>
+
+            <p class="mb-4">
+              Always compare your ratios against others in your industry, not against generic targets. A SaaS company with an inventory turnover of 0 and a debt-to-equity of 0.1 isn't comparable to a manufacturing firm with turnover of 6 and D/E of 1.5. Both can be perfectly healthy — they just operate in different realities.
+            </p>
+
+            <p class="mb-4">
+              The best sources for small business benchmarks are industry associations, the Annual Statement Studies by RMA (Risk Management Association), and IRS SOI (Statistics of Income) data, which publishes average financial ratios by industry and revenue bracket. Your accountant or bookkeeper should be able to help you find the right benchmarks for your specific business.
+            </p>
+          </section>
+
+          <!-- Related Guides & Tools -->
+          <aside class="mt-12 pt-8 border-t border-[var(--color-border)]">
+            <h3 class="font-semibold mb-4">Related Guides & Tools</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <a href="/tools/profit-margin" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">Profit Margin Calculator</div>
+                <div class="text-sm text-[var(--color-muted)]">Calculate gross, operating, and net margins instantly</div>
+              </a>
+              <a href="/tools/roi" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">ROI Calculator</div>
+                <div class="text-sm text-[var(--color-muted)]">Evaluate investments with payback period analysis</div>
+              </a>
+              <a href="/guides/profit-margins" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">Understanding Profit Margins</div>
+                <div class="text-sm text-[var(--color-muted)]">Deep dive into gross, operating, and net margins</div>
+              </a>
+              <a href="/guides/cash-flow-basics" class="p-4 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+                <div class="font-semibold text-[var(--color-foreground)]">Cash Flow Basics</div>
+                <div class="text-sm text-[var(--color-muted)]">Why profitable businesses fail and how to avoid it</div>
+              </a>
+            </div>
+
+            <!-- Business Gifts CTA -->
+            <div class="mt-6 p-5 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+              <h4 class="font-semibold mb-2">Level Up Your Business Skills</h4>
+              <p class="text-sm text-[var(--color-muted)] mb-3">
+                Online learning platforms are a tax-deductible business expense. Invest in skills that improve your financial literacy.
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <a href="https://giftegy.com/reviews/masterclass" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors" target="_blank" rel="noopener">MasterClass</a>
+                <a href="https://giftegy.com/reviews/skillshare" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors" target="_blank" rel="noopener">Skillshare</a>
+                <a href="https://giftegy.com/guides/gifts-for-creatives" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-emerald-500/50 transition-colors" target="_blank" rel="noopener">More business tools &rarr;</a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Disclaimer -->
+          <div class="mt-8 p-4 bg-[var(--color-card)] rounded-lg border border-[var(--color-border)] text-xs text-[var(--color-muted)]">
+            <strong>Disclaimer:</strong> This guide is for educational purposes only and does not constitute professional financial, accounting, or legal advice. Financial ratios vary significantly by industry, business size, and context. Consult a qualified accountant or financial advisor for guidance specific to your business situation.
+          </div>
+
+          <!-- CTA -->
+          <section class="mt-12 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center">
+            <h3 class="text-xl font-semibold mb-3">Calculate Your Ratios</h3>
+            <p class="text-[var(--color-muted)] mb-4">
+              Start with our free calculators to run the numbers for your specific business.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a href="/tools/profit-margin" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                Profit Margin Calculator
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="/tools/roi" class="inline-flex items-center gap-2 bg-[var(--color-surface)] hover:bg-[var(--color-card)] border border-[var(--color-border)] font-medium py-3 px-6 rounded-lg transition-colors">
+                ROI Calculator
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://smallbizcalc.com/guides/" },
+      { "@type": "ListItem", "position": 3, "name": "Financial Ratios Explained", "item": "https://smallbizcalc.com/guides/financial-ratios" }
+    ]
+  })} />
+</Base>
