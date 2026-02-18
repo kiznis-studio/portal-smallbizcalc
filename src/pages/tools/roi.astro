@@ -419,11 +419,11 @@ const description = "Calculate return on investment for business decisions, mark
     // Update results
     if (roiPercentageEl) {
       roiPercentageEl.textContent = formatPercent(roi);
-      roiPercentageEl.className = roi >= 0 ? 'text-3xl font-bold text-emerald-500' : 'text-3xl font-bold text-red-500';
+      roiPercentageEl.className = roi >= 0 ? 'text-3xl font-bold text-emerald-500' : 'text-3xl font-bold text-amber-600 dark:text-amber-400';
     }
     if (netProfitEl) {
       netProfitEl.textContent = formatCurrency(netProfit);
-      netProfitEl.className = netProfit >= 0 ? 'text-3xl font-bold text-emerald-500' : 'text-3xl font-bold text-red-500';
+      netProfitEl.className = netProfit >= 0 ? 'text-3xl font-bold text-emerald-500' : 'text-3xl font-bold text-amber-600 dark:text-amber-400';
     }
     if (paybackPeriodEl) {
       if (paybackMonths === Infinity || paybackMonths > 1000) {
@@ -467,7 +467,7 @@ const description = "Calculate return on investment for business decisions, mark
         verdictMessage.textContent = 'You\'ll make money, but the return is below typical business investment benchmarks. Consider if there are better uses for this capital.';
       } else {
         verdictCard.className = 'card p-5 mb-6 bg-red-500/10 border-red-500/30';
-        if (iconSvg) iconSvg.setAttribute('class', 'w-5 h-5 text-red-500');
+        if (iconSvg) iconSvg.setAttribute('class', 'w-5 h-5 text-amber-600 dark:text-amber-400');
         if (iconPath) iconPath.setAttribute('d', 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z');
         verdictTitle.textContent = 'Losing Investment';
         verdictMessage.textContent = 'This investment loses money. You\'d lose ' + formatCurrency(Math.abs(netProfit)) + ' over the time period. Reconsider or find ways to increase returns.';
@@ -481,7 +481,7 @@ const description = "Calculate return on investment for business decisions, mark
     if (breakdownReturn) breakdownReturn.textContent = formatCurrency(expectedReturn);
     if (breakdownProfit) {
       breakdownProfit.textContent = formatCurrency(netProfit);
-      breakdownProfit.className = netProfit >= 0 ? 'font-bold text-emerald-500' : 'font-bold text-red-500';
+      breakdownProfit.className = netProfit >= 0 ? 'font-bold text-emerald-500' : 'font-bold text-amber-600 dark:text-amber-400';
     }
 
     // Show results
@@ -541,11 +541,11 @@ const description = "Calculate return on investment for business decisions, mark
       }
 
       const roiTd = document.createElement('td');
-      roiTd.className = item.roi >= 0 ? 'py-2 px-3 text-right text-emerald-500' : 'py-2 px-3 text-right text-red-500';
+      roiTd.className = item.roi >= 0 ? 'py-2 px-3 text-right text-emerald-500' : 'py-2 px-3 text-right text-amber-600 dark:text-amber-400';
       roiTd.textContent = formatPercent(item.roi);
 
       const profitTd = document.createElement('td');
-      profitTd.className = item.netProfit >= 0 ? 'py-2 px-3 text-right' : 'py-2 px-3 text-right text-red-500';
+      profitTd.className = item.netProfit >= 0 ? 'py-2 px-3 text-right' : 'py-2 px-3 text-right text-amber-600 dark:text-amber-400';
       profitTd.textContent = formatCurrency(item.netProfit);
 
       const paybackTd = document.createElement('td');
@@ -559,7 +559,7 @@ const description = "Calculate return on investment for business decisions, mark
       const actionTd = document.createElement('td');
       actionTd.className = 'py-2 px-3 text-center';
       const removeBtn = document.createElement('button');
-      removeBtn.className = 'text-[var(--color-muted)] hover:text-red-500 transition-colors';
+      removeBtn.className = 'text-[var(--color-muted)] hover:text-amber-600 dark:text-amber-400 transition-colors';
       removeBtn.textContent = '×';
       removeBtn.addEventListener('click', () => {
         comparisons.splice(index, 1);

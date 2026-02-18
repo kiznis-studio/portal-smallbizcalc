@@ -105,14 +105,14 @@ const description = "Calculate your break-even point in units and revenue. Find 
             <!-- Contribution Margin -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Contribution Margin</div>
-              <div id="contribution-margin" class="text-2xl font-bold text-green-500">$0</div>
+              <div id="contribution-margin" class="text-2xl font-bold text-teal-600 dark:text-teal-400">$0</div>
               <div class="text-xs text-[var(--color-muted)] mt-1">per unit</div>
             </div>
 
             <!-- Contribution Margin % -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Contribution Margin %</div>
-              <div id="contribution-margin-pct" class="text-2xl font-bold text-green-500">0%</div>
+              <div id="contribution-margin-pct" class="text-2xl font-bold text-teal-600 dark:text-teal-400">0%</div>
             </div>
           </div>
 
@@ -151,7 +151,7 @@ const description = "Calculate your break-even point in units and revenue. Find 
                 <span class="text-[var(--color-muted)]">Total Costs</span>
               </div>
               <div class="flex items-center gap-2">
-                <div class="w-3 h-3 bg-green-500 rounded"></div>
+                <div class="w-3 h-3 bg-teal-500 rounded"></div>
                 <span class="text-[var(--color-muted)]">Break-Even</span>
               </div>
             </div>
@@ -189,8 +189,8 @@ const description = "Calculate your break-even point in units and revenue. Find 
                 <li>• Utilities (base amount)</li>
               </ul>
             </div>
-            <div class="card p-4 bg-green-500/5 border-green-500/20">
-              <div class="font-medium text-green-500 mb-2">Variable Costs</div>
+            <div class="card p-4 bg-teal-500/5 border-teal-500/20">
+              <div class="font-medium text-teal-600 dark:text-teal-400 mb-2">Variable Costs</div>
               <p class="text-sm text-[var(--color-muted)] mb-2">
                 Change with each unit sold:
               </p>
@@ -347,7 +347,7 @@ const description = "Calculate your break-even point in units and revenue. Find 
       unitsCell.className = 'py-2';
       if (isBreakEven) {
         const span = document.createElement('span');
-        span.className = 'font-medium text-green-500';
+        span.className = 'font-medium text-teal-600 dark:text-teal-400';
         span.textContent = formatNumber(units) + ' ★';
         unitsCell.appendChild(span);
       } else {
@@ -363,7 +363,7 @@ const description = "Calculate your break-even point in units and revenue. Find 
       costsCell.textContent = formatCurrency(totalCosts);
 
       const profitCell = document.createElement('td');
-      profitCell.className = `text-right font-medium ${profit >= 0 ? 'text-green-500' : 'text-red-500'}`;
+      profitCell.className = `text-right font-medium ${profit >= 0 ? 'text-teal-600 dark:text-teal-400' : 'text-amber-600 dark:text-amber-400'}`;
       profitCell.textContent = (profit >= 0 ? '+' : '') + formatCurrency(profit);
 
       row.appendChild(unitsCell);

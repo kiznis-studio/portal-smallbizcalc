@@ -114,13 +114,13 @@ const description = "Calculate the right markup and selling price for your produ
             <!-- Markup -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Markup</div>
-              <div id="result-markup" class="text-2xl font-bold text-green-500">0%</div>
+              <div id="result-markup" class="text-2xl font-bold text-teal-600 dark:text-teal-400">0%</div>
             </div>
 
             <!-- Profit per Unit -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Profit per Unit</div>
-              <div id="result-profit" class="text-2xl font-bold text-green-500">$0</div>
+              <div id="result-profit" class="text-2xl font-bold text-teal-600 dark:text-teal-400">$0</div>
             </div>
 
             <!-- Gross Margin -->
@@ -382,7 +382,7 @@ const description = "Calculate the right markup and selling price for your produ
       costCell.textContent = formatCurrency(cost * units);
 
       const profitCell = document.createElement('td');
-      profitCell.className = 'text-right text-green-500';
+      profitCell.className = 'text-right text-teal-600 dark:text-teal-400';
       profitCell.textContent = formatCurrency(profit * units);
 
       row.appendChild(unitsCell);

@@ -91,7 +91,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
             <!-- Gross Profit -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Gross Profit</div>
-              <div id="gross-profit" class="text-2xl font-bold text-green-500">$0</div>
+              <div id="gross-profit" class="text-2xl font-bold text-teal-600 dark:text-teal-400">$0</div>
             </div>
 
             <!-- Gross Margin -->
@@ -103,7 +103,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
             <!-- Net Profit -->
             <div class="card p-5">
               <div class="text-sm text-[var(--color-muted)] mb-1">Net Profit</div>
-              <div id="net-profit" class="text-2xl font-bold text-green-500">$0</div>
+              <div id="net-profit" class="text-2xl font-bold text-teal-600 dark:text-teal-400">$0</div>
             </div>
 
             <!-- Net Margin -->
@@ -123,7 +123,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
               </div>
               <div class="flex justify-between">
                 <span class="text-[var(--color-muted)]">− Cost of Goods Sold</span>
-                <span id="breakdown-cogs" class="text-red-500">−$0</span>
+                <span id="breakdown-cogs" class="text-amber-600 dark:text-amber-400">−$0</span>
               </div>
               <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
                 <span class="font-medium">= Gross Profit</span>
@@ -131,7 +131,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
               </div>
               <div class="flex justify-between">
                 <span class="text-[var(--color-muted)]">− Operating Expenses</span>
-                <span id="breakdown-expenses" class="text-red-500">−$0</span>
+                <span id="breakdown-expenses" class="text-amber-600 dark:text-amber-400">−$0</span>
               </div>
               <div class="flex justify-between border-t border-[var(--color-border)] pt-2">
                 <span class="font-medium">= Net Profit</span>
@@ -166,8 +166,8 @@ const description = "Calculate your gross and net profit margins instantly. Ente
                 Revenue minus direct costs (COGS). Shows production efficiency before overhead. Formula: (Revenue - COGS) / Revenue × 100
               </p>
             </div>
-            <div class="card p-4 bg-green-500/5 border-green-500/20">
-              <div class="font-medium text-green-500 mb-1">Net Margin</div>
+            <div class="card p-4 bg-teal-500/5 border-green-500/20">
+              <div class="font-medium text-teal-600 dark:text-teal-400 mb-1">Net Margin</div>
               <p class="text-sm text-[var(--color-muted)]">
                 Revenue minus ALL costs. Shows true profitability. Formula: (Revenue - COGS - Expenses) / Revenue × 100
               </p>
@@ -315,7 +315,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
 
     if (netMargin >= 20) {
       rating = 'Excellent';
-      color = 'text-green-500';
+      color = 'text-teal-600 dark:text-teal-400';
       advice = 'Your net margin is exceptional. You\'re outperforming most businesses. Focus on scaling while maintaining these margins.';
     } else if (netMargin >= 10) {
       rating = 'Good';
@@ -331,7 +331,7 @@ const description = "Calculate your gross and net profit margins instantly. Ente
       advice = 'Your net margin is thin. Small changes in costs or revenue could significantly impact profitability. Consider ways to improve efficiency.';
     } else {
       rating = 'Negative';
-      color = 'text-red-500';
+      color = 'text-amber-600 dark:text-amber-400';
       advice = 'You\'re operating at a loss. Urgent action needed: review pricing, cut unnecessary expenses, or increase sales volume.';
     }
 
@@ -376,10 +376,10 @@ const description = "Calculate your gross and net profit margins instantly. Ente
     document.getElementById('breakdown-net').textContent = formatCurrency(netProfit);
 
     // Color code profits
-    document.getElementById('gross-profit').className = `text-2xl font-bold ${grossProfit >= 0 ? 'text-green-500' : 'text-red-500'}`;
-    document.getElementById('net-profit').className = `text-2xl font-bold ${netProfit >= 0 ? 'text-green-500' : 'text-red-500'}`;
-    document.getElementById('breakdown-gross').className = `font-medium ${grossProfit >= 0 ? '' : 'text-red-500'}`;
-    document.getElementById('breakdown-net').className = `font-medium ${netProfit >= 0 ? '' : 'text-red-500'}`;
+    document.getElementById('gross-profit').className = `text-2xl font-bold ${grossProfit >= 0 ? 'text-teal-600 dark:text-teal-400' : 'text-amber-600 dark:text-amber-400'}`;
+    document.getElementById('net-profit').className = `text-2xl font-bold ${netProfit >= 0 ? 'text-teal-600 dark:text-teal-400' : 'text-amber-600 dark:text-amber-400'}`;
+    document.getElementById('breakdown-gross').className = `font-medium ${grossProfit >= 0 ? '' : 'text-amber-600 dark:text-amber-400'}`;
+    document.getElementById('breakdown-net').className = `font-medium ${netProfit >= 0 ? '' : 'text-amber-600 dark:text-amber-400'}`;
 
     // Get comparison
     getComparisonText(netMargin);

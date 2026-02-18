@@ -345,13 +345,13 @@ const description = "Project your monthly cash flow for the next 12 months. Iden
     if (endingCashEl) endingCashEl.textContent = formatCurrency(balance);
     if (lowestCashEl) {
       lowestCashEl.textContent = formatCurrency(lowestBalance);
-      lowestCashEl.className = lowestBalance < 0 ? 'text-2xl font-bold text-red-500' : 'text-2xl font-bold';
+      lowestCashEl.className = lowestBalance < 0 ? 'text-2xl font-bold text-amber-600 dark:text-amber-400' : 'text-2xl font-bold';
     }
     if (lowestMonthEl) lowestMonthEl.textContent = 'Month ' + lowestBalanceMonth + ' (' + (forecast[lowestBalanceMonth - 1]?.month || '') + ')';
     if (avgNetEl) {
       const avgNet = totalNet / 12;
       avgNetEl.textContent = formatCurrency(avgNet);
-      avgNetEl.className = avgNet >= 0 ? 'text-2xl font-bold text-emerald-500' : 'text-2xl font-bold text-red-500';
+      avgNetEl.className = avgNet >= 0 ? 'text-2xl font-bold text-emerald-500' : 'text-2xl font-bold text-amber-600 dark:text-amber-400';
     }
 
     // Status alert
@@ -360,7 +360,7 @@ const description = "Project your monthly cash flow for the next 12 months. Iden
 
       if (lowestBalance < 0) {
         statusAlert.className = 'card p-5 mb-8 bg-red-500/10 border-red-500/30';
-        statusIcon.setAttribute('class', 'w-5 h-5 flex-shrink-0 mt-0.5 text-red-500');
+        statusIcon.setAttribute('class', 'w-5 h-5 flex-shrink-0 mt-0.5 text-amber-600 dark:text-amber-400');
         statusIcon.querySelector('path')?.setAttribute('d', 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z');
         statusTitle.textContent = 'Cash Shortfall Detected';
         statusMessage.textContent = 'Your cash goes negative in month ' + lowestBalanceMonth + '. Consider reducing expenses, accelerating collections, or arranging financing.';
@@ -411,15 +411,15 @@ const description = "Project your monthly cash flow for the next 12 months. Iden
         inflowsTd.textContent = formatCurrency(row.inflows);
 
         const outflowsTd = document.createElement('td');
-        outflowsTd.className = 'text-right py-2 px-3 text-red-400';
+        outflowsTd.className = 'text-right py-2 px-3 text-amber-500 dark:text-amber-400';
         outflowsTd.textContent = formatCurrency(row.outflows);
 
         const netTd = document.createElement('td');
-        netTd.className = row.net >= 0 ? 'text-right py-2 px-3 text-emerald-500' : 'text-right py-2 px-3 text-red-500';
+        netTd.className = row.net >= 0 ? 'text-right py-2 px-3 text-emerald-500' : 'text-right py-2 px-3 text-amber-600 dark:text-amber-400';
         netTd.textContent = formatCurrency(row.net);
 
         const endingTd = document.createElement('td');
-        endingTd.className = row.ending < 0 ? 'text-right py-2 px-3 font-medium text-red-500' : 'text-right py-2 px-3 font-medium';
+        endingTd.className = row.ending < 0 ? 'text-right py-2 px-3 font-medium text-amber-600 dark:text-amber-400' : 'text-right py-2 px-3 font-medium';
         endingTd.textContent = formatCurrency(row.ending);
 
         tr.appendChild(monthTd);
