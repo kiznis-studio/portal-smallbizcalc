@@ -4,6 +4,7 @@ import Meta from '../components/seo/Meta.astro';
 import Schema from '../components/seo/Schema.astro';
 import Header from '../components/ui/Header.astro';
 import Footer from '../components/ui/Footer.astro';
+import AdSlot from '../components/ads/AdSlot.astro';
 
 interface Props {
   title: string;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const props = Astro.props;
+const adClient = import.meta.env.PUBLIC_ADSENSE_CLIENT;
 const siteName = "SmallBizCalc";
 const fullTitle = props.title === siteName ? props.title : `${props.title} | ${siteName}`;
 const breadcrumbSchema = (() => {
@@ -91,14 +93,17 @@ const breadcrumbSchema = (() => {
 
     <!-- Umami Analytics -->
     <script defer src="https://analytics.opspixel.com/script.js" data-website-id="a1903774-f139-4102-9e36-f22d83afed77"></script>
+    {adClient && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossorigin="anonymous"></script>}
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
+    <AdSlot slot="top" />
 
     <main class="flex-1">
       <slot />
     </main>
 
+    <AdSlot slot="bottom" />
     <Footer />
   </body>
 </html>
