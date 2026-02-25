@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
 
 const title = "Tax Planning for Small Business: Quarterly Strategies & Deductions";
 const description = "Quarterly tax strategies, common deductions, and how to avoid surprises at tax time. A practical guide for US small business owners.";
@@ -59,6 +60,8 @@ const tableOfContents = [
             ))}
           </ul>
         </nav>
+
+        <AdSlot slot="mid" />
 
         <!-- Content -->
         <div class="prose prose-lg max-w-none">

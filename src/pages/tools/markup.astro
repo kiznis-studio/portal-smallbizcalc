@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
 
 const title = "Markup Calculator";
 const description = "Calculate the right markup and selling price for your products. Convert between markup percentage and profit margin instantly.";
@@ -275,6 +276,8 @@ const description = "Calculate the right markup and selling price for your produ
         </div>
       </div>
     </div>
+
+    <AdSlot slot="mid" />
 
     <!-- Related Calculators -->
     <div class="max-w-5xl mx-auto mt-12">

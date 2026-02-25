@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
 
 const title = "Understanding Profit Margins: A Complete Guide for Small Business";
 const description = "Learn the difference between gross, operating, and net profit margins. Industry benchmarks, calculation methods, and strategies to improve your margins.";
@@ -59,6 +60,8 @@ const tableOfContents = [
             ))}
           </ul>
         </nav>
+
+        <AdSlot slot="mid" />
 
         <!-- Content -->
         <div class="prose prose-lg max-w-none">
