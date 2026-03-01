@@ -1,0 +1,389 @@
+---
+import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
+import statesData from '../../data/states-business.json';
+
+const title = "Business Location Score";
+const description = "Compare US states for business friendliness. See cost of living, corporate tax rates, energy costs, and crime data side by side to choose the best state for your business.";
+
+const statesJSON = JSON.stringify(statesData);
+---
+
+<Base title={title} description={description}>
+  <div class="container py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-[var(--color-muted)] mb-8">
+      <a href="/" class="hover:text-[var(--color-foreground)]">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/tools" class="hover:text-[var(--color-foreground)]">Calculators</a>
+      <span class="mx-2">›</span>
+      <span class="text-[var(--color-foreground)]">{title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-3 gap-12">
+      <!-- Main content -->
+      <div class="lg:col-span-2">
+        <h1 class="text-3xl font-bold mb-4">{title}</h1>
+        <p class="text-[var(--color-muted)] mb-8">
+          Compare two US states on key business factors. Each dimension is scored 1–5 relative to all 50 states + DC, with 5 being the most business-friendly.
+        </p>
+
+        <!-- State selectors -->
+        <div class="card p-6 mb-8">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label for="state-a" class="block text-sm font-medium mb-2">State A</label>
+              <select id="state-a" class="input w-full">
+                <option value="">Select a state...</option>
+              </select>
+            </div>
+            <div>
+              <label for="state-b" class="block text-sm font-medium mb-2">State B</label>
+              <select id="state-b" class="input w-full">
+                <option value="">Select a state...</option>
+              </select>
+            </div>
+          </div>
+          <button
+            id="compare-btn"
+            class="mt-6 w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Compare States
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden">
+          <!-- Overall scores -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-8">
+            <div class="card p-6 text-center">
+              <div class="text-sm text-[var(--color-muted)] mb-1" id="overall-label-a">—</div>
+              <div class="text-4xl font-bold" id="overall-score-a">—</div>
+              <div class="text-sm text-[var(--color-muted)] mt-1">out of 5.0</div>
+            </div>
+            <div class="card p-6 text-center">
+              <div class="text-sm text-[var(--color-muted)] mb-1" id="overall-label-b">—</div>
+              <div class="text-4xl font-bold" id="overall-score-b">—</div>
+              <div class="text-sm text-[var(--color-muted)] mt-1">out of 5.0</div>
+            </div>
+          </div>
+
+          <!-- Dimension comparison table -->
+          <div class="card overflow-hidden mb-8">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+                  <th class="text-left py-3 px-4">Dimension</th>
+                  <th class="text-center py-3 px-4" id="th-a">State A</th>
+                  <th class="text-center py-3 px-4" id="th-b">State B</th>
+                  <th class="text-center py-3 px-4 hidden sm:table-cell">Winner</th>
+                </tr>
+              </thead>
+              <tbody id="dimensions-body"></tbody>
+            </table>
+          </div>
+
+          <!-- Verdict -->
+          <div id="verdict" class="card p-6 mb-8">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <div id="verdict-title" class="font-semibold">—</div>
+                <div id="verdict-message" class="text-sm text-[var(--color-muted)] mt-1">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Source note -->
+          <p class="text-xs text-[var(--color-muted)]">
+            Data sources: BEA Regional Price Parities (cost of living), Tax Foundation (corporate tax rates), EIA (commercial electricity prices), FBI UCR (crime rates). Lower values are better for all dimensions.
+          </p>
+        </div>
+
+        <AdSlot slot="mid" />
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:pt-20">
+        <div class="card p-6 mb-6">
+          <h3 class="font-semibold mb-3">What This Tool Measures</h3>
+          <div class="space-y-3 text-sm text-[var(--color-muted)]">
+            <p>
+              <strong class="text-[var(--color-foreground)]">Cost of Living</strong> — BEA Regional Price Parities. 100 = national average. Lower means cheaper operations, rent, and wages.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Corporate Tax Rate</strong> — Top marginal state corporate income tax. Some states (NV, OH, SD, TX, WA, WY) have no corporate income tax.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Energy Costs</strong> — Commercial electricity price per kWh from the EIA. Critical for offices, warehouses, and manufacturing.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Violent Crime</strong> — FBI UCR violent crime rate per 100K residents. Affects employee safety and insurance costs.
+            </p>
+            <p>
+              <strong class="text-[var(--color-foreground)]">Property Crime</strong> — FBI UCR property crime rate per 100K residents. Affects theft, insurance premiums, and facility security.
+            </p>
+          </div>
+        </div>
+
+        <div class="card p-6 mb-6">
+          <h3 class="font-semibold mb-3">Score Methodology</h3>
+          <div class="space-y-2 text-sm text-[var(--color-muted)]">
+            <p>Each dimension scores 1–5 based on percentile rank among all 50 states + DC. <strong class="text-[var(--color-foreground)]">Lower raw values = higher scores</strong> for all dimensions.</p>
+            <p>The overall score is an equal-weighted average of all five dimensions.</p>
+          </div>
+        </div>
+
+        <div class="card p-6 bg-emerald-500/5 border-emerald-500/20">
+          <h3 class="font-semibold mb-2">Top Business-Friendly States</h3>
+          <div id="top-states" class="text-sm text-[var(--color-muted)] space-y-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Tools -->
+    <div class="mt-16 pt-8 border-t border-[var(--color-border)]">
+      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/tools/startup-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Startup Cost Estimator</div>
+          <p class="text-sm text-[var(--color-muted)]">Estimate total costs to launch your business</p>
+        </a>
+        <a href="/tools/employee-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Employee Cost Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Calculate true cost of hiring in any state</p>
+        </a>
+        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+          <div class="font-medium mb-1">Break-Even Calculator</div>
+          <p class="text-sm text-[var(--color-muted)]">Find when your business becomes profitable</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Business Location Score",
+    "description": description,
+    "url": "https://smallbizcalc.com/tools/business-location",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Business Location Score", "item": "https://smallbizcalc.com/tools/business-location" }
+    ]
+  })} />
+</Base>
+
+<script define:vars={{ statesJSON }}>
+  const states = JSON.parse(statesJSON);
+
+  // Dimensions: key, label, unit, lower-is-better (all are)
+  const dims = [
+    { key: 'rpp', label: 'Cost of Living', unit: 'RPP index', fmt: v => v.toFixed(1) },
+    { key: 'corpTax', label: 'Corporate Tax Rate', unit: '%', fmt: v => v + '%' },
+    { key: 'energy', label: 'Commercial Electricity', unit: '¢/kWh', fmt: v => v.toFixed(1) + '¢/kWh' },
+    { key: 'violent', label: 'Violent Crime Rate', unit: 'per 100K', fmt: v => v.toFixed(0) + '/100K' },
+    { key: 'property', label: 'Property Crime Rate', unit: 'per 100K', fmt: v => v.toFixed(0) + '/100K' },
+  ];
+
+  // Pre-compute percentile ranks (lower value = higher score)
+  const ranks = {};
+  for (const dim of dims) {
+    const vals = states.map(s => s[dim.key]).filter(v => v != null).sort((a, b) => a - b);
+    ranks[dim.key] = {};
+    for (const s of states) {
+      const v = s[dim.key];
+      if (v == null) { ranks[dim.key][s.abbr] = null; continue; }
+      // Percentile: what fraction of states have a higher (worse) value
+      const betterCount = vals.filter(x => x > v).length;
+      const pct = betterCount / (vals.length - 1);
+      // Map to 1-5 score
+      ranks[dim.key][s.abbr] = Math.round((1 + pct * 4) * 10) / 10;
+    }
+  }
+
+  function overallScore(abbr) {
+    let sum = 0, count = 0;
+    for (const dim of dims) {
+      const s = ranks[dim.key][abbr];
+      if (s != null) { sum += s; count++; }
+    }
+    return count > 0 ? sum / count : 0;
+  }
+
+  // Populate dropdowns
+  const selectA = document.getElementById('state-a');
+  const selectB = document.getElementById('state-b');
+  const sorted = [...states].sort((a, b) => a.name.localeCompare(b.name));
+  for (const s of sorted) {
+    const optA = document.createElement('option');
+    optA.value = s.abbr;
+    optA.textContent = s.name;
+    selectA.appendChild(optA);
+
+    const optB = document.createElement('option');
+    optB.value = s.abbr;
+    optB.textContent = s.name;
+    selectB.appendChild(optB);
+  }
+
+  // Pre-select Texas and California as interesting defaults
+  selectA.value = 'TX';
+  selectB.value = 'CA';
+
+  // Show top 5 business-friendly states
+  const topDiv = document.getElementById('top-states');
+  const ranked = [...states].map(s => ({ ...s, score: overallScore(s.abbr) })).sort((a, b) => b.score - a.score);
+  for (let i = 0; i < 5; i++) {
+    const row = document.createElement('div');
+    row.className = 'flex justify-between';
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = (i + 1) + '. ' + ranked[i].name;
+    const scoreSpan = document.createElement('span');
+    scoreSpan.className = 'font-medium text-emerald-500';
+    scoreSpan.textContent = ranked[i].score.toFixed(1) + '/5';
+    row.appendChild(nameSpan);
+    row.appendChild(scoreSpan);
+    topDiv.appendChild(row);
+  }
+
+  function runComparison() {
+    const abbrA = selectA.value;
+    const abbrB = selectB.value;
+    if (!abbrA || !abbrB) return;
+
+    const stA = states.find(s => s.abbr === abbrA);
+    const stB = states.find(s => s.abbr === abbrB);
+    if (!stA || !stB) return;
+
+    const scoreA = overallScore(abbrA);
+    const scoreB = overallScore(abbrB);
+
+    // Update overall scores
+    document.getElementById('overall-label-a').textContent = stA.name;
+    document.getElementById('overall-label-b').textContent = stB.name;
+    const scoreElA = document.getElementById('overall-score-a');
+    const scoreElB = document.getElementById('overall-score-b');
+    scoreElA.textContent = scoreA.toFixed(1);
+    scoreElB.textContent = scoreB.toFixed(1);
+    scoreElA.className = scoreA >= scoreB ? 'text-4xl font-bold text-emerald-500' : 'text-4xl font-bold text-[var(--color-foreground)]';
+    scoreElB.className = scoreB >= scoreA ? 'text-4xl font-bold text-emerald-500' : 'text-4xl font-bold text-[var(--color-foreground)]';
+
+    // Update table headers
+    document.getElementById('th-a').textContent = stA.abbr;
+    document.getElementById('th-b').textContent = stB.abbr;
+
+    // Build dimension rows
+    const tbody = document.getElementById('dimensions-body');
+    while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+
+    let winsA = 0, winsB = 0;
+    for (const dim of dims) {
+      const tr = document.createElement('tr');
+      tr.className = 'border-b border-[var(--color-border)]';
+
+      // Dimension label
+      const tdLabel = document.createElement('td');
+      tdLabel.className = 'py-3 px-4';
+      const labelStrong = document.createElement('div');
+      labelStrong.className = 'font-medium';
+      labelStrong.textContent = dim.label;
+      tdLabel.appendChild(labelStrong);
+
+      // State A cell
+      const tdA = document.createElement('td');
+      tdA.className = 'py-3 px-4 text-center';
+      const valA = stA[dim.key];
+      const scoreDA = ranks[dim.key][abbrA];
+      const valDivA = document.createElement('div');
+      valDivA.className = 'font-medium';
+      valDivA.textContent = valA != null ? dim.fmt(valA) : 'N/A';
+      const scoreDivA = document.createElement('div');
+      scoreDivA.className = 'text-xs text-[var(--color-muted)]';
+      scoreDivA.textContent = scoreDA != null ? 'Score: ' + scoreDA.toFixed(1) : '';
+      tdA.appendChild(valDivA);
+      tdA.appendChild(scoreDivA);
+
+      // State B cell
+      const tdB = document.createElement('td');
+      tdB.className = 'py-3 px-4 text-center';
+      const valB = stB[dim.key];
+      const scoreDB = ranks[dim.key][abbrB];
+      const valDivB = document.createElement('div');
+      valDivB.className = 'font-medium';
+      valDivB.textContent = valB != null ? dim.fmt(valB) : 'N/A';
+      const scoreDivB = document.createElement('div');
+      scoreDivB.className = 'text-xs text-[var(--color-muted)]';
+      scoreDivB.textContent = scoreDB != null ? 'Score: ' + scoreDB.toFixed(1) : '';
+      tdB.appendChild(valDivB);
+      tdB.appendChild(scoreDivB);
+
+      // Highlight winner
+      if (scoreDA != null && scoreDB != null) {
+        if (scoreDA > scoreDB) {
+          tdA.classList.add('bg-emerald-500/5');
+          winsA++;
+        } else if (scoreDB > scoreDA) {
+          tdB.classList.add('bg-emerald-500/5');
+          winsB++;
+        }
+      }
+
+      // Winner cell (desktop)
+      const tdW = document.createElement('td');
+      tdW.className = 'py-3 px-4 text-center hidden sm:table-cell text-sm';
+      if (scoreDA != null && scoreDB != null) {
+        if (scoreDA > scoreDB) {
+          tdW.textContent = stA.abbr;
+          tdW.classList.add('text-emerald-500', 'font-medium');
+        } else if (scoreDB > scoreDA) {
+          tdW.textContent = stB.abbr;
+          tdW.classList.add('text-emerald-500', 'font-medium');
+        } else {
+          tdW.textContent = 'Tie';
+          tdW.classList.add('text-[var(--color-muted)]');
+        }
+      }
+
+      tr.appendChild(tdLabel);
+      tr.appendChild(tdA);
+      tr.appendChild(tdB);
+      tr.appendChild(tdW);
+      tbody.appendChild(tr);
+    }
+
+    // Verdict
+    const verdictTitle = document.getElementById('verdict-title');
+    const verdictMessage = document.getElementById('verdict-message');
+    if (abbrA === abbrB) {
+      verdictTitle.textContent = 'Same State Selected';
+      verdictMessage.textContent = 'Select two different states to see a comparison.';
+    } else if (scoreA > scoreB) {
+      verdictTitle.textContent = stA.name + ' wins ' + winsA + ' of 5 dimensions';
+      verdictMessage.textContent = stA.name + ' scores ' + scoreA.toFixed(1) + ' vs ' + stB.name + "'s " + scoreB.toFixed(1) + '. ' + stA.name + ' offers a better overall business environment based on cost, tax, energy, and safety factors.';
+    } else if (scoreB > scoreA) {
+      verdictTitle.textContent = stB.name + ' wins ' + winsB + ' of 5 dimensions';
+      verdictMessage.textContent = stB.name + ' scores ' + scoreB.toFixed(1) + ' vs ' + stA.name + "'s " + scoreA.toFixed(1) + '. ' + stB.name + ' offers a better overall business environment based on cost, tax, energy, and safety factors.';
+    } else {
+      verdictTitle.textContent = "It's a tie!";
+      verdictMessage.textContent = 'Both states score ' + scoreA.toFixed(1) + ' overall. Consider other factors like workforce availability, industry clusters, and proximity to customers.';
+    }
+
+    document.getElementById('results').classList.remove('hidden');
+  }
+
+  document.getElementById('compare-btn').addEventListener('click', runComparison);
+
+  // Run comparison on load with defaults
+  runComparison();
+</script>
