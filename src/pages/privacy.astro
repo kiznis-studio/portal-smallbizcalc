@@ -1,108 +1,62 @@
 ---
 import Base from '../layouts/Base.astro';
-
-const title = "Privacy Policy";
-const description = "SmallBizCalc privacy policy. Learn how we handle your data and protect your privacy.";
-const lastUpdated = "February 5, 2026";
 ---
 
-<Base title={title} description={description}>
-  <div class="container py-12">
-    <div class="max-w-2xl mx-auto">
-      <h1 class="text-3xl font-bold mb-2">{title}</h1>
-      <p class="text-sm text-[var(--color-muted)] mb-8">Last updated: {lastUpdated}</p>
+<Base title="Privacy Policy" description="SmallBizCalc privacy policy — how we handle your data, cookies, and advertising."
+  breadcrumbs={[{ name: 'Home', href: '/' }, { name: 'Privacy Policy' }]}>
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-[var(--color-text)]">Privacy Policy</h1>
+    <p class="mt-2 text-xs text-[var(--color-text-secondary)]">Last updated: March 3, 2026</p>
 
-      <div class="prose prose-lg space-y-6">
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Overview</h2>
-          <p class="text-[var(--color-muted)]">
-            SmallBizCalc ("we", "our", or "us") respects your privacy. This policy explains what data we collect, why we collect it, and your rights regarding that data.
-          </p>
-        </section>
+    <div class="mt-6 space-y-4 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Information We Collect</h2>
+      <p>SmallBizCalc collects minimal data. We use privacy-focused analytics (Umami) that does not use cookies and does not collect personally identifiable information. We track page views, referral sources, and device types in aggregate form only.</p>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Data We Collect</h2>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Cookies & Tracking Technologies</h2>
+      <p>SmallBizCalc does not set first-party cookies. However, third-party services used on this site may set cookies:</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Google AdSense</strong> uses cookies to serve ads based on your visits to this and other websites. Google's DoubleClick cookie enables it and its partners to serve ads based on your browsing patterns.</li>
+        <li><strong>Cloudflare</strong> may set security cookies (e.g., <code>__cf_bm</code>) to distinguish humans from bots.</li>
+      </ul>
+      <p>Your browser's light/dark theme preference is stored in localStorage, which never leaves your device.</p>
 
-          <h3 class="text-lg font-medium mt-4 mb-2">Calculator Data</h3>
-          <p class="text-[var(--color-muted)]">
-            All calculations are performed locally in your browser. The numbers you enter into our calculators are never sent to our servers or stored anywhere. Your financial data stays on your device.
-          </p>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Advertising</h2>
+      <p>We display advertisements through <strong>Google AdSense</strong>. Google and its advertising partners may use cookies and web beacons to serve ads based on your prior visits to this and other websites. This includes:</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Google's use of the DoubleClick cookie for ad serving</li>
+        <li>Third-party vendors and ad networks serving ads on this site</li>
+      </ul>
+      <p>You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" class="text-[var(--color-primary)] hover:underline" target="_blank" rel="noopener">Google Ads Settings</a>. You can also opt out of third-party vendor cookies at <a href="https://optout.aboutads.info/" class="text-[var(--color-primary)] hover:underline" target="_blank" rel="noopener">aboutads.info</a>. For a full list of Google's ad technology providers, visit <a href="https://support.google.com/adsense/answer/9012903" class="text-[var(--color-primary)] hover:underline" target="_blank" rel="noopener">Google's ad technology providers page</a>.</p>
 
-          <h3 class="text-lg font-medium mt-4 mb-2">Analytics Data</h3>
-          <p class="text-[var(--color-muted)]">
-            We use privacy-focused analytics (Umami) to understand how visitors use our site. This includes:
-          </p>
-          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
-            <li>Pages visited</li>
-            <li>Referral source</li>
-            <li>Browser type and device category</li>
-            <li>Country (based on IP, not stored)</li>
-          </ul>
-          <p class="text-[var(--color-muted)] mt-2">
-            We do not use cookies for analytics. We do not track individual users across sessions.
-          </p>
-        </section>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Data Processing</h2>
+      <p>All tools and calculations on SmallBizCalc run entirely in your browser. No user inputs are transmitted to our servers or any third party.</p>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Third-Party Services</h2>
-          <p class="text-[var(--color-muted)]">
-            We may use the following third-party services:
-          </p>
-          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
-            <li><strong>Cloudflare</strong> – For website hosting and security</li>
-            <li><strong>Umami</strong> – For privacy-focused analytics</li>
-          </ul>
-          <p class="text-[var(--color-muted)] mt-2">
-            These services have their own privacy policies governing their data practices.
-          </p>
-        </section>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Third-Party Services</h2>
+      <p>We use the following third-party services:</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Cloudflare</strong> — CDN, security, and hosting</li>
+        <li><strong>Google AdSense</strong> — advertising (<a href="https://policies.google.com/privacy" class="text-[var(--color-primary)] hover:underline" target="_blank" rel="noopener">Google Privacy Policy</a>)</li>
+        <li><strong>Umami</strong> — privacy-focused, cookie-free analytics</li>
+      </ul>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Cookies</h2>
-          <p class="text-[var(--color-muted)]">
-            SmallBizCalc uses minimal cookies:
-          </p>
-          <ul class="list-disc list-inside text-[var(--color-muted)] mt-2 space-y-1">
-            <li><strong>Theme preference</strong> – Stored locally to remember your light/dark mode choice</li>
-          </ul>
-          <p class="text-[var(--color-muted)] mt-2">
-            We do not use tracking cookies, advertising cookies, or third-party cookies.
-          </p>
-        </section>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Your Rights</h2>
+      <p>Under GDPR, CCPA, and similar privacy regulations, you have the right to:</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Know what data is collected about you</li>
+        <li>Request deletion of your data</li>
+        <li>Opt out of personalized advertising (see Advertising section above)</li>
+        <li>Use browser privacy features or ad blockers to limit tracking</li>
+      </ul>
+      <p>If you are in the European Economic Area (EEA), a consent dialog will be presented for personalized advertising in compliance with GDPR. California residents may opt out of the sale of personal information under CCPA.</p>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Your Rights</h2>
-          <p class="text-[var(--color-muted)]">
-            Since we don't collect personal data, there's nothing to delete or export. Your calculator inputs never leave your device.
-          </p>
-        </section>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Children's Privacy</h2>
+      <p>SmallBizCalc does not knowingly collect information from children under 13.</p>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Children's Privacy</h2>
-          <p class="text-[var(--color-muted)]">
-            Our site is not directed at children under 13. We do not knowingly collect data from children.
-          </p>
-        </section>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Changes</h2>
+      <p>We may update this policy from time to time. Changes will be posted on this page with an updated date.</p>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Changes to This Policy</h2>
-          <p class="text-[var(--color-muted)]">
-            We may update this policy from time to time. Changes will be posted on this page with an updated revision date.
-          </p>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold mb-3">Contact</h2>
-          <p class="text-[var(--color-muted)]">
-            Questions about this privacy policy? Contact us at:
-          </p>
-          <p class="mt-2">
-            <a href="mailto:privacy@smallbizcalc.com" class="text-emerald-500 hover:underline">
-              privacy@smallbizcalc.com
-            </a>
-          </p>
-        </section>
-      </div>
+      <h2 class="text-lg font-bold text-[var(--color-text)]">Contact</h2>
+      <p>Questions about this privacy policy can be directed to <a href="mailto:privacy@smallbizcalc.com" class="text-[var(--color-primary)] hover:underline">privacy@smallbizcalc.com</a>.</p>
     </div>
-  </div>
+  </section>
 </Base>
