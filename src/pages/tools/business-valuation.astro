@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const title = "Business Valuation Calculator";
+const title = "Business Valuation Calculator — SDE, Revenue & Asset Methods";
 const description = "Estimate what your small business is worth using multiple valuation methods — SDE multiple, revenue multiple, and asset-based approaches.";
 ---
 
@@ -257,9 +257,76 @@ const description = "Estimate what your small business is worth using multiple v
               <div class="font-semibold">Employee Cost Calculator</div>
               <div class="text-[var(--color-muted)]">True cost of hiring</div>
             </a>
+            <a href="/tools/startup-cost" class="p-3 border border-[var(--color-border)] rounded-lg hover:border-emerald-500/50 transition-colors">
+              <div class="font-semibold">Startup Cost Estimator</div>
+              <div class="text-[var(--color-muted)]">Budget for your next venture</div>
+            </a>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Exit Planning</h3>
+            <p class="text-sm text-[var(--color-muted)]">Understanding your current valuation tells you how far you are from your exit target. Run this annually to track value creation and identify which levers move the multiple most.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Bringing in Partners or Investors</h3>
+            <p class="text-sm text-[var(--color-muted)]">Before negotiating equity splits, you need a baseline valuation. Even a rough estimate prevents giving away too much or too little in early-stage discussions.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Insurance and Estate Planning</h3>
+            <p class="text-sm text-[var(--color-muted)]">Key-person insurance, buy-sell agreements, and estate planning all require a business valuation. Use this to get an initial number before engaging a certified appraiser.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes in Business Valuation</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Confusing SDE with EBITDA</h3>
+            <p class="text-sm text-[var(--color-muted)]">SDE adds back owner salary and benefits — used for owner-operated businesses under $5M revenue. EBITDA is used for larger businesses with professional management. Using the wrong metric with the wrong multiple leads to significantly over- or under-valuing the business.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Using one method in isolation</h3>
+            <p class="text-sm text-[var(--color-muted)]">Professional appraisers use a weighted combination of methods. Relying on only the revenue multiple ignores profitability; only asset value ignores earnings power. The SDE method alone misses growth potential. Real valuations triangulate across approaches.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Not adding back personal expenses run through the business</h3>
+            <p class="text-sm text-[var(--color-muted)]">Car payments, personal travel, meals, phone plans, and family salaries run through the business all reduce reported profit — and reduce your apparent valuation. Properly recasting financials to normalize these expenses is essential before selling.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Valuing based on one exceptional year</h3>
+            <p class="text-sm text-[var(--color-muted)]">Buyers use a weighted average of 2–3 years of earnings, not just your best year. A business that made $500K once but averages $300K will be valued closer to the $300K figure. Sustainable earnings matter more than peak earnings.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">BizBuySell Transaction Data</div>
+            <div class="text-[var(--color-muted)]">Largest business-for-sale marketplace. Publishes quarterly transaction reports with median revenue multiples and SDE multiples by industry segment.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">IBBA Market Pulse</div>
+            <div class="text-[var(--color-muted)]">International Business Brokers Association quarterly survey of deal activity, pricing trends, and buyer demand across main street and lower middle market businesses.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">Pepperdine Private Capital Markets</div>
+            <div class="text-[var(--color-muted)]">Annual survey covering valuation multiples, financing terms, and deal structures for private businesses across all size segments and industries.</div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
 
@@ -413,6 +480,52 @@ const description = "Estimate what your small business is worth using multiple v
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Business Valuation Calculator", "item": "https://smallbizcalc.com/tools/business-valuation" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate the value of my small business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most common method for small businesses is the SDE (Seller's Discretionary Earnings) multiple. First, calculate SDE = net profit + owner's salary + benefits + depreciation + interest + one-time expenses. Then multiply by an industry-appropriate multiple (typically 2x–4x for most small businesses). For example, a $200,000 SDE business in professional services might sell for $400,000–$800,000. Always use multiple methods and triangulate to get a realistic range."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a typical business valuation multiple for a small business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most small businesses sell for 1.5x–4x SDE (Seller's Discretionary Earnings). The multiple depends on industry, growth rate, customer concentration, owner dependence, and recurring revenue quality. Restaurants average 1.5–2.5x. Service businesses average 2–3x. SaaS and software companies can command 4–8x SDE or 5–10x revenue. Declining businesses or those with single-customer concentration may sell below 2x."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Seller's Discretionary Earnings (SDE) and how is it different from EBITDA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SDE adds back the owner's total compensation (salary + benefits + personal expenses) to pre-tax profit, along with depreciation, amortization, and interest. It represents the total financial benefit to a single owner-operator. EBITDA does NOT add back owner salary — it's used for businesses with professional management teams, typically $1M+ in earnings. Using EBITDA multiples on a small business that should use SDE multiples will significantly overvalue the business."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does my business valuation include the building or real estate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Typically no — the SDE and EBITDA methods value the operating business separately from real estate. If you own the building, it's usually sold separately or converted to a lease at market rate (which then affects your SDE). Asset-based valuations do include tangible assets like equipment, inventory, and receivables, but commercial real estate is almost always valued and transacted separately from the business operations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I hire a professional business appraiser instead of using a calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a calculator for planning and education. Hire a Certified Business Appraiser (CBA) or Accredited Senior Appraiser (ASA) for: selling your business, partner buyouts, divorce proceedings involving the business, estate and gift tax purposes, SBA loan applications, and litigation support. Professional appraisals cost $3,000–$10,000 and typically take 2–4 weeks. The fee is worthwhile when the decision involves significant money or legal obligations."
+        }
+      }
     ]
   })} />
 </Base>

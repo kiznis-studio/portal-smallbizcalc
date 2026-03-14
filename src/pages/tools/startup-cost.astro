@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const title = "Startup Cost Estimator";
+const title = "Startup Cost Estimator — Categorized Budget Planner by Industry";
 const description = "Estimate your total startup costs by category — licenses, equipment, marketing, inventory, and operating reserves. Get a realistic budget before you launch.";
 ---
 
@@ -383,23 +383,141 @@ const description = "Estimate your total startup costs by category — licenses,
       </div>
     </div>
 
-    <!-- Related Calculators -->
-    <div class="max-w-5xl mx-auto mt-12">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Break-Even Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">When will your startup become profitable?</div>
-        </a>
-        <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Cash Flow Forecaster</div>
-          <div class="text-sm text-[var(--color-muted)]">Project monthly cash flow post-launch</div>
-        </a>
-        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Business Loan Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Compare funding options and payments</div>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Before Seeking Funding</h3>
+            <p class="text-sm text-[var(--color-muted)]">Investors and lenders want to see a detailed startup budget. A well-structured cost estimate shows you've thought through the business and know how much capital you actually need.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Deciding Between Concepts</h3>
+            <p class="text-sm text-[var(--color-muted)]">Comparing a brick-and-mortar vs. e-commerce concept? Run both through this estimator to see the capital difference before committing to a direction.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Setting Your Cash Reserve</h3>
+            <p class="text-sm text-[var(--color-muted)]">Most failed startups cite running out of cash as the cause. The cash reserve section helps you target the safety net needed to survive your first 3–6 months of operations.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <div class="card p-6 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 pr-4">Business Type</th>
+                <th class="text-right py-2 px-4">Typical Startup Cost</th>
+                <th class="text-right py-2 pl-4">Key Driver</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--color-border)]">
+              <tr>
+                <td class="py-2 pr-4">Home Service / Trades</td>
+                <td class="text-right py-2 px-4">$10K–$50K</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Tools, licensing, vehicle</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">E-Commerce / Online Store</td>
+                <td class="text-right py-2 px-4">$5K–$30K</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Inventory, platform, marketing</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Restaurant / Café</td>
+                <td class="text-right py-2 px-4">$175K–$500K</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Build-out, equipment, licenses</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Retail Storefront</td>
+                <td class="text-right py-2 px-4">$50K–$150K</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Lease, fixtures, inventory</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Professional Services</td>
+                <td class="text-right py-2 px-4">$5K–$25K</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Licensing, software, marketing</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">SaaS / Software</td>
+                <td class="text-right py-2 px-4">$30K–$150K</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Development, infrastructure, legal</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--color-muted)] mt-3">Source: SBA.gov Small Business Profiles, Kauffman Foundation Startup Activity data.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes When Estimating Startup Costs</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Underestimating the cash reserve</h3>
+            <p class="text-sm text-[var(--color-muted)]">Most businesses don't turn profitable immediately. Budget 3–6 months of operating expenses as a cash buffer beyond your startup costs. Without it, one slow month can force you to close before you've had time to grow.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Forgetting pre-opening costs</h3>
+            <p class="text-sm text-[var(--color-muted)]">Legal formation ($500–$2,000), business licenses ($100–$1,000), initial marketing and branding ($2,000–$10,000), and website setup often get overlooked. These are real costs you pay before serving a single customer.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring working capital needs</h3>
+            <p class="text-sm text-[var(--color-muted)]">If you carry inventory or have 30–60 day payment terms with customers, you need capital to bridge that gap. Working capital requirements can easily add 20–30% to your total funding need.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Using best-case estimates</h3>
+            <p class="text-sm text-[var(--color-muted)]">Construction always runs over. Equipment takes longer to arrive. Permits get delayed. Add a 15–20% contingency buffer to every startup cost estimate. The startups that succeed plan for Murphy's Law.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SBA.gov Small Business Profiles</div>
+            <div class="text-[var(--color-muted)]">U.S. Small Business Administration annual state-by-state profiles covering startup costs, survival rates, and financing patterns across industries.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">Kauffman Foundation</div>
+            <div class="text-[var(--color-muted)]">Ewing Marion Kauffman Foundation publishes annual startup activity indexes and research on typical capital requirements by business type and industry.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">BLS Business Employment Dynamics</div>
+            <div class="text-[var(--color-muted)]">Bureau of Labor Statistics quarterly data on business formations, survival rates by industry, and early-stage business characteristics.</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Break-Even Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">When will your startup become profitable?</p>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Cash Flow Forecaster</div>
+            <p class="text-sm text-[var(--color-muted)]">Project monthly cash flow post-launch</p>
+          </a>
+          <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Business Loan Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Compare funding options and payments</p>
+          </a>
+          <a href="/tools/employee-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Employee Cost Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Budget for your first hire</p>
+          </a>
+          <a href="/tools/business-location" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Business Location Score</div>
+            <p class="text-sm text-[var(--color-muted)]">Compare costs across all 50 states</p>
+          </a>
+        </div>
+      </section>
+
     </div>
   </div>
 
@@ -420,6 +538,52 @@ const description = "Estimate your total startup costs by category — licenses,
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Startup Cost Estimator", "item": "https://smallbizcalc.com/tools/startup-cost" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much money do I need to start a small business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Startup costs vary enormously by business type. Service businesses and freelancers can start for under $5,000 (licenses, website, basic tools). E-commerce businesses typically need $5,000–$30,000 for inventory, platform setup, and marketing. Retail storefronts cost $50,000–$150,000 with lease deposits, fixtures, and inventory. Restaurants are the most capital-intensive at $175,000–$500,000+ for build-out and equipment. Always add 3–6 months of operating expenses as a cash reserve on top of these startup costs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the most commonly forgotten startup costs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most commonly overlooked startup costs include: legal formation fees ($500–$2,000 for LLC or corporation setup), business licenses and permits ($100–$1,000 depending on industry), initial insurance premiums (general liability, professional liability, workers' comp), security deposits for leases (typically 2–3 months rent), point-of-sale and software subscriptions, initial accounting and bookkeeping setup, and a contingency buffer (budget 15–20% over your estimates for unexpected costs)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much cash reserve should a new business keep?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most financial advisors recommend 3–6 months of operating expenses as a cash reserve for a new business. Service businesses with low fixed costs can survive on 3 months. Businesses with high fixed costs (rent, payroll, utilities) should target 6 months. Seasonal businesses may need up to 12 months of reserve to survive slow seasons. The cash reserve is separate from your startup costs — it's the buffer that keeps you operating while revenue ramps up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I get a business loan or use personal savings to fund startup costs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most successful startups use a mix of both. Personal savings (bootstrapping) avoids debt and interest costs, but limits how fast you can scale. Business loans preserve your personal cash but add monthly payment obligations before revenue stabilizes. A common approach: use personal savings for the minimum viable startup, then apply for an SBA microloan ($5,000–$50,000) or SBA 7(a) loan once you have some operating history. Avoid high-interest credit cards for startup funding — the interest burden can cripple early-stage cash flow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What percentage of startups fail due to running out of money?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About 38% of startups fail specifically because they run out of cash or can't raise additional funding, according to CB Insights post-mortem analyses. The underlying causes are usually underestimating startup costs, overestimating early revenue, or not maintaining enough cash reserve. The BLS reports that about 20% of small businesses fail in year 1 and about 45% fail by year 5. Adequate capitalization — meaning having enough startup funds plus a cash reserve — is one of the strongest predictors of survival."
+        }
+      }
     ]
   })} />
 </Base>

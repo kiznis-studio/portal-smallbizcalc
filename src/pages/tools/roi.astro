@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
 
-const title = "ROI Calculator";
+const title = "ROI Calculator — Return on Investment with Payback Period";
 const description = "Calculate return on investment for business decisions, marketing campaigns, and equipment purchases. Compare multiple options and see payback period.";
 ---
 
@@ -284,23 +284,141 @@ const description = "Calculate return on investment for business decisions, mark
 
     <AdSlot slot="mid" />
 
-    <!-- Related Tools -->
-    <div class="mt-16 pt-8 border-t border-[var(--color-border)]">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-medium mb-1">Break-Even Calculator</div>
-          <p class="text-sm text-[var(--color-muted)]">Find how many sales cover your costs</p>
-        </a>
-        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-medium mb-1">Profit Margin Calculator</div>
-          <p class="text-sm text-[var(--color-muted)]">Calculate margins from revenue and costs</p>
-        </a>
-        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-medium mb-1">Business Loan Calculator</div>
-          <p class="text-sm text-[var(--color-muted)]">Calculate loan payments and total cost</p>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Evaluating Equipment Purchases</h3>
+            <p class="text-sm text-[var(--color-muted)]">Before buying a $50,000 piece of equipment, calculate whether the revenue increase or cost savings justify the investment. Compare payback period against the equipment's useful life.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Marketing Campaign Analysis</h3>
+            <p class="text-sm text-[var(--color-muted)]">Calculate ROI for every marketing channel. If you spend $5,000 on ads and generate $18,000 in revenue, your marketing ROI is 260%. Use this to compare channels and shift budget to what works.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Hiring Decisions</h3>
+            <p class="text-sm text-[var(--color-muted)]">A new hire at $75,000/yr total cost should generate measurable return. Calculate expected revenue contribution or cost reduction over 1–3 years to justify the headcount investment.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <div class="card p-6 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 pr-4">Investment Type</th>
+                <th class="text-right py-2 px-4">Average ROI</th>
+                <th class="text-right py-2 pl-4">Typical Payback</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--color-border)]">
+              <tr>
+                <td class="py-2 pr-4">Email Marketing</td>
+                <td class="text-right py-2 px-4 text-teal-600 dark:text-teal-400">3,600%</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Immediate</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">SEO / Content Marketing</td>
+                <td class="text-right py-2 px-4 text-teal-600 dark:text-teal-400">700%+</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">6–18 months</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Paid Search (Google Ads)</td>
+                <td class="text-right py-2 px-4 text-teal-600 dark:text-teal-400">200%</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">Immediate</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">New Equipment (manufacturing)</td>
+                <td class="text-right py-2 px-4">15–25%</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">3–7 years</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Employee Training</td>
+                <td class="text-right py-2 px-4">200–300%</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">6–12 months</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">CRM Software Implementation</td>
+                <td class="text-right py-2 px-4">245%</td>
+                <td class="text-right py-2 pl-4 text-[var(--color-muted)]">12–18 months</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--color-muted)] mt-3">Source: HubSpot State of Marketing, Google Economic Impact, Nucleus Research ROI studies. ROI varies significantly by implementation quality.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes When Calculating ROI</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring the time value of money</h3>
+            <p class="text-sm text-[var(--color-muted)]">A return 3 years from now is worth less than the same return today due to inflation and opportunity cost. For multi-year investments, use Net Present Value (NPV) or Internal Rate of Return (IRR) instead of simple ROI to account for when the returns arrive.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Only counting direct revenue gains</h3>
+            <p class="text-sm text-[var(--color-muted)]">ROI includes cost savings, not just revenue increases. If a software investment saves 10 hours/week at $50/hr, that's $26,000/yr in value even without additional revenue. Include productivity gains, error reduction, and avoided costs in your benefit calculation.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Using gross revenue instead of net profit</h3>
+            <p class="text-sm text-[var(--color-muted)]">If a marketing campaign generates $100,000 in revenue but those sales cost $70,000 to fulfill, the net gain is $30,000 — not $100,000. Always use profit (after direct costs) as the return figure, not top-line revenue.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring opportunity cost</h3>
+            <p class="text-sm text-[var(--color-muted)]">The real question is not "is this ROI positive?" but "is this the best use of this capital?" An investment returning 15% ROI sounds good, but if an alternative returns 40% ROI, you've made a suboptimal choice. Always compare investments against alternatives.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">Nucleus Research</div>
+            <div class="text-[var(--color-muted)]">Independent technology ROI research firm publishing detailed case studies and average ROI benchmarks for enterprise software, CRM, ERP, and IT investments.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">HubSpot State of Marketing</div>
+            <div class="text-[var(--color-muted)]">Annual survey of 1,200+ marketing professionals covering channel-by-channel ROI data, payback periods, and budget allocation benchmarks.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SCORE / SBA Research</div>
+            <div class="text-[var(--color-muted)]">SCORE mentorship network and U.S. Small Business Administration publish research on small business investment patterns, returns, and capital efficiency benchmarks.</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Break-Even Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Find how many sales cover your costs</p>
+          </a>
+          <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Profit Margin Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Calculate margins from revenue and costs</p>
+          </a>
+          <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Business Loan Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Calculate loan payments and total cost</p>
+          </a>
+          <a href="/tools/business-valuation" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Business Valuation Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">See how ROI affects your business value</p>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Cash Flow Forecaster</div>
+            <p class="text-sm text-[var(--color-muted)]">Model cash impact of investments over time</p>
+          </a>
+        </div>
+      </section>
+
     </div>
   </div>
 
@@ -321,6 +439,52 @@ const description = "Calculate return on investment for business decisions, mark
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "ROI Calculator", "item": "https://smallbizcalc.com/tools/roi" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a good ROI for a small business investment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A good ROI depends on the investment type and risk level. As a baseline, any investment should beat what you could earn passively (S&P 500 averages ~10%/yr). For low-risk operational investments (software, training), aim for 100–300% ROI. Marketing investments typically deliver 200–400% when optimized. Equipment investments in manufacturing often run 15–25% annually. If an investment can't clearly justify at least 15–20% ROI for its risk level, it may not be worth pursuing versus other uses of capital."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate ROI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ROI = (Net Profit from Investment ÷ Cost of Investment) × 100. Net profit is the gain from the investment minus the investment cost. For example: you invest $10,000 in equipment and it generates $35,000 in additional profit over 3 years. Net profit = $35,000 − $10,000 = $25,000. ROI = ($25,000 ÷ $10,000) × 100 = 250%. Always use net profit (after direct costs of generating the revenue), not gross revenue, as your return figure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is payback period and how is it different from ROI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Payback period is how long it takes to recoup your investment in absolute dollars. ROI measures the percentage return over the full investment horizon. Example: $10,000 investment generating $4,000/yr profit has a 2.5-year payback period. ROI at year 3 = (($4,000 × 3 − $10,000) ÷ $10,000) × 100 = 20%. Payback period answers 'when do I break even?' while ROI answers 'how much do I make per dollar invested?' Both matter — a high ROI with a 10-year payback may not be practical."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between ROI and ROAS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ROI (Return on Investment) measures profit as a percentage of total investment cost, accounting for all costs including cost of goods sold. ROAS (Return on Ad Spend) measures gross revenue generated per dollar of advertising spend, without deducting product costs. A ROAS of 4x ($4 revenue per $1 ad spend) might sound great, but if your product cost is $3 per $4 revenue, your actual profit after ad spend is zero. Always convert ROAS to ROI by factoring in your gross margin before evaluating ad channel performance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I use ROI or NPV for multi-year investment decisions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For investments spanning more than 2 years, Net Present Value (NPV) is more accurate because it accounts for the time value of money — a dollar received in year 3 is worth less than a dollar received today due to inflation and opportunity cost. Simple ROI ignores when the returns arrive. If you're comparing two investments with the same total ROI but different timing (one pays out in year 1, another in year 5), NPV will correctly show the earlier-paying investment is more valuable. Use ROI for quick comparisons; use NPV for serious capital allocation decisions."
+        }
+      }
     ]
   })} />
 </Base>

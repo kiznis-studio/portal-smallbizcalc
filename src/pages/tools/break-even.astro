@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
 
-const title = "Break-Even Calculator";
+const title = "Break-Even Calculator — Units & Revenue to Profitability";
 const description = "Calculate your break-even point in units and revenue. Find out exactly how much you need to sell to cover your costs.";
 ---
 
@@ -258,23 +258,116 @@ const description = "Calculate your break-even point in units and revenue. Find 
 
     <AdSlot slot="mid" />
 
-    <!-- Related Calculators -->
-    <div class="max-w-5xl mx-auto mt-12">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Profit Margin Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Calculate gross and net margins</div>
-        </a>
-        <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Cash Flow Forecaster</div>
-          <div class="text-sm text-[var(--color-muted)]">12-month cash flow projection</div>
-        </a>
-        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Business Loan Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Calculate loan payments and interest</div>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Before Launching a Product</h3>
+            <p class="text-sm text-[var(--color-muted)]">Before committing to a product line, calculate whether you can realistically sell enough units at a viable price to cover fixed costs. A product that requires 10,000 units/month to break even may be unviable for a small business.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">After Adding Fixed Costs</h3>
+            <p class="text-sm text-[var(--color-muted)]">Every time you sign a lease, hire a salaried employee, or add a subscription, recalculate your break-even. You need to know the new minimum revenue target before committing.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Setting Sales Targets</h3>
+            <p class="text-sm text-[var(--color-muted)]">Use the break-even point as your floor when setting monthly revenue goals. Your sales team needs to know this number — it is the minimum, not the target.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <p class="text-[var(--color-muted)] mb-4">Typical contribution margins by business type. Higher contribution margin means you break even faster.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 font-medium">Business Type</th>
+                <th class="text-right py-2 font-medium">Contribution Margin</th>
+                <th class="text-right py-2 font-medium">Break-Even Difficulty</th>
+              </tr>
+            </thead>
+            <tbody class="text-[var(--color-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">SaaS / Software</td><td class="text-right">75–90%</td><td class="text-right text-emerald-500">Low</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Consulting / Services</td><td class="text-right">60–80%</td><td class="text-right text-teal-600 dark:text-teal-400">Low–Moderate</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">E-commerce</td><td class="text-right">30–50%</td><td class="text-right text-yellow-500">Moderate</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Retail</td><td class="text-right">20–40%</td><td class="text-right text-yellow-500">Moderate</td></tr>
+              <tr><td class="py-2">Restaurant</td><td class="text-right">25–35%</td><td class="text-right text-amber-600 dark:text-amber-400">High</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Classifying semi-fixed costs incorrectly</h3>
+            <p class="text-sm text-[var(--color-muted)]">Labor that scales with output (part-time hourly staff) is variable, not fixed. Misclassifying it understates your variable costs and makes break-even look easier than it is.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Not recalculating after cost changes</h3>
+            <p class="text-sm text-[var(--color-muted)]">Your break-even point changes every time a fixed cost or variable cost changes. Treat it as a living number, not a one-time calculation.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring product mix</h3>
+            <p class="text-sm text-[var(--color-muted)]">If you sell multiple products, use a weighted average contribution margin. A single product with a great margin may subsidize others with poor margins without you realizing it.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Confusing cash break-even with accounting break-even</h3>
+            <p class="text-sm text-[var(--color-muted)]">Depreciation is a non-cash fixed cost. Your cash break-even (the point where cash flow is neutral) is different from your accounting break-even and is equally important.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SBA Business Statistics</div>
+            <p class="text-[var(--color-muted)]">Break-even timelines and startup cost ranges for small businesses sourced from SBA Office of Advocacy annual reports.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">BLS Occupational Outlook</div>
+            <p class="text-[var(--color-muted)]">Labor cost benchmarks used to model fixed vs. variable cost splits across industries.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">IRS Expense Data</div>
+            <p class="text-[var(--color-muted)]">Fixed overhead ratios by industry from IRS Schedule C and corporate return data.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Calculators -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Profit Margin Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Calculate gross and net margins from revenue and costs</div>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Cash Flow Forecaster</div>
+            <div class="text-sm text-[var(--color-muted)]">12-month cash projection with seasonal adjustments</div>
+          </a>
+          <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Business Loan Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">See how loan payments affect your fixed costs and break-even</div>
+          </a>
+          <a href="/tools/startup-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Startup Cost Estimator</div>
+            <div class="text-sm text-[var(--color-muted)]">Plan your launch budget before calculating break-even</div>
+          </a>
+          <a href="/tools/markup" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Markup Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Set selling prices that ensure a healthy contribution margin</div>
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -295,6 +388,17 @@ const description = "Calculate your break-even point in units and revenue. Find 
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Break-Even Calculator", "item": "https://smallbizcalc.com/tools/break-even" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a break-even point?", "acceptedAnswer": { "@type": "Answer", "text": "The break-even point is the number of units sold (or total revenue) where your total costs equal total revenue — you are neither profitable nor losing money. Every unit or dollar of revenue above break-even contributes to profit." } },
+      { "@type": "Question", "name": "How do I calculate break-even in units?", "acceptedAnswer": { "@type": "Answer", "text": "Break-Even Units = Fixed Costs / (Selling Price - Variable Cost per Unit). The denominator is called the contribution margin per unit. For example, if fixed costs are $5,000/month, selling price is $50, and variable cost is $20, then break-even = 5000 / 30 = 167 units." } },
+      { "@type": "Question", "name": "How can I lower my break-even point?", "acceptedAnswer": { "@type": "Answer", "text": "Four strategies: (1) Reduce fixed costs — negotiate rent, cut subscriptions, go remote. (2) Raise prices — increases contribution margin per sale. (3) Lower variable costs — better supplier deals, optimize shipping. (4) Increase average order value — bundles, upsells, minimum orders." } },
+      { "@type": "Question", "name": "What is contribution margin?", "acceptedAnswer": { "@type": "Answer", "text": "Contribution margin is the amount each unit sold contributes toward covering fixed costs. Contribution Margin = Selling Price - Variable Cost per Unit. A higher contribution margin means fewer units needed to break even." } },
+      { "@type": "Question", "name": "How long does it typically take a small business to break even?", "acceptedAnswer": { "@type": "Answer", "text": "Most small businesses take 2–3 years to reach break-even on total startup investment, though monthly cash flow break-even (covering operating expenses) can be achieved in 6–18 months. Service businesses typically break even faster than product-based businesses because variable costs are lower." } }
     ]
   })} />
 </Base>

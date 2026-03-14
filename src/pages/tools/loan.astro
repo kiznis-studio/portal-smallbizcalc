@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const title = "Business Loan Calculator";
+const title = "Business Loan Calculator — Monthly Payments, Interest & Amortization";
 const description = "Calculate monthly loan payments, total interest costs, and compare different loan options. See amortization schedule and true cost of borrowing.";
 ---
 
@@ -243,23 +243,117 @@ const description = "Calculate monthly loan payments, total interest costs, and 
       </div>
     </div>
 
-    <!-- Related Tools -->
-    <div class="mt-16 pt-8 border-t border-[var(--color-border)]">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-medium mb-1">Break-Even Calculator</div>
-          <p class="text-sm text-[var(--color-muted)]">Find how many sales cover your costs</p>
-        </a>
-        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-medium mb-1">Profit Margin Calculator</div>
-          <p class="text-sm text-[var(--color-muted)]">Calculate margins from revenue and costs</p>
-        </a>
-        <a href="/guides/cash-flow-basics" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-medium mb-1">Cash Flow Guide</div>
-          <p class="text-sm text-[var(--color-muted)]">Manage cash flow and avoid shortfalls</p>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Before Applying for a Loan</h3>
+            <p class="text-sm text-[var(--color-muted)]">Know your monthly payment before you sit down with a banker. Enter the rate and term you expect to be offered and see if the payment fits your cash flow before committing.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Comparing Multiple Lenders</h3>
+            <p class="text-sm text-[var(--color-muted)]">Different lenders quote different APRs, terms, and fees. Run each offer through the calculator and compare total cost of loan — not just monthly payment — to find the true cheapest option.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Equipment Financing Decisions</h3>
+            <p class="text-sm text-[var(--color-muted)]">When considering equipment financing, compare the loan payment against the revenue or cost savings the equipment will generate. Use the ROI Calculator alongside this to build a complete picture.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <p class="text-[var(--color-muted)] mb-4">Typical business loan terms by loan type (2026 data, rates vary by creditworthiness).</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 font-medium">Loan Type</th>
+                <th class="text-right py-2 font-medium">Rate Range</th>
+                <th class="text-right py-2 font-medium">Typical Term</th>
+                <th class="text-right py-2 font-medium">Max Amount</th>
+              </tr>
+            </thead>
+            <tbody class="text-[var(--color-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">SBA 7(a)</td><td class="text-right">Prime + 2.25–4.75%</td><td class="text-right">10–25 yr</td><td class="text-right">$5M</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">SBA Microloan</td><td class="text-right">8–13%</td><td class="text-right">Up to 6 yr</td><td class="text-right">$50K</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Bank Term Loan</td><td class="text-right">6–13%</td><td class="text-right">3–10 yr</td><td class="text-right">$1M+</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Equipment Financing</td><td class="text-right">4–30%</td><td class="text-right">2–7 yr</td><td class="text-right">$5M</td></tr>
+              <tr><td class="py-2">Online Business Lender</td><td class="text-right">9–99%</td><td class="text-right">3 mo–5 yr</td><td class="text-right">$500K</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Comparing monthly payments, not total cost</h3>
+            <p class="text-sm text-[var(--color-muted)]">A lower monthly payment often means a longer term and dramatically higher total interest paid. Always compare the total cost of loan (principal + interest + fees) across options.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring origination fees</h3>
+            <p class="text-sm text-[var(--color-muted)]">A 2% origination fee on a $100K loan means you receive $98K but owe $100K. On short-term loans, fees can add more to your effective cost than the stated interest rate.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Taking more than you need</h3>
+            <p class="text-sm text-[var(--color-muted)]">Every extra dollar borrowed costs interest. Borrow the minimum amount needed plus a small buffer. You can always take a second draw or line of credit if needed.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Not checking prepayment penalties</h3>
+            <p class="text-sm text-[var(--color-muted)]">Some loans charge a fee for paying off early. If you plan to refinance or pay down the loan quickly, this can eliminate the benefit of a lower rate.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">Federal Reserve H.15 Release</div>
+            <p class="text-[var(--color-muted)]">Current business loan rate benchmarks from the Federal Reserve's Selected Interest Rates statistical release.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SBA Loan Program Data</div>
+            <p class="text-[var(--color-muted)]">SBA 7(a) and microloan terms sourced from SBA.gov official program documentation.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">FFIEC Call Reports</div>
+            <p class="text-[var(--color-muted)]">Average commercial and industrial loan rates from FDIC and Federal Financial Institutions Examination Council reports.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Calculators -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Break-Even Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">See how loan payments affect your break-even point</p>
+          </a>
+          <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Profit Margin Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Ensure margins are strong enough to service debt</p>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Cash Flow Forecaster</div>
+            <p class="text-sm text-[var(--color-muted)]">Model loan payment impact on 12-month cash position</p>
+          </a>
+          <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">ROI Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Compare the ROI of loan-funded investments</p>
+          </a>
+          <a href="/tools/startup-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-medium mb-1">Startup Cost Estimator</div>
+            <p class="text-sm text-[var(--color-muted)]">Calculate how much funding your startup actually needs</p>
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -280,6 +374,52 @@ const description = "Calculate monthly loan payments, total interest costs, and 
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Business Loan Calculator", "item": "https://smallbizcalc.com/tools/loan" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a good interest rate for a small business loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Interest rates vary widely by loan type and borrower profile. SBA 7(a) loans typically range from 10–13% APR. Bank term loans average 6–13%. Online lenders charge 15–50%+ for faster approval. Revenue-based financing can reach 25–75% effective APR. Your credit score, business revenue, and time in business are the primary factors lenders use to set your rate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is a business loan monthly payment calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Monthly payment = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the principal (loan amount minus any down payment), r is the monthly interest rate (annual rate ÷ 12), and n is the total number of monthly payments (loan term in years × 12). This formula assumes a fixed-rate amortizing loan where each payment covers both interest and principal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an origination fee and how does it affect my loan cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An origination fee is a one-time charge by the lender to process your loan, typically 0.5–5% of the loan amount. It's usually deducted from the loan proceeds upfront, meaning you receive less than the face value of the loan but pay interest on the full amount. Always factor origination fees into your true cost of borrowing — a low-rate loan with a 3% origination fee can be more expensive than a slightly higher-rate loan with no fee."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an amortization schedule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An amortization schedule is a table showing each monthly payment broken down into principal and interest portions. In early months, most of your payment goes toward interest. As you pay down the balance, more goes toward principal. The schedule lets you see exactly how much you owe at any point in time, how much interest you've paid cumulatively, and when you'll pay off the loan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it better to get a shorter or longer loan term?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Shorter terms mean higher monthly payments but significantly less total interest — you own the asset faster. Longer terms lower monthly payments and improve cash flow, but you pay much more in total interest over the life of the loan. A good rule of thumb: match the loan term to the useful life of the asset. For equipment lasting 5 years, a 5-year term makes sense. For working capital, shorter terms (12–24 months) are safer. Use this calculator to compare total interest costs across different terms before deciding."
+        }
+      }
     ]
   })} />
 </Base>

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const title = "Cash Flow Forecaster";
+const title = "Cash Flow Forecaster — 12-Month Projection with Seasonality";
 const description = "Project your monthly cash flow for the next 12 months. Identify potential shortfalls before they happen and plan for seasonal variations.";
 ---
 
@@ -201,23 +201,115 @@ const description = "Project your monthly cash flow for the next 12 months. Iden
       </div>
     </div>
 
-    <!-- Related Calculators -->
-    <div class="max-w-5xl mx-auto mt-12">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Break-Even Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Find your break-even point</div>
-        </a>
-        <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Business Loan Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Calculate loan payments and interest</div>
-        </a>
-        <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">ROI Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Analyze return on investment</div>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Planning a Major Hire</h3>
+            <p class="text-sm text-[var(--color-muted)]">Before adding a salaried employee, model the impact on your 12-month cash position. A hire that looks affordable month-to-month can create a serious crunch when combined with slow-revenue months.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Seasonal Businesses</h3>
+            <p class="text-sm text-[var(--color-muted)]">Retailers, landscapers, tourism operators, and others with revenue peaks need to confirm they have enough cash to survive low months. Use seasonal adjustments to model realistic monthly inflows.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Applying for a Line of Credit</h3>
+            <p class="text-sm text-[var(--color-muted)]">Banks want to see cash flow projections before extending credit. Run this forecast and export or screenshot it as supporting documentation for your loan application.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <p class="text-[var(--color-muted)] mb-4">Recommended cash reserve levels by business type, based on SBA and SCORE guidance.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 font-medium">Business Type</th>
+                <th class="text-right py-2 font-medium">Recommended Reserve</th>
+                <th class="text-right py-2 font-medium">Warning Level</th>
+              </tr>
+            </thead>
+            <tbody class="text-[var(--color-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Freelance / Solo</td><td class="text-right">3 months expenses</td><td class="text-right">Below 1 month</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Service Business</td><td class="text-right">3–4 months expenses</td><td class="text-right">Below 6 weeks</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Retail / E-commerce</td><td class="text-right">4–6 months expenses</td><td class="text-right">Below 2 months</td></tr>
+              <tr><td class="py-2">Restaurant / Seasonal</td><td class="text-right">6–9 months expenses</td><td class="text-right">Below 3 months</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Using revenue instead of collections</h3>
+            <p class="text-sm text-[var(--color-muted)]">Cash flow is about when cash actually hits your bank — not when you invoice. If you have 30–60 day payment terms, model inflows based on collection timing, not invoice dates.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Using optimistic inflow estimates</h3>
+            <p class="text-sm text-[var(--color-muted)]">Use 80% of expected revenue as your inflow projection. Conservative modeling prevents cash crises. Being pleasantly surprised beats running short on payroll.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Forgetting lump-sum annual expenses</h3>
+            <p class="text-sm text-[var(--color-muted)]">Insurance renewals, annual software licenses, tax payments, and quarterly estimated taxes all create irregular outflows. Add them to the relevant months, not spread evenly.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Not updating the forecast monthly</h3>
+            <p class="text-sm text-[var(--color-muted)]">A forecast created once and never updated is useless by month 3. Update actuals each month and roll the projection forward to maintain a live 12-month view.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">Federal Reserve Business Credit Survey</div>
+            <p class="text-[var(--color-muted)]">Cash reserve benchmarks and financing patterns for small businesses from Federal Reserve's Small Business Credit Survey.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SBA Office of Advocacy</div>
+            <p class="text-[var(--color-muted)]">Small business failure rates and cash flow as root cause data from SBA annual economic research.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SCORE Foundation</div>
+            <p class="text-[var(--color-muted)]">Cash management guidelines and reserve recommendations from SCORE mentors working with 1,200+ businesses annually.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Calculators -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Break-Even Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Find the minimum revenue to cover all your costs</div>
+          </a>
+          <a href="/tools/loan" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Business Loan Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Model loan payment impact on monthly cash flow</div>
+          </a>
+          <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">ROI Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Analyze return on investment with payback period</div>
+          </a>
+          <a href="/tools/employee-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Employee Cost Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Calculate true cost of hiring before adding to cash flow</div>
+          </a>
+          <a href="/tools/startup-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Startup Cost Estimator</div>
+            <div class="text-sm text-[var(--color-muted)]">Plan initial outflows before building a cash flow forecast</div>
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -238,6 +330,17 @@ const description = "Project your monthly cash flow for the next 12 months. Iden
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Cash Flow Forecaster", "item": "https://smallbizcalc.com/tools/cash-flow" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Why do profitable businesses run out of cash?", "acceptedAnswer": { "@type": "Answer", "text": "Profit is an accounting concept; cash is what pays bills. A profitable business can run out of cash if customers pay late, inventory is tied up, or growth is funded without adequate financing. Cash flow forecasting reveals these gaps before they become crises." } },
+      { "@type": "Question", "name": "How much cash reserve should a small business keep?", "acceptedAnswer": { "@type": "Answer", "text": "The SBA recommends 3–6 months of operating expenses as a cash reserve. Service businesses can often manage with 3 months, while retail, restaurants, and seasonal businesses should target 6–9 months due to inventory requirements and revenue variability." } },
+      { "@type": "Question", "name": "What is the difference between cash flow and profit?", "acceptedAnswer": { "@type": "Answer", "text": "Profit = Revenue - Expenses (accounting concept). Cash flow = Cash in - Cash out (timing-based). You can be profitable but cash-negative if customers pay 60 days late while you must pay suppliers upfront. Cash flow forecasting accounts for actual payment timing." } },
+      { "@type": "Question", "name": "How do I handle seasonal revenue in a cash flow forecast?", "acceptedAnswer": { "@type": "Answer", "text": "Use the seasonal adjustment feature in this calculator. Enter the percentage of your average revenue expected each month (e.g., 150% for peak months, 60% for slow months). The calculator will apply these factors to your base inflows while keeping outflows at their base level." } },
+      { "@type": "Question", "name": "What should I do if my cash flow forecast shows a negative balance?", "acceptedAnswer": { "@type": "Answer", "text": "Immediate options: (1) Accelerate collections — offer early payment discounts, tighten payment terms. (2) Delay non-critical purchases. (3) Arrange a line of credit before you need it — banks won't lend to businesses already in crisis. (4) Reduce fixed costs. Plan financing 2–3 months before the projected shortfall." } }
     ]
   })} />
 </Base>

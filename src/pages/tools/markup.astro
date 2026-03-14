@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
 
-const title = "Markup Calculator";
+const title = "Markup Calculator — Convert Markup to Margin & Find Selling Price";
 const description = "Calculate the right markup and selling price for your products. Convert between markup percentage and profit margin instantly.";
 ---
 
@@ -279,23 +279,116 @@ const description = "Calculate the right markup and selling price for your produ
 
     <AdSlot slot="mid" />
 
-    <!-- Related Calculators -->
-    <div class="max-w-5xl mx-auto mt-12">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Profit Margin Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Calculate gross and net margins</div>
-        </a>
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Break-Even Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Find your break-even point</div>
-        </a>
-        <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">ROI Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Analyze return on investment</div>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Pricing New Products</h3>
+            <p class="text-sm text-[var(--color-muted)]">Enter your cost and desired markup percentage to instantly calculate the right selling price. Never underprice a product again because you did the math in your head.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Reverse-Engineering Competitors</h3>
+            <p class="text-sm text-[var(--color-muted)]">If you know a competitor's selling price, enter it along with your cost estimate to see their likely markup. Use this to position your pricing intelligently.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Standardizing Pricing Rules</h3>
+            <p class="text-sm text-[var(--color-muted)]">Many retailers use "keystone pricing" (100% markup = 2x cost). Use this calculator to find your target markup and apply it consistently across your product catalog.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 font-medium">Industry</th>
+                <th class="text-right py-2 font-medium">Typical Markup</th>
+                <th class="text-right py-2 font-medium">Equivalent Margin</th>
+              </tr>
+            </thead>
+            <tbody class="text-[var(--color-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Grocery / Supermarket</td><td class="text-right">5–15%</td><td class="text-right">4.8–13%</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Electronics</td><td class="text-right">10–30%</td><td class="text-right">9–23%</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Apparel / Clothing</td><td class="text-right">50–100%</td><td class="text-right">33–50%</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Home Furnishings</td><td class="text-right">80–150%</td><td class="text-right">44–60%</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Jewelry</td><td class="text-right">100–300%</td><td class="text-right">50–75%</td></tr>
+              <tr><td class="py-2">Restaurant Food &amp; Drink</td><td class="text-right">200–500%</td><td class="text-right">67–83%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Treating markup and margin as the same</h3>
+            <p class="text-sm text-[var(--color-muted)]">A 50% markup gives you a 33.3% gross margin — not 50%. Mixing these up costs real money at scale.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Not including all costs in your base</h3>
+            <p class="text-sm text-[var(--color-muted)]">Your "cost" must include shipping inbound, payment fees, storage, and shrinkage — not just purchase price. Undercosting your base leads to underpricing your product.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Using a single markup for all products</h3>
+            <p class="text-sm text-[var(--color-muted)]">High-velocity, low-margin items can use a lower markup. Slow-moving, high-effort items need a higher markup to compensate for carrying costs and time.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Never testing price elasticity</h3>
+            <p class="text-sm text-[var(--color-muted)]">Many small businesses chronically underprice. A 10% price increase often reduces volume by far less than 10%, resulting in higher overall profit.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">US Census Retail Trade Survey</div>
+            <p class="text-[var(--color-muted)]">Industry gross margin benchmarks for retail sectors derived from Census Annual Retail Trade Survey data.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">BLS Producer Price Index</div>
+            <p class="text-[var(--color-muted)]">Wholesale cost benchmarks by product category referenced from BLS PPI tables.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">IRS Statistics of Income</div>
+            <p class="text-[var(--color-muted)]">Small business average gross margin data by industry code from IRS SOI annual reports.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Calculators -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Profit Margin Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Calculate gross and net margins from revenue and costs</div>
+          </a>
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Break-Even Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Find the sales volume needed to cover all costs</div>
+          </a>
+          <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">ROI Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Analyze return on investment with payback period</div>
+          </a>
+          <a href="/tools/startup-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Startup Cost Estimator</div>
+            <div class="text-sm text-[var(--color-muted)]">Plan your launch budget by category and industry</div>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Cash Flow Forecaster</div>
+            <div class="text-sm text-[var(--color-muted)]">12-month cash projection with seasonal adjustments</div>
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -316,6 +409,17 @@ const description = "Calculate the right markup and selling price for your produ
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Markup Calculator", "item": "https://smallbizcalc.com/tools/markup" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is the difference between markup and margin?", "acceptedAnswer": { "@type": "Answer", "text": "Markup is calculated on cost: (Price - Cost) / Cost × 100. Margin is calculated on revenue: (Price - Cost) / Price × 100. A 50% markup equals a 33.3% gross margin. They are not interchangeable — mixing them up is one of the most common pricing mistakes in small business." } },
+      { "@type": "Question", "name": "How do I convert markup to margin?", "acceptedAnswer": { "@type": "Answer", "text": "Use the formula: Margin = Markup / (1 + Markup). For example, a 50% markup = 0.5 / 1.5 = 33.3% margin. To convert margin to markup: Markup = Margin / (1 - Margin)." } },
+      { "@type": "Question", "name": "What markup percentage should I use?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on your industry. Grocery runs 5–15%, apparel 50–100%, jewelry 100–300%, and restaurants 200–500% on food. The right markup ensures your gross margin covers all overhead and leaves profit. Calculate your minimum required gross margin first, then back into the markup." } },
+      { "@type": "Question", "name": "What is keystone pricing?", "acceptedAnswer": { "@type": "Answer", "text": "Keystone pricing is a retail rule of thumb where items are marked up 100% (doubled from cost). It simplifies pricing and is standard in apparel and home goods. However, it does not work for all categories — high-cost items may need lower markup, while low-cost high-effort items need higher markup." } },
+      { "@type": "Question", "name": "How do I set a selling price from cost?", "acceptedAnswer": { "@type": "Answer", "text": "Selling Price = Cost × (1 + Markup%). For example, if your cost is $50 and you want a 60% markup: $50 × 1.60 = $80 selling price. Use the calculator above to try different markup scenarios instantly." } }
     ]
   })} />
 </Base>

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const title = "Employee Cost Calculator";
+const title = "Employee Cost Calculator — True Cost Beyond Salary (FICA, Benefits, PTO)";
 const description = "Calculate the true cost of hiring an employee. See the full picture: salary, payroll taxes, benefits, and overhead — what a new hire actually costs your business.";
 ---
 
@@ -355,23 +355,142 @@ const description = "Calculate the true cost of hiring an employee. See the full
       </div>
     </div>
 
-    <!-- Related Calculators -->
-    <div class="max-w-5xl mx-auto mt-12">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Profit Margin Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Check if you can afford new hires</div>
-        </a>
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Break-Even Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Factor hiring costs into break-even</div>
-        </a>
-        <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Cash Flow Forecaster</div>
-          <div class="text-sm text-[var(--color-muted)]">Project cash impact of new hires</div>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Before Making a Job Offer</h3>
+            <p class="text-sm text-[var(--color-muted)]">Calculate the full burden cost before committing to a salary so you know the true impact on your payroll budget, not just the headline number.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Pricing Your Services</h3>
+            <p class="text-sm text-[var(--color-muted)]">Service businesses must price in labor burden costs. If you only account for base wages, every project is underpriced and your margin disappears.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Evaluating Full-Time vs. Contractor</h3>
+            <p class="text-sm text-[var(--color-muted)]">Contractors cost 1099 rate only. Employees cost salary + 25–40% burden. This calculator makes the true comparison visible before you decide.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <div class="card p-6 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 pr-4">Role Type</th>
+                <th class="text-right py-2 px-4">Typical Base Salary</th>
+                <th class="text-right py-2 px-4">Burden Rate</th>
+                <th class="text-right py-2 pl-4">Total Annual Cost</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--color-border)]">
+              <tr>
+                <td class="py-2 pr-4">Entry-Level Office Worker</td>
+                <td class="text-right py-2 px-4">$35,000</td>
+                <td class="text-right py-2 px-4">30%</td>
+                <td class="text-right py-2 pl-4 text-emerald-600 dark:text-emerald-400">$45,500</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Mid-Level Professional</td>
+                <td class="text-right py-2 px-4">$65,000</td>
+                <td class="text-right py-2 px-4">32%</td>
+                <td class="text-right py-2 pl-4 text-emerald-600 dark:text-emerald-400">$85,800</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Software Engineer</td>
+                <td class="text-right py-2 px-4">$110,000</td>
+                <td class="text-right py-2 px-4">28%</td>
+                <td class="text-right py-2 pl-4 text-emerald-600 dark:text-emerald-400">$140,800</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Hourly Retail/Service</td>
+                <td class="text-right py-2 px-4">$28,000</td>
+                <td class="text-right py-2 px-4">35%</td>
+                <td class="text-right py-2 pl-4 text-emerald-600 dark:text-emerald-400">$37,800</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4">Sales Role (+ commission)</td>
+                <td class="text-right py-2 px-4">$55,000 base</td>
+                <td class="text-right py-2 px-4">30%</td>
+                <td class="text-right py-2 pl-4 text-emerald-600 dark:text-emerald-400">$71,500 base only</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-[var(--color-muted)] mt-3">Source: BLS Employer Costs for Employee Compensation (ECEC). Burden rates vary by industry and benefits package.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes When Calculating Employee Cost</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Only counting base salary</h3>
+            <p class="text-sm text-[var(--color-muted)]">FICA (7.65% employer share), workers' comp (0.5–3%), health insurance ($6,000–$12,000/yr), and PTO add 20–40% to your real cost. A $60K employee costs $75K–$84K total.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Forgetting recruiting and onboarding costs</h3>
+            <p class="text-sm text-[var(--color-muted)]">SHRM estimates the average cost to hire is $4,700. Add 2–4 weeks of reduced productivity during onboarding. Factor this into your first-year ROI calculation.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring equipment and workspace costs</h3>
+            <p class="text-sm text-[var(--color-muted)]">Each desk employee needs hardware ($1,500–$3,000), software licenses ($500–$2,000/yr), and potentially office space. Remote employees still need tech stipends and collaboration tools.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Underestimating manager time cost</h3>
+            <p class="text-sm text-[var(--color-muted)]">A new hire typically needs 5–15% of a senior employee's time during the first 90 days for training and support. That's hidden productivity cost to your existing team.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">BLS ECEC</div>
+            <div class="text-[var(--color-muted)]">Employer Costs for Employee Compensation survey — quarterly benchmark for total compensation costs by industry and occupation.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">IRS Publication 15</div>
+            <div class="text-[var(--color-muted)]">Employer's Tax Guide — authoritative source for FICA rates (6.2% Social Security + 1.45% Medicare employer share) and FUTA/SUTA obligations.</div>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SHRM Benchmarking</div>
+            <div class="text-[var(--color-muted)]">Society for Human Resource Management annual data on recruiting costs, benefits spending, and employee turnover rates by company size.</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/profit-margin" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Profit Margin Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Check if revenue can support new headcount</p>
+          </a>
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Break-Even Calculator</div>
+            <p class="text-sm text-[var(--color-muted)]">Factor full labor costs into your break-even point</p>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Cash Flow Forecaster</div>
+            <p class="text-sm text-[var(--color-muted)]">Model cash impact of hiring over 12 months</p>
+          </a>
+          <a href="/tools/startup-cost" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Startup Cost Estimator</div>
+            <p class="text-sm text-[var(--color-muted)]">Include hiring costs in your startup budget</p>
+          </a>
+          <a href="/tools/business-location" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold mb-1">Business Location Score</div>
+            <p class="text-sm text-[var(--color-muted)]">Compare state labor costs and tax burden</p>
+          </a>
+        </div>
+      </section>
+
     </div>
   </div>
 
@@ -392,6 +511,52 @@ const description = "Calculate the true cost of hiring an employee. See the full
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Employee Cost Calculator", "item": "https://smallbizcalc.com/tools/employee-cost" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the true cost of an employee beyond salary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The true cost of an employee is typically 1.25x–1.40x their base salary. Beyond wages, employers pay: FICA taxes (7.65% of wages), FUTA/SUTA (unemployment taxes, ~1–4%), workers' compensation insurance (0.5–3% depending on industry), health insurance (average $7,500/yr for individual coverage), paid time off (10–15 days = 4–6% of salary), and any retirement match. A $60,000 salary often costs $75,000–$84,000 total."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the employer portion of FICA taxes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Employers pay 7.65% of each employee's wages in FICA taxes: 6.2% for Social Security (on wages up to $168,600 in 2024) and 1.45% for Medicare (no wage cap). This is in addition to the employee's matching 7.65% withholding. Self-employed individuals pay the full 15.3% as self-employment tax. FICA is one of the largest non-salary costs for employers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does employee benefits cost employers per year?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "According to BLS data, benefits account for about 30% of total compensation for civilian workers. For a full-time employee earning $60,000/yr, employers typically spend $6,000–$12,000 on health insurance, $2,000–$5,000 on retirement contributions, $3,000–$5,000 in paid leave value, and $2,000–$4,000 in legally required benefits (FICA, unemployment, workers' comp). Total benefits often run $13,000–$26,000 per year on top of salary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it cheaper to hire a contractor or a full-time employee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Contractors typically cost more per hour but less in total overhead. A $50/hr contractor on 2,000 hours costs $100,000 with no benefits burden. A $60,000 salaried employee costs $75,000–$84,000 total. Contractors are better for project-based work, specialized skills, or fluctuating demand. Employees make more sense for ongoing roles, knowledge retention, and situations where training investment is important. Always compare total annual cost, not just the hourly rate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is labor burden rate and how is it calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Labor burden rate is the percentage added to base wages to cover all employer-paid costs. Formula: Burden Rate = (Total Employer Costs − Base Wages) ÷ Base Wages × 100. For example, if a $50,000 salary employee costs $67,500 total, the burden rate is ($67,500 − $50,000) ÷ $50,000 = 35%. Industry averages range from 25% (tech/knowledge workers with fewer mandated benefits) to 40%+ (construction, manufacturing with high workers' comp and overtime)."
+        }
+      }
     ]
   })} />
 </Base>

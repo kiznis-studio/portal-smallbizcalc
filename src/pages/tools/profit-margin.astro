@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
 
-const title = "Profit Margin Calculator";
+const title = "Profit Margin Calculator — Gross & Net Margin Analysis";
 const description = "Calculate your gross and net profit margins instantly. Enter your revenue and costs to see your exact profitability percentages.";
 ---
 
@@ -249,23 +249,118 @@ const description = "Calculate your gross and net profit margins instantly. Ente
 
     <AdSlot slot="mid" />
 
-    <!-- Related Calculators -->
-    <div class="max-w-5xl mx-auto mt-12">
-      <h2 class="text-xl font-semibold mb-6">Related Calculators</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
-        <a href="/tools/markup" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Markup Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Convert between markup and margin</div>
-        </a>
-        <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">Break-Even Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Find your break-even point</div>
-        </a>
-        <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
-          <div class="font-semibold">ROI Calculator</div>
-          <div class="text-sm text-[var(--color-muted)]">Analyze return on investment</div>
-        </a>
-      </div>
+    <!-- Extended Content Sections -->
+    <div class="max-w-5xl mx-auto mt-16 space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">When to Use This Calculator</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Setting Prices</h3>
+            <p class="text-sm text-[var(--color-muted)]">Use it whenever you are quoting a new product or service. Enter your cost and desired margin to back into the right selling price before you commit to a number.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Monthly P&amp;L Review</h3>
+            <p class="text-sm text-[var(--color-muted)]">Run your actual monthly revenue and costs through the calculator each month. Tracking margin trends over time is more valuable than any single snapshot.</p>
+          </div>
+          <div class="card p-5">
+            <h3 class="font-semibold mb-2">Evaluating New Products</h3>
+            <p class="text-sm text-[var(--color-muted)]">Before launching a new SKU or service line, model the gross margin. If a product can't hit your minimum threshold (typically 40%+ for product, 60%+ for services), reconsider the offering.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Industry Benchmarks</h2>
+        <p class="text-[var(--color-muted)] mb-4">These are typical net profit margins by sector (BLS/IRS data). If you are below the low end, your cost structure or pricing needs attention.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left py-2 font-medium">Industry</th>
+                <th class="text-right py-2 font-medium">Gross Margin</th>
+                <th class="text-right py-2 font-medium">Net Margin</th>
+                <th class="text-right py-2 font-medium">Rating</th>
+              </tr>
+            </thead>
+            <tbody class="text-[var(--color-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">SaaS / Software</td><td class="text-right">70–85%</td><td class="text-right">15–25%</td><td class="text-right text-emerald-500">Excellent</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Consulting / Professional Services</td><td class="text-right">80–90%</td><td class="text-right">15–25%</td><td class="text-right text-emerald-500">Excellent</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">E-commerce</td><td class="text-right">40–60%</td><td class="text-right">5–10%</td><td class="text-right text-teal-600 dark:text-teal-400">Good</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Manufacturing</td><td class="text-right">25–35%</td><td class="text-right">5–10%</td><td class="text-right text-teal-600 dark:text-teal-400">Good</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2">Restaurants</td><td class="text-right">60–70%</td><td class="text-right">3–9%</td><td class="text-right text-yellow-500">Average</td></tr>
+              <tr><td class="py-2">Retail</td><td class="text-right">25–50%</td><td class="text-right">2–5%</td><td class="text-right text-yellow-500">Average</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Common Mistakes</h2>
+        <div class="space-y-3">
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Confusing markup with margin</h3>
+            <p class="text-sm text-[var(--color-muted)]">A 50% markup does not give you a 50% margin. Markup is based on cost; margin is based on revenue. Use the Markup Calculator to convert between the two.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Forgetting hidden COGS</h3>
+            <p class="text-sm text-[var(--color-muted)]">Payment processing fees (2–3%), packaging, shipping labels, and returns erode gross margin. Always include every direct cost in COGS.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Ignoring owner compensation</h3>
+            <p class="text-sm text-[var(--color-muted)]">Many small business owners omit their own salary from expenses, making the business look more profitable than it is. Pay yourself a market rate and include it in operating expenses.</p>
+          </div>
+          <div class="card p-4 border-l-4 border-amber-500">
+            <h3 class="font-semibold mb-1">Only tracking gross, not net</h3>
+            <p class="text-sm text-[var(--color-muted)]">High gross margins can mask poor net margins if overhead is unchecked. Track both every month.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="card p-4">
+            <div class="font-semibold mb-1">IRS Statistics of Income</div>
+            <p class="text-[var(--color-muted)]">Industry average profit margins sourced from IRS SOI data on corporate and sole proprietor returns.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">BLS Producer Price Index</div>
+            <p class="text-[var(--color-muted)]">Cost benchmarks for manufacturing and wholesale sectors referenced from BLS PPI tables.</p>
+          </div>
+          <div class="card p-4">
+            <div class="font-semibold mb-1">SBA Office of Advocacy</div>
+            <p class="text-[var(--color-muted)]">Small business financial benchmarks from SBA annual reports on small business economics.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Calculators -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Related Calculators</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/tools/markup" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Markup Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Convert markup % to margin and find the right selling price</div>
+          </a>
+          <a href="/tools/break-even" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Break-Even Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Find the minimum sales to cover all your fixed and variable costs</div>
+          </a>
+          <a href="/tools/roi" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">ROI Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Analyze return on investment with payback period</div>
+          </a>
+          <a href="/tools/cash-flow" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Cash Flow Forecaster</div>
+            <div class="text-sm text-[var(--color-muted)]">12-month cash projection with seasonal adjustments</div>
+          </a>
+          <a href="/tools/business-valuation" class="card p-4 hover:border-emerald-500/50 transition-colors">
+            <div class="font-semibold">Business Valuation Calculator</div>
+            <div class="text-sm text-[var(--color-muted)]">Estimate your business worth using SDE and revenue multiples</div>
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -286,6 +381,17 @@ const description = "Calculate your gross and net profit margins instantly. Ente
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallbizcalc.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://smallbizcalc.com/tools/" },
       { "@type": "ListItem", "position": 3, "name": "Profit Margin Calculator", "item": "https://smallbizcalc.com/tools/profit-margin" }
+    ]
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a good profit margin for a small business?", "acceptedAnswer": { "@type": "Answer", "text": "A net profit margin of 10% or higher is generally considered good for a small business. Service businesses typically achieve 15–25%, while retail often runs 2–5%. The key is tracking your margin trend over time and comparing against your industry benchmark." } },
+      { "@type": "Question", "name": "What is the difference between gross margin and net margin?", "acceptedAnswer": { "@type": "Answer", "text": "Gross margin is revenue minus direct costs (COGS) divided by revenue. It measures production efficiency. Net margin subtracts all operating expenses (rent, salaries, marketing) from gross profit. Net margin reflects true profitability after all costs." } },
+      { "@type": "Question", "name": "How do I calculate profit margin?", "acceptedAnswer": { "@type": "Answer", "text": "Gross margin = (Revenue - COGS) / Revenue × 100. Net margin = (Revenue - COGS - Operating Expenses) / Revenue × 100. Enter your numbers into the calculator above for instant results." } },
+      { "@type": "Question", "name": "What is the difference between markup and profit margin?", "acceptedAnswer": { "@type": "Answer", "text": "Markup is calculated on cost: (Price - Cost) / Cost × 100. Profit margin is calculated on revenue: (Price - Cost) / Price × 100. A 50% markup results in only a 33.3% profit margin — they are not interchangeable." } },
+      { "@type": "Question", "name": "How can I improve my profit margin?", "acceptedAnswer": { "@type": "Answer", "text": "The four main levers are: raise prices (even 5% can significantly impact margin), reduce COGS (negotiate with suppliers), cut overhead (review subscriptions and fixed costs), and focus on higher-margin products or services. Small improvements across multiple areas compound quickly." } }
     ]
   })} />
 </Base>

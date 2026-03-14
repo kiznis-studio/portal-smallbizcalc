@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/enrich-states.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -14,5 +15,8 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^12.8.0"
   }
 }
